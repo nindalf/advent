@@ -1,0 +1,8 @@
+{
+    "template_name": "rust",
+    "exec_file_paths": ["src/day{n}/mod.rs"],
+    "input_file_paths": ["src/day{n}/input.txt"],
+    "test_input_file_paths": ["src/day{n}/test-input.txt"],
+    "bench_file_paths": [],
+    "readme_file_paths": ["src/day{n}/Readme.md"]
+}

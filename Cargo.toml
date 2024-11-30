@@ -1,0 +1,11 @@
+[package]
+name = "advent-2024"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+
+[dev-dependencies]
+criterion = "0.3"
+paste = "1.0"
