@@ -1,3 +1,5 @@
+pub mod day01;
+
 #[macro_export]
 macro_rules! aoctest {
     ($op_1_test: expr, $op_1: expr, $op_2_test: expr, $op_2: expr) => {
