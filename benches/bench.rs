@@ -7,10 +7,10 @@ macro_rules! benchmark {
 
             fn $name(c: &mut Criterion) {
                 c.bench_function(concat!(stringify!($name), " Part 1"), |b| {
-                    b.iter(|| advent_2024::$name::part_1(black_box([<$name:upper _INPUT>])));
+                    b.iter(|| advent_2024::$name::part1(black_box([<$name:upper _INPUT>])));
                 });
                 c.bench_function(concat!(stringify!($name), " Part 2"), |b| {
-                    b.iter(|| advent_2024::$name::part_2(black_box([<$name:upper _INPUT>])));
+                    b.iter(|| advent_2024::$name::part2(black_box([<$name:upper _INPUT>])));
                 });
             }
         }
