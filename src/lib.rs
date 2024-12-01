@@ -1,4 +1,4 @@
-pub mod day01;
+pub mod day1;
 
 #[macro_export]
 macro_rules! aoctest {
@@ -10,25 +10,25 @@ macro_rules! aoctest {
 
             #[test]
             fn part_1_test() {
-                let output = super::part_1(TEST_INPUT);
+                let output = super::part1(TEST_INPUT);
                 assert_eq!(output, $op_1_test);
             }
 
             #[test]
             fn part_1() {
-                let output = super::part_1(FULL_INPUT);
+                let output = super::part1(FULL_INPUT);
                 assert_eq!(output, $op_1);
             }
 
             #[test]
             fn part_2_test() {
-                let output = super::part_2(TEST_INPUT);
+                let output = super::part2(TEST_INPUT);
                 assert_eq!(output, $op_2_test);
             }
 
             #[test]
             fn part_2() {
-                let output = super::part_2(FULL_INPUT);
+                let output = super::part2(FULL_INPUT);
                 assert_eq!(output, $op_2);
             }
         }

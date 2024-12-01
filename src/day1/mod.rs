@@ -1,7 +1,7 @@
 use ahash::AHashMap;
 
 #[inline]
-pub fn part_1(input: &str) -> i32 {
+pub fn part1(input: &str) -> i32 {
     let (mut first, mut second) = parse(input);
     first.sort_unstable();
     second.sort_unstable();
@@ -13,7 +13,7 @@ pub fn part_1(input: &str) -> i32 {
 }
 
 #[inline]
-pub fn part_2(input: &str) -> i32 {
+pub fn part2(input: &str) -> i32 {
     let (first, second) = parse(input);
 
     let mut counts = AHashMap::with_capacity(1000);
