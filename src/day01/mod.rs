@@ -1,3 +1,5 @@
+use ahash::AHashMap;
+
 #[inline]
 pub fn part_1(input: &str) -> i32 {
     let (mut first, mut second) = parse(input);
@@ -13,7 +15,8 @@ pub fn part_1(input: &str) -> i32 {
 #[inline]
 pub fn part_2(input: &str) -> i32 {
     let (first, second) = parse(input);
-    let mut counts = std::collections::HashMap::with_capacity(100);
+
+    let mut counts = AHashMap::with_capacity(1000);
     for i in second {
         *counts.entry(i).or_insert(0) += 1;
     }
