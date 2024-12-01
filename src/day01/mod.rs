@@ -13,7 +13,7 @@ pub fn part_1(input: &str) -> i32 {
 #[inline]
 pub fn part_2(input: &str) -> i32 {
     let (first, second) = parse(input);
-    let mut counts = std::collections::HashMap::new();
+    let mut counts = std::collections::HashMap::with_capacity(100);
     for i in second {
         *counts.entry(i).or_insert(0) += 1;
     }
@@ -23,11 +23,11 @@ pub fn part_2(input: &str) -> i32 {
 fn parse(input: &str) -> (Vec<i32>, Vec<i32>) {
     input
         .lines()
-        .map(|line| line.split_once("   ").unwrap())
-        .map(|(first, second)| {
-            let first = first.parse::<i32>().unwrap();
-            let second = second.parse::<i32>().unwrap();
-            (first, second)
+        .filter_map(|line| line.split_once("   "))
+        .filter_map(|(first, second)| {
+            let first = first.parse::<i32>().ok();
+            let second = second.parse::<i32>().ok();
+            first.zip(second)
         })
         .unzip()
 }
