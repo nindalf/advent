@@ -1,7 +1,9 @@
+use rayon::str::ParallelString;
+use rayon::prelude::*;
+
 #[inline]
 pub fn part1(input: &str) -> usize {
     parse(input)
-        .iter()
         .filter(|line| is_monotonic(line, None))
         .count()
 }
@@ -9,7 +11,6 @@ pub fn part1(input: &str) -> usize {
 #[inline]
 pub fn part2(input: &str) -> usize {
     parse(input)
-        .iter()
         .filter(|line| is_monotonic_safe(line))
         .count()
 }
@@ -61,16 +62,16 @@ fn is_monotonic(numbers: &[u32], skip_index: Option<usize>) -> bool {
 }
 
 
-fn parse(input: &str) -> Vec<Vec<u32>> {
+fn parse(input: &str) -> impl rayon::prelude::ParallelIterator<Item = Vec<u32>> + use<'_> {
     input
-        .lines()
+        .par_lines()
         .map(|line| line.split(" "))
         .map(|parts| {
             parts
                 .flat_map(|part| part.parse::<u32>())
                 .collect::<Vec<u32>>()
         })
-        .collect()
+        // .collect()
 }
 
 crate::aoctest!(2, 591, 4, 621);

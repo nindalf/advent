@@ -9,6 +9,7 @@ dependencies = [
  "ahash",
  "criterion",
  "paste",
+ "rayon",
 ]
 
 [[package]]
