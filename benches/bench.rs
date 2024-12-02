@@ -28,4 +28,4 @@ macro_rules! benchmarks {
     }
 }
 
-benchmarks! {day1}
+benchmarks! {day1, day2}

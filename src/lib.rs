@@ -1,4 +1,5 @@
 pub mod day1;
+pub mod day2;
 
 #[macro_export]
 macro_rules! aoctest {
