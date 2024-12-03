@@ -10,6 +10,7 @@ dependencies = [
  "criterion",
  "paste",
  "rayon",
+ "regex",
 ]
 
 [[package]]

@@ -6,6 +6,7 @@ edition = "2021"
 [dependencies]
 ahash = "0.8.11"
 rayon = "1.10.0"
+regex = "1.11.1"
 
 
 
