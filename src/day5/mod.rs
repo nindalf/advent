@@ -7,12 +7,12 @@ type Book = Vec<u32>;
 
 #[inline]
 pub fn part1(input: &str) -> u32 {
-    let (mut books, page_order) = parse(input);
+    let (books, page_order) = parse(input);
 
     books
-        .iter_mut()
+        .iter()
         .filter_map(|book| {
-            let was_already_ordered = sort_book(book, &page_order);
+            let (_, was_already_ordered) = is_book_ordered(book, &page_order);
             if was_already_ordered {
                 return Some(book[book.len() / 2]);
             }
@@ -23,33 +23,32 @@ pub fn part1(input: &str) -> u32 {
 
 #[inline]
 pub fn part2(input: &str) -> u32 {
-    let (mut books, page_order) = parse(input);
+    let (books, page_order) = parse(input);
 
     books
-        .iter_mut()
+        .iter()
         .filter_map(|book| {
-            let was_already_ordered = sort_book(book, &page_order);
+            let (sorted_book, was_already_ordered) = is_book_ordered(book, &page_order);
             if !was_already_ordered {
-                return Some(book[book.len() / 2]);
+                return Some(sorted_book[sorted_book.len() / 2]);
             }
             None
         })
         .sum()
 }
 
-fn sort_book(book: &mut Book, page_order: &PageOrder) -> bool {
-    let is_sorted = book.windows(2).all(|chunk| match page_order.get(&(chunk[0], chunk[1])) {
-        Some(ordering) => *ordering == cmp::Ordering::Less,
-        None => true,
-    });
-    if is_sorted {
-        return true;
-    }
-    book.sort_unstable_by(|a, b| match page_order.get(&(*a, *b)) {
+fn is_book_ordered(book: &Book, page_order: &PageOrder) -> (Vec<u32>, bool) {
+    let mut sorted_book = (*book).clone();
+    sorted_book.sort_unstable_by(|a, b| match page_order.get(&(*a, *b)) {
         Some(ordering) => *ordering,
         None => cmp::Ordering::Greater,
     });
-    return false;
+    for i in 0..book.len() {
+        if book[i] != sorted_book[i] {
+            return (sorted_book, false);
+        }
+    }
+    (sorted_book, true)
 }
 
 fn parse(input: &str) -> (Vec<Book>, PageOrder) {
@@ -62,7 +61,6 @@ fn parse(input: &str) -> (Vec<Book>, PageOrder) {
         .map(|(x, y)| (x.parse::<u32>().unwrap(), y.parse::<u32>().unwrap()))
         .for_each(|(lesser, greater)| {
             page_order.insert((lesser, greater), cmp::Ordering::Less);
-            page_order.insert((greater, lesser), cmp::Ordering::Greater);
         });
 
     let books = second
