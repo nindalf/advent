@@ -7,43 +7,59 @@ type Book = Vec<u32>;
 
 #[inline]
 pub fn part1(input: &str) -> u32 {
-    let (books, page_order) = parse(input);
+    let (mut books, page_order) = parse(input);
 
     books
-        .iter()
-        .filter(|book| is_book_ordered(book, &page_order).1)
-        .map(|book| book[book.len() / 2])
-        .sum()
-}
-
-#[inline]
-pub fn part2(input: &str) -> u32 {
-    let (books, page_order) = parse(input);
-
-    books
-        .iter()
+        .iter_mut()
         .filter_map(|book| {
-            let (sorted_book, was_already_ordered) = is_book_ordered(book, &page_order);
-            if !was_already_ordered {
-                return Some(sorted_book[sorted_book.len() / 2]);
+            let was_already_ordered = sort_book(book, &page_order);
+            if was_already_ordered {
+                return Some(book[book.len() / 2]);
             }
             None
         })
         .sum()
 }
 
-fn is_book_ordered(book: &Book, page_order: &PageOrder) -> (Vec<u32>, bool) {
-    let mut sorted_book = (*book).clone();
-    sorted_book.sort_unstable_by(|a, b| match page_order.get(&(*a, *b)) {
+#[inline]
+pub fn part2(input: &str) -> u32 {
+    let (mut books, page_order) = parse(input);
+
+    books
+        .iter_mut()
+        .filter_map(|book| {
+            let was_already_ordered = sort_book(book, &page_order);
+            if !was_already_ordered {
+                return Some(book[book.len() / 2]);
+            }
+            None
+        })
+        .sum()
+}
+
+fn sort_book<'a>(book: &'a mut Book, page_order: &PageOrder) -> bool {
+    let hash_before = generate_hash(&book);
+    book.sort_unstable_by(|a, b| match page_order.get(&(*a, *b)) {
         Some(ordering) => *ordering,
         None => cmp::Ordering::Greater,
     });
-    for i in 0..book.len() {
-        if book[i] != sorted_book[i] {
-            return (sorted_book, false);
-        }
+    let hash_after = generate_hash(&book);
+    hash_before == hash_after
+}
+
+use std::hash::{Hash, Hasher};
+
+fn generate_hash(arr: &[u32]) -> u64 {
+    // Create a new hasher
+    let mut hasher = ahash::AHasher::default();
+
+    // Hash each element of the array along with its index to preserve order
+    for (index, &num) in arr.iter().enumerate() {
+        (index, num).hash(&mut hasher);
     }
-    (sorted_book, true)
+
+    // Return the hash value
+    hasher.finish()
 }
 
 fn parse(input: &str) -> (Vec<Book>, PageOrder) {
