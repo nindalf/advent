@@ -1,53 +1,61 @@
-use ahash::{AHashMap, AHashSet};
+use std::cmp;
+
+use ahash::AHashMap;
+
+type PageOrder = AHashMap<(u32, u32), cmp::Ordering>;
+type Book = Vec<u32>;
 
 #[inline]
 pub fn part1(input: &str) -> u32 {
-    let (ordering, books) = parse(input);
+    let (books, page_order) = parse(input);
 
     books
         .iter()
-        .filter(|book| is_book_ordered(&ordering, *book))
+        .filter(|book| is_book_ordered(book, &page_order).1)
         .map(|book| book[book.len() / 2])
         .sum()
 }
 
 #[inline]
-pub fn part2(input: &str) -> i32 {
-    let (ordering, books) = parse(input);
+pub fn part2(input: &str) -> u32 {
+    let (books, page_order) = parse(input);
 
     books
         .iter()
-        .filter(|book| !is_book_ordered(&ordering, *book))
-    
-    0
-}
-
-fn is_book_ordered(ordering: &AHashMap<u32, AHashSet<u32>>, book:&[u32]) -> bool {
-    let mut seen_so_far = AHashSet::with_capacity(book.len());
-    for page in book {
-        if let Some(should_appear_before) = ordering.get(&page) {
-            if seen_so_far.intersection(should_appear_before).count() > 0 {
-                // This page is appearing after some page it shouldn't have.
-                return false;
+        .filter_map(|book| {
+            let (sorted_book, was_already_ordered) = is_book_ordered(book, &page_order);
+            if !was_already_ordered {
+                return Some(sorted_book[sorted_book.len() / 2]);
             }
-        }
-        seen_so_far.insert(*page);
-    }
-    true
+            None
+        })
+        .sum()
 }
 
-fn parse(input: &str) -> (AHashMap<u32, AHashSet<u32>>, Vec<Vec<u32>>) {
+fn is_book_ordered(book: &Book, page_order: &PageOrder) -> (Vec<u32>, bool) {
+    let mut sorted_book = (*book).clone();
+    sorted_book.sort_unstable_by(|a, b| match page_order.get(&(*a, *b)) {
+        Some(ordering) => *ordering,
+        None => cmp::Ordering::Greater,
+    });
+    for i in 0..book.len() {
+        if book[i] != sorted_book[i] {
+            return (sorted_book, false);
+        }
+    }
+    (sorted_book, true)
+}
+
+fn parse(input: &str) -> (Vec<Book>, PageOrder) {
     let (first, second) = input.split_once("\n\n").unwrap();
-    let ordering = first
+
+    let mut page_order = AHashMap::with_capacity(100);
+    first
         .lines()
         .filter_map(|line| line.split_once("|"))
         .map(|(x, y)| (x.parse::<u32>().unwrap(), y.parse::<u32>().unwrap()))
-        .fold(AHashMap::with_capacity(500), |mut result, (key, val)| {
-            result
-                .entry(key)
-                .or_insert(AHashSet::with_capacity(50))
-                .insert(val);
-            result
+        .for_each(|(lesser, greater)| {
+            page_order.insert((lesser, greater), cmp::Ordering::Less);
         });
 
     let books = second
@@ -59,7 +67,7 @@ fn parse(input: &str) -> (AHashMap<u32, AHashSet<u32>>, Vec<Vec<u32>>) {
         })
         .collect();
 
-    (ordering, books)
+    (books, page_order)
 }
 
-crate::aoctest!(143, 6951, 123, 1234);
+crate::aoctest!(143, 6951, 123, 4121);
