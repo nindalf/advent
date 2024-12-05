@@ -52,8 +52,50 @@ S.S.S.S.SS
 
 Take a look at the little Elf's word search. *How many times does `XMAS` appear?*
 
-To begin, [get your puzzle input](4/input).
+Your puzzle answer was `2560`.
 
-Answer:
+\--- Part Two ---
+----------
 
-You can also [Shareon [Bluesky](https://bsky.app/intent/compose?text=%22Ceres+Search%22+%2D+Day+4+%2D+Advent+of+Code+2024+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F4) [Twitter](https://twitter.com/intent/tweet?text=%22Ceres+Search%22+%2D+Day+4+%2D+Advent+of+Code+2024&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F4&amp;related=ericwastl&amp;hashtags=AdventOfCode) [Mastodon](javascript:void(0);)] this puzzle.
+The Elf looks quizzically at you. Did you misunderstand the assignment?
+
+Looking for the instructions, you flip over the word search to find that this isn't actually an `*XMAS*` puzzle; it's an `*X-MAS*` puzzle in which you're supposed to find two `MAS` in the shape of an `X`. One way to achieve that is like this:
+
+```
+M.S
+.A.
+M.S
+
+```
+
+Irrelevant characters have again been replaced with `.` in the above diagram. Within the `X`, each `MAS` can be written forwards or backwards.
+
+Here's the same example from before, but this time all of the `X-MAS`es have been kept instead:
+
+```
+.M.S......
+..A..MSMS.
+.M.S.MAA..
+..A.ASMSM.
+.M.S.M....
+..........
+S.S.S.S.S.
+.A.A.A.A..
+M.M.M.M.M.
+..........
+
+```
+
+In this example, an `X-MAS` appears `*9*` times.
+
+Flip the word search from the instructions back over to the word search side and try again. *How many times does an `X-MAS` appear?*
+
+Your puzzle answer was `1910`.
+
+Both parts of this puzzle are complete! They provide two gold stars: \*\*
+
+At this point, you should [return to your Advent calendar](/2024) and try another puzzle.
+
+If you still want to see it, you can [get your puzzle input](4/input).
+
+You can also [Shareon [Bluesky](https://bsky.app/intent/compose?text=I%27ve+completed+%22Ceres+Search%22+%2D+Day+4+%2D+Advent+of+Code+2024+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F4) [Twitter](https://twitter.com/intent/tweet?text=I%27ve+completed+%22Ceres+Search%22+%2D+Day+4+%2D+Advent+of+Code+2024&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F4&amp;related=ericwastl&amp;hashtags=AdventOfCode) [Mastodon](javascript:void(0);)] this puzzle.

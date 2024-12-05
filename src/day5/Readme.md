@@ -86,8 +86,29 @@ Of course, you'll need to be careful: the actual list of *page ordering rules* i
 
 Determine which updates are already in the correct order. *What do you get if you add up the middle page number from those correctly-ordered updates?*
 
-To begin, [get your puzzle input](5/input).
+Your puzzle answer was `6951`.
 
-Answer:
+\--- Part Two ---
+----------
 
-You can also [Shareon [Bluesky](https://bsky.app/intent/compose?text=%22Print+Queue%22+%2D+Day+5+%2D+Advent+of+Code+2024+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F5) [Twitter](https://twitter.com/intent/tweet?text=%22Print+Queue%22+%2D+Day+5+%2D+Advent+of+Code+2024&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F5&amp;related=ericwastl&amp;hashtags=AdventOfCode) [Mastodon](javascript:void(0);)] this puzzle.
+While the Elves get to work printing the correctly-ordered updates, you have a little time to fix the rest of them.
+
+For each of the *incorrectly-ordered updates*, use the page ordering rules to put the page numbers in the right order. For the above example, here are the three incorrectly-ordered updates and their correct orderings:
+
+* `75,97,47,61,53` becomes `97,75,*47*,61,53`.
+* `61,13,29` becomes `61,*29*,13`.
+* `97,13,75,29,47` becomes `97,75,*47*,29,13`.
+
+After taking *only the incorrectly-ordered updates* and ordering them correctly, their middle page numbers are `47`, `29`, and `47`. Adding these together produces `*123*`.
+
+Find the updates which are not in the correct order. *What do you get if you add up the middle page numbers after correctly ordering just those updates?*
+
+Your puzzle answer was `4121`.
+
+Both parts of this puzzle are complete! They provide two gold stars: \*\*
+
+At this point, you should [return to your Advent calendar](/2024) and try another puzzle.
+
+If you still want to see it, you can [get your puzzle input](5/input).
+
+You can also [Shareon [Bluesky](https://bsky.app/intent/compose?text=I%27ve+completed+%22Print+Queue%22+%2D+Day+5+%2D+Advent+of+Code+2024+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F5) [Twitter](https://twitter.com/intent/tweet?text=I%27ve+completed+%22Print+Queue%22+%2D+Day+5+%2D+Advent+of+Code+2024&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F5&amp;related=ericwastl&amp;hashtags=AdventOfCode) [Mastodon](javascript:void(0);)] this puzzle.

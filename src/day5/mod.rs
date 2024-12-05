@@ -11,8 +11,13 @@ pub fn part1(input: &str) -> u32 {
 
     books
         .iter()
-        .filter(|book| is_book_ordered(book, &page_order).1)
-        .map(|book| book[book.len() / 2])
+        .filter_map(|book| {
+            let (_, was_already_ordered) = is_book_ordered(book, &page_order);
+            if was_already_ordered {
+                return Some(book[book.len() / 2]);
+            }
+            None
+        })
         .sum()
 }
 
