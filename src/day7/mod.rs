@@ -1,9 +1,16 @@
 use rayon::prelude::*;
 
+// Note on performance: calculate2 and calculate3 only differ in a couple of lines and could 
+// accept 2/3 as a paramater and still work. The first iteration of this solution did that.
+// However, performance improves dramatically by hardcoding 2 and 3 as constants.
+// The compiler is able to generate much better code. %2 and /2 are 1 CPU instruction each.
+// Part 1: 1.34 ms -> 269.31 µs (-79%)
+// Part 2: 61.7 ms -> 53.44 ms (-13.5%)
+
 #[inline]
 pub fn part1(input: &str) -> u64 {
     parse(input)
-        .filter(|(result, operands)| calculate(*result, operands, 2))
+        .filter(|(result, operands)| calculate_2(*result, operands))
         .map(|(result, _)| result)
         .sum()
 }
@@ -11,20 +18,51 @@ pub fn part1(input: &str) -> u64 {
 #[inline]
 pub fn part2(input: &str) -> u64 {
     parse(input)
-        .filter(|(result, operands)| calculate(*result, operands, 3))
+        .filter(|(result, operands)| calculate_3(*result, operands))
         .map(|(result, _)| result)
         .sum()
 }
 
-fn calculate(result: u64, operands: &[u64], possible_operations: u64) -> bool {
+
+fn calculate_2(result: u64, operands: &[u64]) -> bool {
     // If there are 11 operands
     let operations_len = operands.len() - 1; // There will be 10 operations
-    let num_iterations = possible_operations.pow(operations_len as u32); // And 2^10 or 3^10 iterations to calculate every possibility
+    let num_iterations = 2u64.pow(operations_len as u32); // And 2^10 iterations to calculate every possibile combination of operations
     for i in 0 .. num_iterations {
         let mut calculated_result = operands[0];
         let mut operations = i;
         for j in 0 .. operations_len {
-            calculated_result = match operations % possible_operations {
+            calculated_result = match operations % 2 {
+                0 => {
+                    calculated_result + operands[j+1]
+                },
+                1 => {
+                    calculated_result * operands[j+1]
+                },
+                _ => unreachable!(),
+            };
+            if calculated_result > result {
+                break;
+            }
+            operations = operations/2;
+        }
+        if calculated_result == result {
+            return true;
+        }
+        
+    }
+    false
+}
+
+fn calculate_3(result: u64, operands: &[u64]) -> bool {
+    // If there are 11 operands
+    let operations_len = operands.len() - 1; // There will be 10 operations
+    let num_iterations = 3u64.pow(operations_len as u32); // And 3^10 iterations to calculate every possibile combination of operations
+    for i in 0 .. num_iterations {
+        let mut calculated_result = operands[0];
+        let mut operations = i;
+        for j in 0 .. operations_len {
+            calculated_result = match operations % 3 {
                 0 => {
                     calculated_result + operands[j+1]
                 },
@@ -41,7 +79,7 @@ fn calculate(result: u64, operands: &[u64], possible_operations: u64) -> bool {
             if calculated_result > result {
                 break;
             }
-            operations = operations/possible_operations;
+            operations = operations/3;
         }
         if calculated_result == result {
             return true;
