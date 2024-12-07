@@ -1,16 +1,21 @@
 use rayon::prelude::*;
 
-// Note on performance: calculate2 and calculate3 only differ in a couple of lines and could 
-// accept 2/3 as a paramater and still work. The first iteration of this solution did that.
-// However, performance improves dramatically by hardcoding 2 and 3 as constants.
-// The compiler is able to generate much better code. %2 and /2 are 1 CPU instruction each.
+// Note on performance: The first iteration of this solution had a calculate function that accepted
+// the number of possible operations (2 or 3) as a param.
+// I replaced that function with specific versions calculate_2 and calculate_3 that hardcode 2 and 3.
+// This improves performance dramatically because the compiler is able to generate much better code.
+// %2 and /2 are 1 CPU instruction each.
 // Part 1: 1.34 ms -> 269.31 µs (-79%)
 // Part 2: 61.7 ms -> 53.44 ms (-13.5%)
+
+// Note on readability/DRY: I replaced calculate_2 and calculate_3 with calculate<const N:u64>.
+// It achieves the same thing because calculate<const N:u64> is monomorphized at compile-time 
+// to the equivalent of calculate_2 and calculate_3.
 
 #[inline]
 pub fn part1(input: &str) -> u64 {
     parse(input)
-        .filter(|(result, operands)| calculate_2(*result, operands))
+        .filter(|(result, operands)| calculate::<2>(*result, operands))
         .map(|(result, _)| result)
         .sum()
 }
@@ -18,51 +23,20 @@ pub fn part1(input: &str) -> u64 {
 #[inline]
 pub fn part2(input: &str) -> u64 {
     parse(input)
-        .filter(|(result, operands)| calculate_3(*result, operands))
+        .filter(|(result, operands)| calculate::<3>(*result, operands))
         .map(|(result, _)| result)
         .sum()
 }
 
-
-fn calculate_2(result: u64, operands: &[u64]) -> bool {
+fn calculate<const N: u64>(result: u64, operands: &[u64]) -> bool {
     // If there are 11 operands
     let operations_len = operands.len() - 1; // There will be 10 operations
-    let num_iterations = 2u64.pow(operations_len as u32); // And 2^10 iterations to calculate every possibile combination of operations
+    let num_iterations = N.pow(operations_len as u32); // And N^10 iterations to calculate every possibile combination of operations
     for i in 0 .. num_iterations {
         let mut calculated_result = operands[0];
         let mut operations = i;
         for j in 0 .. operations_len {
-            calculated_result = match operations % 2 {
-                0 => {
-                    calculated_result + operands[j+1]
-                },
-                1 => {
-                    calculated_result * operands[j+1]
-                },
-                _ => unreachable!(),
-            };
-            if calculated_result > result {
-                break;
-            }
-            operations = operations/2;
-        }
-        if calculated_result == result {
-            return true;
-        }
-        
-    }
-    false
-}
-
-fn calculate_3(result: u64, operands: &[u64]) -> bool {
-    // If there are 11 operands
-    let operations_len = operands.len() - 1; // There will be 10 operations
-    let num_iterations = 3u64.pow(operations_len as u32); // And 3^10 iterations to calculate every possibile combination of operations
-    for i in 0 .. num_iterations {
-        let mut calculated_result = operands[0];
-        let mut operations = i;
-        for j in 0 .. operations_len {
-            calculated_result = match operations % 3 {
+            calculated_result = match operations % N {
                 0 => {
                     calculated_result + operands[j+1]
                 },
@@ -73,18 +47,17 @@ fn calculate_3(result: u64, operands: &[u64]) -> bool {
                     // Formatting takes 292ms while multiplication + addition takes 61ms (80% faster)
                     //format!("{}{}", calculated_result, operands[j+1]).parse().unwrap()
                     (calculated_result * next_power_of_10(operands[j+1])) + operands[j+1]
-                }
+                },
                 _ => unreachable!(),
             };
             if calculated_result > result {
                 break;
             }
-            operations = operations/3;
+            operations = operations/N;
         }
         if calculated_result == result {
             return true;
         }
-        
     }
     false
 }
