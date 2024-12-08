@@ -1,8 +1,6 @@
-use crate::grid::Grid;
+use crate::grid::{Grid, Point};
 use ahash::AHashSet;
 use rayon::prelude::*;
-
-type Point = (usize, usize);
 
 #[inline]
 pub fn part1(input: &str) -> usize {
@@ -21,7 +19,7 @@ fn steps_to_leave_the_grid(
     let mut visited = AHashSet::with_capacity(grid.rows * grid.columns);
     let mut visited_with_direction = AHashSet::with_capacity(grid.rows * grid.columns);
     while let Some((next_position, next_direction)) =
-        next_valid_position(&grid, obstruction, guard_position, guard_direction)
+        next_valid_position(grid, obstruction, guard_position, guard_direction)
     {
         visited.insert(guard_position);
         let position_with_direction = (guard_position.0, guard_position.1, guard_direction);
@@ -66,9 +64,7 @@ pub fn part2(input: &str) -> usize {
 
     steps
         .par_iter()
-        .map(|obstruction| {
-            steps_to_leave_the_grid(&grid, initial_position, Some(obstruction.clone()))
-        })
+        .map(|obstruction| steps_to_leave_the_grid(&grid, initial_position, Some(*obstruction)))
         .filter(|optional_steps| optional_steps.is_none())
         .count()
         + 1

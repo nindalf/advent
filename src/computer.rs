@@ -23,7 +23,7 @@ impl<'a> Computer<'a> {
     }
 
     pub fn next_instruction(&mut self) -> Option<Instruction> {
-        if self.input == "" {
+        if self.input.is_empty() {
             return None;
         }
         let (remaining, instruction) = parse_instruction(&mut self.input).unwrap();
@@ -37,17 +37,17 @@ use winnow::combinator::{alt, delimited, separated_pair};
 use winnow::token::{literal, take_while};
 use winnow::{PResult, Parser};
 
-fn parse_dont<'s>(input: &mut &'s str) -> PResult<Instruction> {
+fn parse_dont(input: &mut &str) -> PResult<Instruction> {
     literal("don't()")
         .map(|_| Instruction::Dont)
         .parse_next(input)
 }
 
-fn parse_do<'s>(input: &mut &'s str) -> PResult<Instruction> {
+fn parse_do(input: &mut &str) -> PResult<Instruction> {
     literal("do()").map(|_| Instruction::Do).parse_next(input)
 }
 
-fn parse_mul<'s>(input: &mut &'s str) -> PResult<Instruction> {
+fn parse_mul(input: &mut &str) -> PResult<Instruction> {
     delimited(
         literal("mul("),
         separated_pair(
@@ -61,19 +61,19 @@ fn parse_mul<'s>(input: &mut &'s str) -> PResult<Instruction> {
     .parse_next(input)
 }
 
-fn parse_gibberish<'s>(input: &mut &'s str) -> PResult<Instruction> {
+fn parse_gibberish(input: &mut &str) -> PResult<Instruction> {
     winnow::token::any
-        .map(|c| Instruction::UnknownChar(c))
+        .map(Instruction::UnknownChar)
         .parse_next(input)
 }
 
-fn parse_special_character<'s>(input: &mut &'s str) -> PResult<Instruction> {
+fn parse_special_character(input: &mut &str) -> PResult<Instruction> {
     take_while(1.., is_special_character)
         .map(|s: &str| Instruction::SpecialCharacters(s.to_string()))
         .parse_next(input)
 }
 
-fn parse_whitespace<'s>(input: &mut &'s str) -> PResult<Instruction> {
+fn parse_whitespace(input: &mut &str) -> PResult<Instruction> {
     take_while(1.., is_whitespace)
         .map(|_| Instruction::Whitespace)
         .parse_next(input)

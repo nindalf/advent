@@ -1,3 +1,5 @@
+pub type Point = (usize, usize);
+
 pub struct Grid {
     s: Vec<char>,
     pub rows: usize,
@@ -23,16 +25,22 @@ impl Grid {
     }
 
     pub fn get_i32(&self, position: (i32, i32)) -> Option<char> {
-        if position.0 >= self.rows as i32 || position.0 < 0 || position.1 >= self.columns as i32 || position.1 < 0 {
+        if position.0 >= self.rows as i32
+            || position.0 < 0
+            || position.1 >= self.columns as i32
+            || position.1 < 0
+        {
             return None;
         }
-        self.s.get(position.0 as usize * self.columns + position.1 as usize).copied()
+        self.s
+            .get(position.0 as usize * self.columns + position.1 as usize)
+            .copied()
     }
 
     pub fn set(&mut self, position: (usize, usize), val: char) {
         let idx = position.0 * self.columns + position.1;
         if idx >= self.s.len() {
-            return ();
+            return;
         }
         self.s[idx] = val;
     }

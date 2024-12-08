@@ -7,9 +7,8 @@ pub fn part1(input: &str) -> i32 {
     let mut result = 0;
     let mut computer = crate::computer::Computer::init(input);
     while let Some(instruction) = computer.next_instruction() {
-        match instruction {
-            Instruction::Mul(x, y) => result += x * y,
-            _ => {}
+        if let Instruction::Mul(x, y) = instruction {
+            result += x * y;
         }
     }
     result
@@ -25,13 +24,9 @@ pub fn part2(input: &str) -> i32 {
                 if computer.multiply_enabled {
                     result += x * y
                 }
-            },
-            Instruction::Do => {
-                computer.multiply_enabled = true
-            },
-            Instruction::Dont => {
-                computer.multiply_enabled = false
-            },
+            }
+            Instruction::Do => computer.multiply_enabled = true,
+            Instruction::Dont => computer.multiply_enabled = false,
             _ => {}
         }
     }

@@ -2,6 +2,8 @@ use ahash::AHashMap;
 
 use crate::grid::Grid;
 
+type AntennaLocations = AHashMap<char, Vec<(i32, i32)>>;
+
 #[inline]
 pub fn part1(input: &str) -> usize {
     solve(input, find_anti_nodes)
@@ -105,7 +107,7 @@ fn find_resonant_anti_nodes(locations: &[(i32, i32)], grid_size: (i32, i32)) -> 
     anti_nodes
 }
 
-fn parse(input: &str) -> (AHashMap<char, Vec<(i32, i32)>>, (i32, i32)) {
+fn parse(input: &str) -> (AntennaLocations, (i32, i32)) {
     let grid = Grid::new(input);
 
     let mut antenna_locations = AHashMap::with_capacity(62);

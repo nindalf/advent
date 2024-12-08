@@ -32,8 +32,8 @@ pub fn part1(input: &str) -> u32 {
 pub fn part2(input: &str) -> i32 {
     let grid = Grid::new(input);
     let mut results = 0;
-    for i in 1..grid.rows-1 {
-        for j in 1..grid.columns-1 {
+    for i in 1..grid.rows - 1 {
+        for j in 1..grid.columns - 1 {
             if grid.get((i, j)) == Some('A') {
                 match (
                     grid.get((i - 1, j - 1)),
