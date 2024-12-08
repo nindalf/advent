@@ -1,22 +1,28 @@
 use crate::grid::Grid;
 use ahash::AHashSet;
 use rayon::prelude::*;
-use itertools::Itertools;
 
 type Point = (usize, usize);
 
 #[inline]
 pub fn part1(input: &str) -> usize {
     let (grid, initial_position) = parse(input);
-    num_steps_to_leave_the_grid(&grid, initial_position, None).unwrap()
+    let steps = steps_to_leave_the_grid(&grid, initial_position, None).unwrap();
+    steps.len() + 1
 }
 
-fn num_steps_to_leave_the_grid(grid: &Grid, initial_position: Point, obstruction: Option<Point>) -> Option<usize> {
+fn steps_to_leave_the_grid(
+    grid: &Grid,
+    initial_position: Point,
+    obstruction: Option<Point>,
+) -> Option<AHashSet<Point>> {
     let mut guard_direction = Direction::Up;
     let mut guard_position = initial_position;
     let mut visited = AHashSet::with_capacity(grid.rows * grid.columns);
     let mut visited_with_direction = AHashSet::with_capacity(grid.rows * grid.columns);
-    while let Some((next_position, next_direction)) = next_valid_position(&grid, obstruction, guard_position, guard_direction) {
+    while let Some((next_position, next_direction)) =
+        next_valid_position(&grid, obstruction, guard_position, guard_direction)
+    {
         visited.insert(guard_position);
         let position_with_direction = (guard_position.0, guard_position.1, guard_direction);
         if visited_with_direction.contains(&position_with_direction) {
@@ -27,10 +33,15 @@ fn num_steps_to_leave_the_grid(grid: &Grid, initial_position: Point, obstruction
         guard_position = next_position;
         guard_direction = next_direction;
     }
-    Some(visited.len() + 1)
+    Some(visited)
 }
 
-fn next_valid_position(grid: &Grid, obstruction: Option<Point>, position: Point, mut direction: Direction) -> Option<(Point, Direction)> {
+fn next_valid_position(
+    grid: &Grid,
+    obstruction: Option<Point>,
+    position: Point,
+    mut direction: Direction,
+) -> Option<(Point, Direction)> {
     while let Some(next_position) = direction.next_position(grid, position) {
         if obstruction.is_some() && obstruction.unwrap() == next_position {
             direction = direction.turn_right();
@@ -51,14 +62,17 @@ fn next_valid_position(grid: &Grid, obstruction: Option<Point>, position: Point,
 #[inline]
 pub fn part2(input: &str) -> usize {
     let (grid, initial_position) = parse(input);
+    let steps = steps_to_leave_the_grid(&grid, initial_position, None).unwrap();
 
-    (0..grid.rows).cartesian_product(0..grid.columns)
-        .map(|obstruction| num_steps_to_leave_the_grid(&grid, initial_position, Some(obstruction)))
+    steps
+        .par_iter()
+        .map(|obstruction| {
+            steps_to_leave_the_grid(&grid, initial_position, Some(obstruction.clone()))
+        })
         .filter(|optional_steps| optional_steps.is_none())
         .count()
+        + 1
 }
-
-
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 enum Direction {
@@ -68,18 +82,6 @@ enum Direction {
     Left,
 }
 
-impl From<char> for Direction {
-    fn from(value: char) -> Self {
-        match value {
-            '^' => Direction::Up,
-            '>' => Direction::Right,
-            'v' => Direction::Down,
-            '<' => Direction::Left,
-            _ => unreachable!("No other direction supported"),
-        }
-    }
-}
-
 impl Direction {
     fn turn_right(&self) -> Direction {
         match self {
@@ -87,15 +89,6 @@ impl Direction {
             Direction::Right => Direction::Down,
             Direction::Down => Direction::Left,
             Direction::Left => Direction::Up,
-        }
-    }
-
-    fn to_char(&self) -> char {
-        match self {
-            Direction::Up => '^',
-            Direction::Right => '>',
-            Direction::Down => 'v',
-            Direction::Left => '<',
         }
     }
 
