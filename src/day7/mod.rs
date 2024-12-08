@@ -82,11 +82,9 @@ fn calculate_dfs<const N: u64>(result: u64, operands: &[u64]) -> bool {
             calculated_result = match operations % N {
                 0 => calculated_result * operand,
                 1 => calculated_result + operand,
-                2 => {
-                    // Formatting takes 292ms while multiplication + addition takes 61ms (80% faster)
-                    // format!("{calculated_result}{operand}").parse().unwrap()
-                    (calculated_result * next_power_of_10(operand)) + operand
-                }
+                // Formatting takes 292ms while multiplication + addition takes 61ms (80% faster)
+                // format!("{calculated_result}{operand}").parse().unwrap()
+                2 => (calculated_result * next_power_of_10(operand)) + operand,
                 _ => unreachable!(),
             };
             if calculated_result > result {

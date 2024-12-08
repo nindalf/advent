@@ -58,18 +58,14 @@ fn parse(input: &str) -> (Vec<Book>, PageOrder) {
     first
         .lines()
         .filter_map(|line| line.split_once("|"))
-        .map(|(x, y)| (x.parse::<u32>().unwrap(), y.parse::<u32>().unwrap()))
+        .map(|(x, y)| (x.parse().unwrap(), y.parse().unwrap()))
         .for_each(|(lesser, greater)| {
             page_order.insert((lesser, greater), cmp::Ordering::Less);
         });
 
     let books = second
         .lines()
-        .map(|line| {
-            line.split(',')
-                .flat_map(|x| x.parse::<u32>())
-                .collect::<Vec<u32>>()
-        })
+        .map(|line| line.split(',').flat_map(str::parse).collect())
         .collect();
 
     (books, page_order)
