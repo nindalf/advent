@@ -12,18 +12,24 @@ pub fn part2(input: &str) -> usize {
     solve(input, find_resonant_anti_nodes)
 }
 
-fn solve(input: &str, node_finder_fn: impl Fn(&[(i32, i32)], (i32, i32)) -> Vec<(i32, i32)>) -> usize {
+fn solve(
+    input: &str,
+    node_finder_fn: impl Fn(&[(i32, i32)], (i32, i32)) -> Vec<(i32, i32)>,
+) -> usize {
     let (antenna_locations, grid_size) = parse(input);
 
     antenna_locations
         .iter()
         .map(|(_, locations)| node_finder_fn(locations, grid_size))
-        .fold(ahash::AHashSet::with_capacity(2000), |mut acc, anti_nodes| {
-            anti_nodes.iter().for_each(|node| {
-                acc.insert(*node);
-            });
-            acc
-        })
+        .fold(
+            ahash::AHashSet::with_capacity(2000),
+            |mut acc, anti_nodes| {
+                anti_nodes.iter().for_each(|node| {
+                    acc.insert(*node);
+                });
+                acc
+            },
+        )
         .len()
 }
 
