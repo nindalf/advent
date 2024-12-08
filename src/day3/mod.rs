@@ -1,7 +1,45 @@
 use regex::Regex;
 
+use crate::computer::Instruction;
+
 #[inline]
 pub fn part1(input: &str) -> i32 {
+    let mut result = 0;
+    let mut computer = crate::computer::Computer::init(input);
+    while let Some(instruction) = computer.next_instruction() {
+        match instruction {
+            Instruction::Mul(x, y) => result += x * y,
+            _ => {}
+        }
+    }
+    result
+}
+
+#[inline]
+pub fn part2(input: &str) -> i32 {
+    let mut result = 0;
+    let mut computer = crate::computer::Computer::init(input);
+    while let Some(instruction) = computer.next_instruction() {
+        match instruction {
+            Instruction::Mul(x, y) => {
+                if computer.multiply_enabled {
+                    result += x * y
+                }
+            },
+            Instruction::Do => {
+                computer.multiply_enabled = true
+            },
+            Instruction::Dont => {
+                computer.multiply_enabled = false
+            },
+            _ => {}
+        }
+    }
+    result
+}
+
+#[allow(dead_code)]
+fn part1_re(input: &str) -> i32 {
     let re = Regex::new(r"mul\((?P<op1>[0-9]+),(?P<op2>[0-9]+)\)").unwrap();
     re.captures_iter(input)
         .map(|capture| {
@@ -14,8 +52,8 @@ pub fn part1(input: &str) -> i32 {
         .sum()
 }
 
-#[inline]
-pub fn part2(input: &str) -> i32 {
+#[allow(dead_code)]
+fn part2_re(input: &str) -> i32 {
     let re = Regex::new(r"((don't)|(do)|mul\((?P<op1>[0-9]+),(?P<op2>[0-9]+)\))").unwrap();
     let mut enabled = true;
     let mut result = 0;
