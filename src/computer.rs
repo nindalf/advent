@@ -7,11 +7,17 @@ pub struct Computer<'a> {
 pub enum Instruction {
     Do,
     Dont,
-    UnknownChar(char),
+    From,
+    How,
     Mul(i32, i32),
+    Select,
     SpecialCharacters(String),
-    Unknown,
+    UnknownChar(char),
+    What,
+    When,
+    Where,
     Whitespace,
+    Why,
 }
 
 impl<'a> Computer<'a> {
@@ -37,14 +43,52 @@ use winnow::combinator::{alt, delimited, separated_pair};
 use winnow::token::{literal, take_while};
 use winnow::{PResult, Parser};
 
+fn parse_do(input: &mut &str) -> PResult<Instruction> {
+    literal("do()").map(|_| Instruction::Do).parse_next(input)
+}
+
 fn parse_dont(input: &mut &str) -> PResult<Instruction> {
     literal("don't()")
         .map(|_| Instruction::Dont)
         .parse_next(input)
 }
 
-fn parse_do(input: &mut &str) -> PResult<Instruction> {
-    literal("do()").map(|_| Instruction::Do).parse_next(input)
+fn parse_from(input: &mut &str) -> PResult<Instruction> {
+    literal("from()")
+        .map(|_| Instruction::From)
+        .parse_next(input)
+}
+
+fn parse_how(input: &mut &str) -> PResult<Instruction> {
+    literal("how()").map(|_| Instruction::How).parse_next(input)
+}
+
+fn parse_select(input: &mut &str) -> PResult<Instruction> {
+    literal("select()")
+        .map(|_| Instruction::Select)
+        .parse_next(input)
+}
+
+fn parse_what(input: &mut &str) -> PResult<Instruction> {
+    literal("what()")
+        .map(|_| Instruction::What)
+        .parse_next(input)
+}
+
+fn parse_when(input: &mut &str) -> PResult<Instruction> {
+    literal("when()")
+        .map(|_| Instruction::When)
+        .parse_next(input)
+}
+
+fn parse_where(input: &mut &str) -> PResult<Instruction> {
+    literal("where()")
+        .map(|_| Instruction::Where)
+        .parse_next(input)
+}
+
+fn parse_why(input: &mut &str) -> PResult<Instruction> {
+    literal("why()").map(|_| Instruction::Why).parse_next(input)
 }
 
 fn parse_mul(input: &mut &str) -> PResult<Instruction> {
@@ -94,7 +138,14 @@ fn parse_instruction<'s>(input: &mut &'s str) -> PResult<(&'s str, Instruction)>
     alt((
         parse_do,
         parse_dont,
+        parse_from,
+        parse_how,
+        parse_what,
+        parse_when,
+        parse_where,
+        parse_why,
         parse_mul,
+        parse_select,
         parse_special_character,
         parse_whitespace,
         parse_gibberish,

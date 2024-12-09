@@ -1,6 +1,5 @@
 #[inline]
 pub fn part1(input: &str) -> usize {
-    let mut result = 0;
     let disk = parse(input);
     let mut forward = 0;
     let mut disk_index = 0;
@@ -15,11 +14,12 @@ pub fn part1(input: &str) -> usize {
 
     let total_bytes = disk.iter().step_by(2).sum();
 
+    let mut checksum = 0;
     while disk_index < total_bytes {
         // forward points at a file
         if forward % 2 == 0 {
             for _ in 0..disk[forward] {
-                result += disk_index * file_id;
+                checksum += disk_index * file_id;
                 disk_index += 1;
                 if disk_index == total_bytes {
                     break;
@@ -30,7 +30,7 @@ pub fn part1(input: &str) -> usize {
         } else {
             // forward points to free space, let's get data from the back
             for _ in 0..disk[forward] {
-                result += disk_index * reverse_file.id;
+                checksum += disk_index * reverse_file.id;
                 disk_index += 1;
                 reverse_file.remaining -= 1;
                 if reverse_file.remaining == 0 {
@@ -49,7 +49,7 @@ pub fn part1(input: &str) -> usize {
         }
     }
 
-    result
+    checksum
 }
 
 #[derive(Debug)]
@@ -70,7 +70,7 @@ struct FreeSpace {
 #[inline]
 pub fn part2(input: &str) -> usize {
     let disk = parse(input);
-    let mut files = Vec::with_capacity(disk.len() / 2);
+    let mut files = Vec::with_capacity(disk.len() / 2 + 1);
     let mut free_spaces = Vec::with_capacity(disk.len() / 2);
     let mut disk_offset = 0;
     for i in (0..disk.len() - 1).step_by(2) {
@@ -102,14 +102,16 @@ pub fn part2(input: &str) -> usize {
             .iter()
             .enumerate()
             .find_map(|(idx, free_space)| {
-                if free_space.remaining >= file.remaining && free_space.disk_offset < file.disk_offset {
+                if free_space.remaining >= file.remaining
+                    && free_space.disk_offset < file.disk_offset
+                {
                     return Some(idx);
                 }
                 None
             });
 
         match free_space_idx {
-            // There is space
+            // There is space, move the file
             Some(idx) => {
                 let free_space = &mut free_spaces[idx];
                 for _ in 0..file.remaining {
@@ -118,6 +120,7 @@ pub fn part2(input: &str) -> usize {
                     free_space.remaining -= 1;
                 }
             }
+            // There is no space, don't move the file.
             None => {
                 for j in 0..file.remaining {
                     checksum += (file.disk_offset + j) * file.id;
@@ -125,7 +128,7 @@ pub fn part2(input: &str) -> usize {
             }
         }
     }
-    
+
     checksum
 }
 
