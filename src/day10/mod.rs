@@ -32,34 +32,15 @@ fn num_paths_bfs(grid: &Grid<u8>, start: Point, end: u8) -> usize {
         let current_val = grid.get(point).unwrap();
         if current_val == end {
             result += 1;
+            continue;
         }
-        let (up, right, down, left) = grid.adjacent(point);
-        if let Some(val) = up.and_then(|p| grid.get(p)) {
-            let p = up.unwrap();
-            if val == current_val + 1 && !seen.contains(&p) {
-                q.push_back(p);
-                seen.insert(p);
-            }
-        }
-        if let Some(val) = right.and_then(|p| grid.get(p)) {
-            let p = right.unwrap();
-            if val == current_val + 1 && !seen.contains(&p) {
-                q.push_back(p);
-                seen.insert(p);
-            }
-        }
-        if let Some(val) = down.and_then(|p| grid.get(p)) {
-            let p = down.unwrap();
-            if val == current_val + 1 && !seen.contains(&p) {
-                q.push_back(p);
-                seen.insert(p);
-            }
-        }
-        if let Some(val) = left.and_then(|p| grid.get(p)) {
-            let p = left.unwrap();
-            if val == current_val + 1 && !seen.contains(&p) {
-                q.push_back(p);
-                seen.insert(p);
+        let adjacents = grid.adjacent(point);
+        for point in adjacents {
+            if let Some(p) = point && let Some(val) = grid.get(p) {
+                if val == current_val + 1 && !seen.contains(&p) {
+                    q.push_back(p);
+                    seen.insert(p);
+                }
             }
         }
     }

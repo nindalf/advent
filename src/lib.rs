@@ -1,3 +1,5 @@
+#![feature(let_chains)]
+
 pub mod computer;
 pub mod day1;
 pub mod day2;

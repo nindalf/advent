@@ -71,12 +71,12 @@ impl<T> Grid<T> where T:Copy + PartialEq {
         }
     }
 
-    pub fn adjacent(&self, position: Point) -> (Option<Point>, Option<Point>, Option<Point>, Option<Point>) {
+    pub fn adjacent(&self, position: Point) -> [Option<Point>; 4] {
         let up = (position.0 > 0).then(|| (position.0 - 1, position.1));
         let right = (position.1 + 1 < self.columns).then(|| (position.0, position.1 + 1));
         let down = (position.0 + 1 < self.rows).then(|| (position.0 + 1, position.1));
         let left = (position.1 > 0).then(||(position.0, position.1 - 1));
-        (up, right, down, left)
+        [up, right, down, left]
     }
 
     pub fn iter(&self) -> impl Iterator<Item = (Point, T)> + use<'_, T> {
