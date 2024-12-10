@@ -14,15 +14,22 @@ pub enum Direction {
     Left,
 }
 
-impl<T> Grid<T> where T:Copy + PartialEq {
-    pub fn construct(input: &str, mapper: impl Fn(char)->T) -> Grid<T> {
+impl<T> Grid<T>
+where
+    T: Copy + PartialEq,
+{
+    pub fn construct(input: &str, mapper: impl Fn(char) -> T) -> Grid<T> {
         let columns = if input.is_empty() {
             0
         } else {
             input.lines().next().unwrap().len()
         };
         Grid {
-            s: input.lines().flat_map(|line| line.chars()).map(mapper).collect(),
+            s: input
+                .lines()
+                .flat_map(|line| line.chars())
+                .map(mapper)
+                .collect(),
             rows: input.lines().count(),
             columns,
         }
@@ -65,9 +72,11 @@ impl<T> Grid<T> where T:Copy + PartialEq {
     pub fn next_position(&self, position: Point, direction: Direction) -> Option<Point> {
         match direction {
             Direction::Up => (position.0 > 0).then(|| (position.0 - 1, position.1)),
-            Direction::Right => (position.1 + 1 < self.columns).then(|| (position.0, position.1 + 1)),
+            Direction::Right => {
+                (position.1 + 1 < self.columns).then(|| (position.0, position.1 + 1))
+            }
             Direction::Down => (position.0 + 1 < self.rows).then(|| (position.0 + 1, position.1)),
-            Direction::Left => (position.1 > 0).then(||(position.0, position.1 - 1)),
+            Direction::Left => (position.1 > 0).then(|| (position.0, position.1 - 1)),
         }
     }
 
@@ -75,15 +84,15 @@ impl<T> Grid<T> where T:Copy + PartialEq {
         let up = (position.0 > 0).then(|| (position.0 - 1, position.1));
         let right = (position.1 + 1 < self.columns).then(|| (position.0, position.1 + 1));
         let down = (position.0 + 1 < self.rows).then(|| (position.0 + 1, position.1));
-        let left = (position.1 > 0).then(||(position.0, position.1 - 1));
+        let left = (position.1 > 0).then(|| (position.0, position.1 - 1));
         [up, right, down, left]
     }
 
     pub fn iter(&self) -> impl Iterator<Item = (Point, T)> + use<'_, T> {
-        self.s.iter().enumerate()
-            .map(|(idx, c)| {
-                ((idx / self.columns, idx % self.columns), *c)
-            })
+        self.s
+            .iter()
+            .enumerate()
+            .map(|(idx, c)| ((idx / self.columns, idx % self.columns), *c))
     }
 }
 
