@@ -10,7 +10,7 @@ pub fn part1(input: &str) -> usize {
     grid.iter()
         .filter_map(|(point, val)| {
             if val == 0 {
-                return Some(num_paths_bfs(&grid, point, 9));
+                return Some(num_paths_bfs::<false>(&grid, point, 9));
             }
             None
         })
@@ -18,12 +18,19 @@ pub fn part1(input: &str) -> usize {
 }
 
 #[inline]
-pub fn part2(input: &str) -> i32 {
-    let grid = Grid::construct(input, |x| x);
-    0
+pub fn part2(input: &str) -> usize {
+    let grid = Grid::construct(input, |x| (x as u8 - '0' as u8));
+    grid.iter()
+        .filter_map(|(point, val)| {
+            if val == 0 {
+                return Some(num_paths_bfs::<true>(&grid, point, 9));
+            }
+            None
+        })
+        .sum()
 }
 
-fn num_paths_bfs(grid: &Grid<u8>, start: Point, end: u8) -> usize {
+fn num_paths_bfs<const OVERLAPPING_ENABLED: bool>(grid: &Grid<u8>, start: Point, end: u8) -> usize {
     let mut seen = ahash::HashSet::with_capacity(grid.rows*grid.columns);
     let mut q = VecDeque::with_capacity(100);
     q.push_back(start);
@@ -37,9 +44,15 @@ fn num_paths_bfs(grid: &Grid<u8>, start: Point, end: u8) -> usize {
         let adjacents = grid.adjacent(point);
         for point in adjacents {
             if let Some(p) = point && let Some(val) = grid.get(p) {
-                if val == current_val + 1 && !seen.contains(&p) {
-                    q.push_back(p);
-                    seen.insert(p);
+                if !OVERLAPPING_ENABLED {
+                    if val == current_val + 1 && !seen.contains(&p) {
+                        q.push_back(p);
+                        seen.insert(p);
+                    }
+                } else {
+                    if val == current_val + 1 {
+                        q.push_back(p);
+                    }
                 }
             }
         }
@@ -47,4 +60,4 @@ fn num_paths_bfs(grid: &Grid<u8>, start: Point, end: u8) -> usize {
     result
 }
 
-crate::aoctest!(36, 501, 1234, 1234);
+crate::aoctest!(36, 501, 81, 1017);
