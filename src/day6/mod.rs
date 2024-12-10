@@ -1,4 +1,4 @@
-use crate::grid::{Grid, Point};
+use crate::grid::{Direction, Grid, Point};
 use ahash::AHashSet;
 use rayon::prelude::*;
 
@@ -9,8 +9,21 @@ pub fn part1(input: &str) -> usize {
     steps.len() + 1
 }
 
+#[inline]
+pub fn part2(input: &str) -> usize {
+    let (grid, initial_position) = parse(input);
+    let steps = steps_to_leave_the_grid(&grid, initial_position, None).unwrap();
+
+    steps
+        .par_iter()
+        .map(|obstruction| steps_to_leave_the_grid(&grid, initial_position, Some(*obstruction)))
+        .filter(|optional_steps| optional_steps.is_none())
+        .count()
+        + 1
+}
+
 fn steps_to_leave_the_grid(
-    grid: &Grid,
+    grid: &Grid<char>,
     initial_position: Point,
     obstruction: Option<Point>,
 ) -> Option<AHashSet<Point>> {
@@ -35,12 +48,12 @@ fn steps_to_leave_the_grid(
 }
 
 fn next_valid_position(
-    grid: &Grid,
+    grid: &Grid<char>,
     obstruction: Option<Point>,
     position: Point,
     mut direction: Direction,
 ) -> Option<(Point, Direction)> {
-    while let Some(next_position) = direction.next_position(grid, position) {
+    while let Some(next_position) = grid.next_position(position, direction) {
         if obstruction.is_some() && obstruction.unwrap() == next_position {
             direction = direction.turn_right();
             continue;
@@ -57,69 +70,8 @@ fn next_valid_position(
     None
 }
 
-#[inline]
-pub fn part2(input: &str) -> usize {
-    let (grid, initial_position) = parse(input);
-    let steps = steps_to_leave_the_grid(&grid, initial_position, None).unwrap();
-
-    steps
-        .par_iter()
-        .map(|obstruction| steps_to_leave_the_grid(&grid, initial_position, Some(*obstruction)))
-        .filter(|optional_steps| optional_steps.is_none())
-        .count()
-        + 1
-}
-
-#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
-enum Direction {
-    Up,
-    Right,
-    Down,
-    Left,
-}
-
-impl Direction {
-    fn turn_right(&self) -> Direction {
-        match self {
-            Direction::Up => Direction::Right,
-            Direction::Right => Direction::Down,
-            Direction::Down => Direction::Left,
-            Direction::Left => Direction::Up,
-        }
-    }
-
-    fn next_position(&self, grid: &Grid, position: Point) -> Option<Point> {
-        match self {
-            Direction::Up => {
-                if position.0 == 0 {
-                    return None;
-                }
-                Some((position.0 - 1, position.1))
-            }
-            Direction::Right => {
-                if position.1 + 1 == grid.columns {
-                    return None;
-                }
-                Some((position.0, position.1 + 1))
-            }
-            Direction::Down => {
-                if position.0 + 1 == grid.rows {
-                    return None;
-                }
-                Some((position.0 + 1, position.1))
-            }
-            Direction::Left => {
-                if position.1 == 0 {
-                    return None;
-                }
-                Some((position.0, position.1 - 1))
-            }
-        }
-    }
-}
-
-fn parse(input: &str) -> (Grid, Point) {
-    let mut grid = Grid::new(input);
+fn parse(input: &str) -> (Grid<char>, Point) {
+    let mut grid = Grid::construct(input, |x| x);
     let guard_position = grid.search('^').unwrap();
     grid.set(guard_position, '.');
     (grid, guard_position)
