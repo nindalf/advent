@@ -64,31 +64,19 @@ impl<T> Grid<T> where T:Copy + PartialEq {
 
     pub fn next_position(&self, position: Point, direction: Direction) -> Option<Point> {
         match direction {
-            Direction::Up => {
-                if position.0 == 0 {
-                    return None;
-                }
-                Some((position.0 - 1, position.1))
-            }
-            Direction::Right => {
-                if position.1 + 1 == self.columns {
-                    return None;
-                }
-                Some((position.0, position.1 + 1))
-            }
-            Direction::Down => {
-                if position.0 + 1 == self.rows {
-                    return None;
-                }
-                Some((position.0 + 1, position.1))
-            }
-            Direction::Left => {
-                if position.1 == 0 {
-                    return None;
-                }
-                Some((position.0, position.1 - 1))
-            }
+            Direction::Up => (position.0 > 0).then(|| (position.0 - 1, position.1)),
+            Direction::Right => (position.1 + 1 < self.columns).then(|| (position.0, position.1 + 1)),
+            Direction::Down => (position.0 + 1 < self.rows).then(|| (position.0 + 1, position.1)),
+            Direction::Left => (position.1 > 0).then(||(position.0, position.1 - 1)),
         }
+    }
+
+    pub fn adjacent(&self, position: Point) -> (Option<Point>, Option<Point>, Option<Point>, Option<Point>) {
+        let up = (position.0 > 0).then(|| (position.0 - 1, position.1));
+        let right = (position.1 + 1 < self.columns).then(|| (position.0, position.1 + 1));
+        let down = (position.0 + 1 < self.rows).then(|| (position.0 + 1, position.1));
+        let left = (position.1 > 0).then(||(position.0, position.1 - 1));
+        (up, right, down, left)
     }
 
     pub fn iter(&self) -> impl Iterator<Item = (Point, T)> + use<'_, T> {
