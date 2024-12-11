@@ -1,14 +1,19 @@
 use ahash::AHashMap;
 
+/// Performance: The first version of this ran in 187.59 µs and 4.43ms.
+/// There was only one optimisation I could think of - size the HashMap to the size actually needed by the inputs.
+/// The final sizes in both parts were 3.3k and 125k. I changed 100k in both cases to 10k (minimising allocation)
+/// and 150k (minimising re-allocation).
+/// Final time: 45.87 µs (-75%) and 2.84ms (-35%)
 #[inline]
 pub fn part1(input: &str) -> u64 {
-    let mut memoized = AHashMap::with_capacity(100000);
+    let mut memoized = AHashMap::with_capacity(10000);
     parse(input).map(|n| transform(n, 25, &mut memoized)).sum()
 }
 
 #[inline]
 pub fn part2(input: &str) -> u64 {
-    let mut memoized = AHashMap::with_capacity(100000);
+    let mut memoized = AHashMap::with_capacity(150000);
     parse(input).map(|n| transform(n, 75, &mut memoized)).sum()
 }
 
