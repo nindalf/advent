@@ -1,18 +1,31 @@
+CURRENT_YEAR := env_var_or_default("AOC_YEAR", "2024")
+
 default:
-  @just --list
+    @just --list
 
+# Fetch input for a specific day in the current year
 fetch DAY:
-  @aocgen --day {{DAY}}
+    @cd y{{CURRENT_YEAR}} && aocgen --day {{DAY}} --year {{CURRENT_YEAR}}
 
-bench DAY:
-  @cargo bench -- day{{DAY}}
+# Benchmark a specific day in a specific year
+bench DAY="":
+    #!/usr/bin/env sh
+    if [ "{{DAY}}" = "" ]; then
+        @cargo bench --manifest-path y{{CURRENT_YEAR}}/Cargo.toml
+    else
+        @cargo bench --manifest-path y{{CURRENT_YEAR}}/Cargo.toml -- day{{DAY}}
+    fi
 
-test-all:
-  @cargo test
-
-test DAY TARGET="":
-  @cargo test -- day{{DAY}}::tests::part_{{TARGET}}
-
+# Run tests for a specific day, optionally targeting a specific part
+test DAY="" TARGET="":
+    #!/usr/bin/env sh
+    if [ "{{DAY}}" = "" ]; then
+        @cargo test --manifest-path y{{CURRENT_YEAR}}/Cargo.toml
+    else
+        @cargo test --manifest-path y{{CURRENT_YEAR}}/Cargo.toml -- day{{DAY}}::tests::part_{{TARGET}}
+    fi
+  
+# Refetch input for a specific day in a specific year
 refetch DAY:
-  @rm src/day{{DAY}}/Readme.md
-  @aocgen --day {{DAY}}
+    @rm -f y{{CURRENT_YEAR}}/src/day{{DAY}}/Readme.md
+    @cd y{{CURRENT_YEAR}} && aocgen --day {{DAY}} --year {{CURRENT_YEAR}}
