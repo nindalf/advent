@@ -1,0 +1,10 @@
+[package]
+name = "y2024"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+ahash = { workspace = true }
+rayon = { workspace = true }
+regex = { workspace = true }
+winnow = { workspace = true }
