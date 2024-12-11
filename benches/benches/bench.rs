@@ -12,17 +12,17 @@ macro_rules! benchmark_year {
 
                 fn [<$year _ $day>](c: &mut Criterion) {
                     c.bench_function(
-                        &format!("{} {} Part 1", stringify!($year), stringify!($day)), 
+                        &format!("{} {} Part 1", stringify!($year), stringify!($day)),
                         |b| {
-                            b.iter(|| 
+                            b.iter(||
                                 $year::$day::part1(black_box([<$year:upper _ $day:upper _INPUT>]))
                             );
                         }
                     );
                     c.bench_function(
-                        &format!("{} {} Part 2", stringify!($year), stringify!($day)), 
+                        &format!("{} {} Part 2", stringify!($year), stringify!($day)),
                         |b| {
-                            b.iter(|| 
+                            b.iter(||
                                 $year::$day::part2(black_box([<$year:upper _ $day:upper _INPUT>]))
                             );
                         }
@@ -39,7 +39,7 @@ macro_rules! benchmark_year {
 }
 
 macro_rules! benchmarks {
-    
+
     ($year:ident, $($day:ident),+) => {
         paste!{
         $(
