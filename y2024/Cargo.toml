@@ -8,3 +8,5 @@ ahash = { workspace = true }
 rayon = { workspace = true }
 regex = { workspace = true }
 winnow = { workspace = true }
+
+common = { path = "../common" }

@@ -125,4 +125,4 @@ fn parse(input: &str) -> impl rayon::prelude::ParallelIterator<Item = (u64, Vec<
         })
 }
 
-crate::aoctest!(3749, 3245122495150, 11387, 105517128211543);
+common::aoctest!(3749, 3245122495150, 11387, 105517128211543);

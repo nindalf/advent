@@ -2,7 +2,7 @@ use std::collections::VecDeque;
 
 use ahash::HashSetExt;
 
-use crate::grid::{Grid, Point};
+use common::grid::{Grid, Point};
 
 /// Note on performance: The const generic bool param makes no difference to part 1, because it it is enabled.
 /// For part 2 it does make a 4.2% difference: 62.5µs -> 60.3µs. Marginal, but it shows that
@@ -73,4 +73,4 @@ fn num_paths_bfs<const OVERLAPPING_ENABLED: bool>(grid: &Grid<u8>, start: Point,
     result
 }
 
-crate::aoctest!(36, 501, 81, 1017);
+common::aoctest!(36, 501, 81, 1017);

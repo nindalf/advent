@@ -47,4 +47,4 @@ fn parse(input: &str) -> impl Iterator<Item = u64> + use<'_> {
     input.split_ascii_whitespace().flat_map(str::parse)
 }
 
-crate::aoctest!(55312, 186203, 65601038650482, 221291560078593);
+common::aoctest!(55312, 186203, 65601038650482, 221291560078593);

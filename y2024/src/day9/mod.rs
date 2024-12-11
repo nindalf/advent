@@ -140,4 +140,4 @@ fn parse(input: &str) -> Vec<usize> {
         .collect()
 }
 
-crate::aoctest!(1928, 6288599492129, 2858, 6321896265143);
+common::aoctest!(1928, 6288599492129, 2858, 6321896265143);

@@ -35,4 +35,4 @@ fn parse(input: &str) -> (Vec<i32>, Vec<i32>) {
         .unzip()
 }
 
-crate::aoctest!(11, 2000468, 31, 18567089);
+common::aoctest!(11, 2000468, 31, 18567089);

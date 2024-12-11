@@ -71,4 +71,4 @@ fn parse(input: &str) -> (Vec<Book>, PageOrder) {
     (books, page_order)
 }
 
-crate::aoctest!(143, 6951, 123, 4121);
+common::aoctest!(143, 6951, 123, 4121);

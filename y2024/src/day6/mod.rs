@@ -1,4 +1,4 @@
-use crate::grid::{Direction, Grid, Point};
+use common::grid::{Direction, Grid, Point};
 use ahash::AHashSet;
 use rayon::prelude::*;
 
@@ -77,4 +77,4 @@ fn parse(input: &str) -> (Grid<char>, Point) {
     (grid, guard_position)
 }
 
-crate::aoctest!(41, 4647, 6, 1723);
+common::aoctest!(41, 4647, 6, 1723);

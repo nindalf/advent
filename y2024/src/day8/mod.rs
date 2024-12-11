@@ -1,6 +1,6 @@
 use ahash::AHashMap;
 
-use crate::grid::Grid;
+use common::grid::Grid;
 
 type AntennaLocations = AHashMap<char, Vec<(i32, i32)>>;
 
@@ -127,4 +127,4 @@ fn parse(input: &str) -> (AntennaLocations, (i32, i32)) {
     (antenna_locations, (grid.rows as i32, grid.columns as i32))
 }
 
-crate::aoctest!(14, 320, 34, 1157);
+common::aoctest!(14, 320, 34, 1157);

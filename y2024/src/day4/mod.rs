@@ -1,4 +1,4 @@
-use crate::grid::Grid;
+use common::grid::Grid;
 
 #[inline]
 pub fn part1(input: &str) -> u32 {
@@ -53,4 +53,4 @@ pub fn part2(input: &str) -> i32 {
     results
 }
 
-crate::aoctest!(18, 2560, 9, 1910);
+common::aoctest!(18, 2560, 9, 1910);

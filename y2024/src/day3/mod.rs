@@ -68,4 +68,4 @@ fn part2_re(input: &str) -> i32 {
     result
 }
 
-crate::aoctest!(161, 183380722, 48, 82733683);
+common::aoctest!(161, 183380722, 48, 82733683);

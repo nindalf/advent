@@ -122,6 +122,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f46ad14479a25103f283c0f10005961cf086d8dc42205bb44c46ac563475dca6"
 
 [[package]]
+name = "common"
+version = "0.1.0"
+
+[[package]]
 name = "criterion"
 version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -662,6 +666,7 @@ name = "y2024"
 version = "0.1.0"
 dependencies = [
  "ahash",
+ "common",
  "rayon",
  "regex",
  "winnow",
