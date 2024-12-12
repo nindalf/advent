@@ -11,18 +11,18 @@ fetch DAY:
 bench DAY="":
     #!/usr/bin/env sh
     if [ "{{DAY}}" = "" ]; then
-        @cargo bench --manifest-path y{{CURRENT_YEAR}}/Cargo.toml
+        cargo bench --manifest-path y{{CURRENT_YEAR}}/Cargo.toml
     else
-        @cargo bench --manifest-path y{{CURRENT_YEAR}}/Cargo.toml -- day{{DAY}}
+        cargo bench --manifest-path y{{CURRENT_YEAR}}/Cargo.toml -- day{{DAY}}
     fi
 
 # Run tests for a specific day, optionally targeting a specific part
 test DAY="" TARGET="":
     #!/usr/bin/env sh
     if [ "{{DAY}}" = "" ]; then
-        @cargo test --manifest-path y{{CURRENT_YEAR}}/Cargo.toml
+        cargo test --manifest-path y{{CURRENT_YEAR}}/Cargo.toml
     else
-        @cargo test --manifest-path y{{CURRENT_YEAR}}/Cargo.toml -- day{{DAY}}::tests::part_{{TARGET}}
+        cargo test --manifest-path y{{CURRENT_YEAR}}/Cargo.toml -- day{{DAY}}::tests::part_{{TARGET}}
     fi
   
 # Refetch input for a specific day in a specific year
