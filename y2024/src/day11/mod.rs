@@ -26,13 +26,13 @@ fn transform(n: u64, remaining_generations: u64, memoized: &mut AHashMap<(u64, u
         return *answer;
     }
     let progeny = match n {
-        n if n == 0 => transform(1, remaining_generations - 1, memoized),
+        0 => transform(1, remaining_generations - 1, memoized),
         n if (n.ilog10() % 2 == 1) => {
             let (first, second) = split(n);
             transform(first, remaining_generations - 1, memoized)
                 + transform(second, remaining_generations - 1, memoized)
         }
-        n @ _ => transform(n * 2024, remaining_generations - 1, memoized),
+        n => transform(n * 2024, remaining_generations - 1, memoized),
     };
     memoized.insert((n, remaining_generations), progeny);
     progeny

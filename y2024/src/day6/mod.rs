@@ -1,5 +1,5 @@
-use common::grid::{Direction, Grid, Point};
 use ahash::AHashSet;
+use common::grid::{Direction, Grid, Point};
 use rayon::prelude::*;
 
 #[inline]
