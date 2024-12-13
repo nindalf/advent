@@ -43,7 +43,7 @@ fn split(n: u64) -> (u64, u64) {
     (n / operand, n % operand)
 }
 
-fn parse(input: &str) -> impl Iterator<Item = u64> + use<'_> {
+pub fn parse(input: &str) -> impl Iterator<Item = u64> + use<'_> {
     input.split_ascii_whitespace().flat_map(str::parse)
 }
 
