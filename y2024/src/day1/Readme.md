@@ -92,4 +92,3 @@ At this point, you should [return to your Advent calendar](/2024) and try anothe
 
 If you still want to see it, you can [get your puzzle input](1/input).
 
-You can also [Shareon [Bluesky](https://bsky.app/intent/compose?text=I%27ve+completed+%22Historian+Hysteria%22+%2D+Day+1+%2D+Advent+of+Code+2024+%23AdventOfCode+https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F1) [Twitter](https://twitter.com/intent/tweet?text=I%27ve+completed+%22Historian+Hysteria%22+%2D+Day+1+%2D+Advent+of+Code+2024&amp;url=https%3A%2F%2Fadventofcode%2Ecom%2F2024%2Fday%2F1&amp;related=ericwastl&amp;hashtags=AdventOfCode) [Mastodon](javascript:void(0);)] this puzzle.
