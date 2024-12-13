@@ -7,6 +7,8 @@ edition = "2021"
 ahash = { workspace = true }
 rayon = { workspace = true }
 regex = { workspace = true }
+scan_fmt = { workspace = true }
 winnow = { workspace = true }
 
 common = { path = "../common" }
+num = "0.4.3"
