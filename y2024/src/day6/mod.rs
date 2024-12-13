@@ -70,7 +70,7 @@ fn next_valid_position(
     None
 }
 
-fn parse(input: &str) -> (Grid<char>, Point) {
+pub fn parse(input: &str) -> (Grid<char>, Point) {
     let mut grid = Grid::construct(input, |x| x);
     let guard_position = grid.search('^').unwrap();
     grid.set(guard_position, '.');

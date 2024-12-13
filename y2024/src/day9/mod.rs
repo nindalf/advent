@@ -132,7 +132,7 @@ pub fn part2(input: &str) -> usize {
     checksum
 }
 
-fn parse(input: &str) -> Vec<usize> {
+pub fn parse(input: &str) -> Vec<usize> {
     input
         .chars()
         .filter(|c| *c != '\n')

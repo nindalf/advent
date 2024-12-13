@@ -107,7 +107,7 @@ fn find_resonant_anti_nodes(locations: &[(i32, i32)], grid_size: (i32, i32)) -> 
     anti_nodes
 }
 
-fn parse(input: &str) -> (AntennaLocations, (i32, i32)) {
+pub fn parse(input: &str) -> (AntennaLocations, (i32, i32)) {
     let grid = Grid::construct(input, |x| x);
 
     let mut antenna_locations = AHashMap::with_capacity(62);

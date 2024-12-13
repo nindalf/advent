@@ -2,7 +2,7 @@ use common::grid::Grid;
 
 #[inline]
 pub fn part1(input: &str) -> u32 {
-    let grid = Grid::construct(input, |x| x);
+    let grid = parse(input);
     let mut results = 0;
     for i in 0..grid.rows as i32 {
         for j in 0..grid.columns as i32 {
@@ -30,7 +30,7 @@ pub fn part1(input: &str) -> u32 {
 
 #[inline]
 pub fn part2(input: &str) -> i32 {
-    let grid = Grid::construct(input, |x| x);
+    let grid = parse(input);
     let mut results = 0;
     for i in 1..grid.rows - 1 {
         for j in 1..grid.columns - 1 {
@@ -51,6 +51,10 @@ pub fn part2(input: &str) -> i32 {
         }
     }
     results
+}
+
+pub fn parse(input: &str) -> Grid<char> {
+    Grid::construct(input, |x| x)
 }
 
 common::aoctest!(18, 2560, 9, 1910);

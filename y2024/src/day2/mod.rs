@@ -57,7 +57,7 @@ fn is_monotonic(numbers: &[u32], skip_index: Option<usize>) -> bool {
     true
 }
 
-fn parse(input: &str) -> impl rayon::prelude::ParallelIterator<Item = Vec<u32>> + use<'_> {
+pub fn parse(input: &str) -> impl rayon::prelude::ParallelIterator<Item = Vec<u32>> + use<'_> {
     input.par_lines().map(|line| line.split(" ")).map(|parts| {
         parts
             .flat_map(|part| part.parse::<u32>())

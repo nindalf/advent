@@ -51,7 +51,7 @@ fn is_book_ordered(book: &Book, page_order: &PageOrder) -> (Vec<u32>, bool) {
     (sorted_book, true)
 }
 
-fn parse(input: &str) -> (Vec<Book>, PageOrder) {
+pub fn parse(input: &str) -> (Vec<Book>, PageOrder) {
     let (first, second) = input.split_once("\n\n").unwrap();
 
     let mut page_order = AHashMap::with_capacity(100);

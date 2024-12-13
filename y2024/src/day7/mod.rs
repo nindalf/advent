@@ -109,7 +109,9 @@ fn next_power_of_10(n: u64) -> u64 {
     power
 }
 
-fn parse(input: &str) -> impl rayon::prelude::ParallelIterator<Item = (u64, Vec<u64>)> + use<'_> {
+pub fn parse(
+    input: &str,
+) -> impl rayon::prelude::ParallelIterator<Item = (u64, Vec<u64>)> + use<'_> {
     input
         .par_lines()
         .filter_map(|line| line.split_once(":"))

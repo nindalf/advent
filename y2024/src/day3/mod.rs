@@ -68,4 +68,6 @@ fn part2_re(input: &str) -> i32 {
     result
 }
 
+pub fn parse(_input: &str) {}
+
 common::aoctest!(161, 183380722, 48, 82733683);

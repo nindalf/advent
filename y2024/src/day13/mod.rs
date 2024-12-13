@@ -1,13 +1,15 @@
 use num::integer::lcm;
-use scan_fmt::scan_fmt;
 
 /// Not on performance: Cramer's rule (229 µs, 224 µs) slightly outpeforms the Naive version (233 µs, 233 µs).
 /// Parallelising this regresses performance to 286µs (+22%) and 278µs (+23%).
 /// I reckon most of this time is in `scan_fmt` because that's really slow, but replacing `scan_fmt` with `regex::Captures`
 /// regresses performance to 256µs and 257µs.
+/// Implementing a handwritten parser with winnow blows both out of the water, reducing time to 34.35µs (-84%) and 34.3µs (-84%)
 #[inline]
 pub fn part1(input: &str) -> i64 {
-    parse(input).filter_map(|(eq1, eq2)| solve_cramer_rule(eq1, eq2)).sum()
+    parse(input)
+        .filter_map(|(eq1, eq2)| solve_cramer_rule(eq1, eq2))
+        .sum()
 }
 
 #[inline]
@@ -67,40 +69,64 @@ fn solve_cramer_rule(one: Equation, two: Equation) -> Option<i64> {
 }
 
 #[derive(Debug, Copy, Clone)]
-struct Equation {
+pub struct Equation {
     op1: i64,
     op2: i64,
     result: i64,
 }
 
-fn parse(input: &str) -> impl Iterator<Item = (Equation, Equation)> + use<'_> {
+pub fn parse(input: &str) -> impl Iterator<Item = (Equation, Equation)> + use<'_> {
     input
         .split("\n\n")
-        .flat_map(|part| {
-            scan_fmt!(
-                part,
-                "Button A: X+{d}, Y+{d}\nButton B: X+{d}, Y+{d}\nPrize: X={d}, Y={d}",
-                i64,
-                i64,
-                i64,
-                i64,
-                i64,
-                i64
-            )
-        })
-        .map(|(x_op1, y_op1, x_op2, y_op2, x_result, y_result)| {
-            (
-                Equation {
-                    op1: x_op1,
-                    op2: x_op2,
-                    result: x_result,
-                },
-                Equation {
-                    op1: y_op1,
-                    op2: y_op2,
-                    result: y_result,
-                },
-            )
-        })
+        .flat_map(|mut part| parse_machine(&mut part))
 }
+
+use winnow::ascii::digit1;
+use winnow::combinator::{alt, delimited, preceded, separated_pair};
+use winnow::token::literal;
+use winnow::{PResult, Parser};
+
+fn parse_machine(input: &mut &str) -> PResult<(Equation, Equation)> {
+    let (x_op1, y_op1) = parse_line(input)?;
+    let (x_op2, y_op2) = parse_line(input)?;
+    let (x_result, y_result) = parse_prize(input)?;
+    Ok((
+        Equation {
+            op1: x_op1,
+            op2: x_op2,
+            result: x_result,
+        },
+        Equation {
+            op1: y_op1,
+            op2: y_op2,
+            result: y_result,
+        },
+    ))
+}
+
+fn parse_line(input: &mut &str) -> PResult<(i64, i64)> {
+    delimited(
+        alt((literal("Button A: X+"), literal("Button B: X+"))),
+        separated_pair(
+            digit1.try_map(|s: &str| s.parse::<i64>()),
+            literal(", Y+"),
+            digit1.try_map(|s: &str| s.parse::<i64>()),
+        ),
+        literal("\n"),
+    )
+    .parse_next(input)
+}
+
+fn parse_prize(input: &mut &str) -> PResult<(i64, i64)> {
+    preceded(
+        literal("Prize: X="),
+        separated_pair(
+            digit1.try_map(|s: &str| s.parse::<i64>()),
+            literal(", Y="),
+            digit1.try_map(|s: &str| s.parse::<i64>()),
+        ),
+    )
+    .parse_next(input)
+}
+
 common::aoctest!(480, 25751, 875318608908, 108528956728655);

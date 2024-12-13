@@ -11,9 +11,9 @@ fetch DAY:
 bench DAY="":
     #!/usr/bin/env sh
     if [ "{{DAY}}" = "" ]; then
-        cargo bench --manifest-path y{{CURRENT_YEAR}}/Cargo.toml
+        cargo bench
     else
-        cargo bench --manifest-path y{{CURRENT_YEAR}}/Cargo.toml -- day{{DAY}}
+        cargo bench -- day{{DAY}}
     fi
 
 # Run tests for a specific day, optionally targeting a specific part

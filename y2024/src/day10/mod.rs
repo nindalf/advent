@@ -19,7 +19,7 @@ use common::grid::{Grid, Point};
 /// More optimal data structures? Can't get better than HashSet and VecDeque for vanilla BFS.
 #[inline]
 pub fn part1(input: &str) -> usize {
-    let grid = Grid::construct(input, |x| (x as u8 - b'0'));
+    let grid = parse(input);
     grid.iter()
         .filter_map(|(point, val)| {
             if val == 0 {
@@ -32,7 +32,7 @@ pub fn part1(input: &str) -> usize {
 
 #[inline]
 pub fn part2(input: &str) -> usize {
-    let grid = Grid::construct(input, |x| (x as u8 - b'0'));
+    let grid = parse(input);
     grid.iter()
         .filter_map(|(point, val)| {
             if val == 0 {
@@ -71,6 +71,10 @@ fn num_paths_bfs<const OVERLAPPING_ENABLED: bool>(grid: &Grid<u8>, start: Point,
         }
     }
     result
+}
+
+pub fn parse(input: &str) -> Grid<u8> {
+    Grid::construct(input, |x| (x as u8 - b'0'))
 }
 
 common::aoctest!(36, 501, 81, 1017);

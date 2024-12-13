@@ -27,6 +27,14 @@ macro_rules! benchmark_year {
                             );
                         }
                     );
+                    c.bench_function(
+                        &format!("{} {} Parsing alone", stringify!($year), stringify!($day)),
+                        |b| {
+                            b.iter(||
+                                $year::$day::parse(black_box([<$year:upper _ $day:upper _INPUT>]))
+                            );
+                        }
+                    );
                 }
             )+
         }

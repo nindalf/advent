@@ -129,7 +129,7 @@ fn perimeter_corners(points: AHashSet<Point>, rows: usize, columns: usize) -> us
         .sum()
 }
 
-fn parse(input: &str) -> Grid<char> {
+pub fn parse(input: &str) -> Grid<char> {
     Grid::construct(input, |x| x)
 }
 

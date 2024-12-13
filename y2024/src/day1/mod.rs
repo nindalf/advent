@@ -23,7 +23,7 @@ pub fn part2(input: &str) -> i32 {
     first.iter().map(|i| i * counts.get(i).unwrap_or(&0)).sum()
 }
 
-fn parse(input: &str) -> (Vec<i32>, Vec<i32>) {
+pub fn parse(input: &str) -> (Vec<i32>, Vec<i32>) {
     input
         .lines()
         .filter_map(|line| line.split_once("   "))
