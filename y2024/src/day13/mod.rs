@@ -5,6 +5,11 @@ use num::integer::lcm;
 /// I reckon most of this time is in `scan_fmt` because that's really slow, but replacing `scan_fmt` with `regex::Captures`
 /// regresses performance to 256µs and 257µs.
 /// Implementing a handwritten parser with winnow blows both out of the water, reducing time to 34.35µs (-84%) and 34.3µs (-84%)
+/// Benchmarking the parser alone
+/// scan_fmt = 227.97 µs
+/// winnow = 34.805 µs (-87%)
+/// The actual processing for this problem is about 1-3µs.
+/// Note that benching the parse() function only works if it returns a Vec<_>, not an impl Iterator, which returns within a few ns.
 #[inline]
 pub fn part1(input: &str) -> i64 {
     parse(input)
@@ -75,10 +80,37 @@ pub struct Equation {
     result: i64,
 }
 
+#[inline]
 pub fn parse(input: &str) -> impl Iterator<Item = (Equation, Equation)> + use<'_> {
     input
         .split("\n\n")
         .flat_map(|mut part| parse_machine(&mut part))
+}
+
+#[allow(dead_code)]
+fn parse_with_scan_fmt(input: &str) -> anyhow::Result<(Equation, Equation)> {
+    let (x_op1, y_op1, x_op2, y_op2, x_result, y_result) = scan_fmt::scan_fmt!(
+        input,
+        "Button A: X+{d}, Y+{d}\nButton B: X+{d}, Y+{d}\nPrize: X={d}, Y={d}",
+        i64,
+        i64,
+        i64,
+        i64,
+        i64,
+        i64
+    )?;
+    Ok((
+        Equation {
+            op1: x_op1,
+            op2: x_op2,
+            result: x_result,
+        },
+        Equation {
+            op1: y_op1,
+            op2: y_op2,
+            result: y_result,
+        },
+    ))
 }
 
 use winnow::ascii::digit1;
