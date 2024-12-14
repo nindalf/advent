@@ -1,22 +1,31 @@
 AOC_YEAR := env_var_or_default("AOC_YEAR", "2024")
 
+# Print all commands
 default:
+    @echo "Advent of Code {{AOC_YEAR}}"
     @just --list
 
-# Fetch input for a specific day in the current year
+# Fetch test input and create
 fetch DAY:
     @cd y{{AOC_YEAR}} && aocgen --day {{DAY}} --year {{AOC_YEAR}}
 
-# Benchmark a specific day in a specific year
+# Refetch readme for a specific day
+# The problem changes after the second part is unlocked
+refetch DAY:
+    @rm -f y{{AOC_YEAR}}/src/day{{DAY}}/Readme.md
+    @cd y{{AOC_YEAR}} && aocgen --day {{DAY}} --year {{AOC_YEAR}}
+
+# Run benchmarks for the year or a specific day
 bench DAY="":
     #!/usr/bin/env sh
     if [ "{{DAY}}" = "" ]; then
-        cargo bench
+        cargo bench -- y{{AOC_YEAR}}
     else
-        cargo bench -- day{{DAY}}
+        # The extra space after day{{DAY}} is needed to avoid `just bench 1` matching with 11, 12...
+        cargo bench -- "y{{AOC_YEAR}} day{{DAY}} "
     fi
 
-# Run tests for a specific day, optionally targeting a specific part
+# Run tests for the year or a specific day, optionally targeting a specific part
 test DAY="" TARGET="":
     #!/usr/bin/env sh
     if [ "{{DAY}}" = "" ]; then
@@ -24,8 +33,3 @@ test DAY="" TARGET="":
     else
         cargo test --manifest-path y{{AOC_YEAR}}/Cargo.toml -- day{{DAY}}::tests::part_{{TARGET}}
     fi
-  
-# Refetch input for a specific day in a specific year
-refetch DAY:
-    @rm -f y{{AOC_YEAR}}/src/day{{DAY}}/Readme.md
-    @cd y{{AOC_YEAR}} && aocgen --day {{DAY}} --year {{AOC_YEAR}}

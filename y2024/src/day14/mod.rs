@@ -27,13 +27,13 @@ pub fn part1(input: &str) -> u32 {
 
     let mut scores: [u32; 5] = [0; 5];
     for (location, robots) in locations {
-        let quadrant = if location.0 < rows/2 && location.1 < columns/2 {
+        let quadrant = if location.0 < rows / 2 && location.1 < columns / 2 {
             0
-        } else if location.0 > rows/2 && location.1 < columns/2 {
+        } else if location.0 > rows / 2 && location.1 < columns / 2 {
             1
-        } else if location.0 < rows/2 && location.1 > columns/2 {
+        } else if location.0 < rows / 2 && location.1 > columns / 2 {
             2
-        } else if location.0 > rows/2 && location.1 > columns/2 {
+        } else if location.0 > rows / 2 && location.1 > columns / 2 {
             3
         } else {
             4
@@ -50,7 +50,7 @@ pub fn part2(input: &str) -> i32 {
     if robots.len() != 500 {
         return 0;
     }
-    let (rows, columns) =  (103, 101);
+    let (rows, columns) = (103, 101);
 
     for i in 0.. {
         let locations = get_robot_locations(&robots);
@@ -70,7 +70,7 @@ pub fn part2(input: &str) -> i32 {
             };
         }
     }
-    
+
     unreachable!("Loop will terminate, have faith");
 }
 
@@ -86,8 +86,8 @@ fn get_robot_locations(robots: &[Robot]) -> AHashMap<(i32, i32), u32> {
 fn print_grid(robots: &[Robot], rows: i32, columns: i32, iterations: usize) {
     let locations = get_robot_locations(&robots);
     println!("{iterations}");
-    for i in 0 .. rows {
-        for j in 0 .. columns {
+    for i in 0..rows {
+        for j in 0..columns {
             if locations.contains_key(&(i, j)) {
                 print!("{}", locations.get(&(i, j)).unwrap());
             } else {

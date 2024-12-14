@@ -27,14 +27,6 @@ macro_rules! benchmark_year {
                             );
                         }
                     );
-                    c.bench_function(
-                        &format!("{} {} Parsing alone", stringify!($year), stringify!($day)),
-                        |b| {
-                            b.iter(||
-                                $year::$day::parse(black_box([<$year:upper _ $day:upper _INPUT>]))
-                            );
-                        }
-                    );
                 }
             )+
         }
@@ -42,17 +34,31 @@ macro_rules! benchmark_year {
 }
 
 macro_rules! benchmarks {
+    // Match one or more year-days groups
+    ($($year:ident {$($day:ident),+ $(,)?}),+ $(,)?) => {
+        paste! {
+            // For each year-day combination, generate the benchmark
+            $(
+                $(
+                    benchmark_year!{$year, $day}
+                )+
+            )+
 
-    ($year:ident, $($day:ident),+) => {
-        paste!{
-        $(
-            benchmark_year!{$year, $day}
-        )+
-
-        criterion_group!(benches, $([<$year _ $day>],)+);
-        criterion_main!(benches);
-    }
-    }
+            // Create a single criterion group with all benchmarks
+            criterion_group!(
+                benches,
+                $(
+                    $(
+                        [<$year _ $day>],
+                    )+
+                )+
+            );
+            criterion_main!(benches);
+        }
+    };
 }
 
-benchmarks! {y2024, day1, day2, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14}
+benchmarks! {
+    y2023 {day1},
+    y2024 {day1, day2, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14},
+}
