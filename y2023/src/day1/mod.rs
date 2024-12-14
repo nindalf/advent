@@ -43,7 +43,7 @@ pub fn part2(input: &str) -> u32 {
         .filter_map(|line| {
             let mut numbers = Vec::with_capacity(10);
             let mut remaining = line;
-            while remaining.len() > 0 {
+            while !remaining.is_empty() {
                 for (k, v) in NUMBERS.entries() {
                     if remaining.starts_with(k) {
                         numbers.push(v);

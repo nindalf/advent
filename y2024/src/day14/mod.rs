@@ -84,7 +84,7 @@ fn get_robot_locations(robots: &[Robot]) -> AHashMap<(i32, i32), u32> {
 
 #[allow(dead_code)]
 fn print_grid(robots: &[Robot], rows: i32, columns: i32, iterations: usize) {
-    let locations = get_robot_locations(&robots);
+    let locations = get_robot_locations(robots);
     println!("{iterations}");
     for i in 0..rows {
         for j in 0..columns {
@@ -94,7 +94,7 @@ fn print_grid(robots: &[Robot], rows: i32, columns: i32, iterations: usize) {
                 print!(".");
             }
         }
-        println!("");
+        println!();
     }
 }
 
