@@ -1,6 +1,6 @@
-use phf::{phf_map, Map};
+use phf::{Map, phf_map};
 
-const NUMBERS: Map<&str, u32> = phf_map!{
+const NUMBERS: Map<&str, u32> = phf_map! {
     "one" => 1,
     "two" => 2,
     "three" => 3,
@@ -25,35 +25,39 @@ const NUMBERS: Map<&str, u32> = phf_map!{
 
 #[inline]
 pub fn part1(input: &str) -> u32 {
-    input.lines().filter_map(|line| {
-        let first = line.chars().find(|c| c.is_numeric())?;
-        let last = line.chars().rev().find(|c| c.is_numeric())?;
-        let combined = format!("{first}{last}");
-        combined.parse::<u32>().ok()
-    })
-    .sum()
+    input
+        .lines()
+        .filter_map(|line| {
+            let first = line.chars().find(|c| c.is_numeric())?;
+            let last = line.chars().rev().find(|c| c.is_numeric())?;
+            let combined = format!("{first}{last}");
+            combined.parse::<u32>().ok()
+        })
+        .sum()
 }
 
 #[inline]
 pub fn part2(input: &str) -> u32 {
-    input.lines().filter_map(|line| {
-        let mut numbers = Vec::with_capacity(10);
-        let mut remaining = line;
-        while remaining.len() > 0 {
-            for (k, v) in NUMBERS.entries() {
-                if remaining.starts_with(k) {
-                    numbers.push(v);
-                    break;
+    input
+        .lines()
+        .filter_map(|line| {
+            let mut numbers = Vec::with_capacity(10);
+            let mut remaining = line;
+            while remaining.len() > 0 {
+                for (k, v) in NUMBERS.entries() {
+                    if remaining.starts_with(k) {
+                        numbers.push(v);
+                        break;
+                    }
                 }
+                remaining = &remaining[1..];
             }
-            remaining = &remaining[1..];
-        }
-        let first = numbers[0];
-        let last = numbers[numbers.len()-1];
-        let combined = format!("{first}{last}");
-        combined.parse::<u32>().ok()
-    })
-    .sum()
+            let first = numbers[0];
+            let last = numbers[numbers.len() - 1];
+            let combined = format!("{first}{last}");
+            combined.parse::<u32>().ok()
+        })
+        .sum()
 }
 
 pub fn parse(_input: &str) {}
