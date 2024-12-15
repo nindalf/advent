@@ -1,3 +1,5 @@
+use std::fmt::Write;
+
 pub type Point = (usize, usize);
 
 pub struct Grid<T> {
@@ -94,6 +96,19 @@ where
             .enumerate()
             .map(|(idx, c)| ((idx / self.columns, idx % self.columns), *c))
     }
+
+    pub fn print(&self)
+    where
+        T: std::fmt::Display,
+    {
+        for i in 0..self.rows {
+            for j in 0..self.columns {
+                let val = self.get((i, j)).unwrap();
+                print!("{val}");
+            }
+            println!();
+        }
+    }
 }
 
 impl Direction {
@@ -104,5 +119,17 @@ impl Direction {
             Direction::Down => Direction::Left,
             Direction::Left => Direction::Up,
         }
+    }
+}
+
+impl std::fmt::Display for Direction {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let c = match self {
+            Direction::Up => '^',
+            Direction::Right => '>',
+            Direction::Down => 'v',
+            Direction::Left => '<',
+        };
+        f.write_char(c)
     }
 }
