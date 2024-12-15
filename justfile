@@ -1,4 +1,4 @@
-AOC_YEAR := env_var_or_default("AOC_YEAR", "2023")
+AOC_YEAR := env_var_or_default("AOC_YEAR", "2024")
 
 # Print all commands
 default:
