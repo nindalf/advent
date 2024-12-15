@@ -7,14 +7,7 @@ pub fn part1(input: &str) -> usize {
         let (_, new_position) = move_next(&mut grid, position, movement, true);
         position = new_position;
     }
-    grid.iter()
-        .filter_map(|(position, val)| {
-            if val == 'O' {
-                return Some(100 * position.0 + position.1);
-            }
-            None
-        })
-        .sum()
+    grid_score(&grid, 'O')
 }
 
 #[inline]
@@ -24,9 +17,13 @@ pub fn part2(input: &str) -> usize {
         let (_, new_position) = move_next(&mut grid, position, movement, true);
         position = new_position;
     }
+    grid_score(&grid, '[')
+}
+
+fn grid_score(grid: &Grid<char>, box_char: char) -> usize {
     grid.iter()
         .filter_map(|(position, val)| {
-            if val == '[' {
+            if val == box_char {
                 return Some(100 * position.0 + position.1);
             }
             None
