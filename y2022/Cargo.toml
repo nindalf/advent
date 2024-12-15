@@ -1,0 +1,9 @@
+[package]
+name = "y2022"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+ahash = { workspace = true }
+common = { path = "../common" }
+winnow = { workspace = true }
