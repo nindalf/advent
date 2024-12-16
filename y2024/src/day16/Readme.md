@@ -104,8 +104,6 @@ Analyze your map carefully. *What is the lowest score a Reindeer could possibly 
 
 Your puzzle answer was `99460`.
 
-The first half of this puzzle is complete! It provides one gold star: \*
-
 \--- Part Two ---
 ----------
 
@@ -161,7 +159,11 @@ In the second example, there are `*64*` tiles that are part of at least one of t
 
 Analyze your map further. *How many tiles are part of at least one of the best paths through the maze?*
 
-Answer:
+Your puzzle answer was `500`.
 
-Although it hasn't changed, you can still [get your puzzle input](16/input).
+Both parts of this puzzle are complete! They provide two gold stars: \*\*
+
+At this point, you should [return to your Advent calendar](/2024) and try another puzzle.
+
+If you still want to see it, you can [get your puzzle input](16/input).
 
