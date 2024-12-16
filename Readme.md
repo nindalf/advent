@@ -18,16 +18,19 @@ Run `just` for all the available commands.
 By default `just` will run these for the latest year, set by the env variable `AOC_YEAR`.
 
 ```
-just fetch 15    # fetches the 15th day's problem and input.
+just fetch 15         # fetches the 15th day's problem and input.
 
-just test 15 1_t # runs day15::tests::part1_test
-just test 15 2   # runs day15::tests::part2_test _and_ day15::tests:part2
-just test 15     # runs all 4 tests for day 15
-just test        # runs all tests for all days of AOC_YEAR
+just test 15 1_t      # runs day15::tests::part1_test
+just test 15 2        # runs day15::tests::part2_test _and_ day15::tests:part2
+just test 15          # runs all 4 tests for day 15
 
-just bench 15    # benchmarks day 15 parts 1 and 2
-just bench       # runs all benchmarks for all days of AOC_YEAR
+just submit 15 1 1024 # Submit "1024" as the solution for Day 15 Part 1
+just submit 15 2 2048 # Submit "2048" as the solution for Day 15 Part 2
+
+just bench 15         # benchmarks day 15 parts 1 and 2
 ```
+
+`just test`/`just bench` with no arguments runs all the tests/benchmarks for the latest year.
 
 ### Overriding `AOC_YEAR`
 
