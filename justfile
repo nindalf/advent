@@ -8,12 +8,14 @@ default:
 # Fetch test input and create
 fetch DAY:
     @cd y{{AOC_YEAR}} && aocgen fetch --day {{DAY}} --year {{AOC_YEAR}}
+    @git status
 
 # Refetch readme for a specific day
 # The problem changes after the second part is unlocked
 refetch DAY:
     @rm -f y{{AOC_YEAR}}/src/day{{DAY}}/Readme.md
     @cd y{{AOC_YEAR}} && aocgen fetch --day {{DAY}} --year {{AOC_YEAR}}
+    @git status
 
 submit DAY PART ANSWER:
     @aocgen submit --year {{AOC_YEAR}} --day {{DAY}} --part {{PART}} --answer {{ANSWER}}
