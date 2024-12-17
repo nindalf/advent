@@ -1,3 +1,5 @@
+use rayon::prelude::*;
+
 #[inline]
 pub fn part1(input: &str) -> String {
     let mut computer = parse(input);
@@ -11,11 +13,22 @@ pub fn part1(input: &str) -> String {
 }
 
 #[inline]
-pub fn part2(_input: &str) -> i32 {
-    0
+pub fn part2(input: &str) -> u32 {
+    let computer = parse(input);
+
+    (0..10_000)
+        .into_par_iter()
+        .by_exponential_blocks()
+        .find_first(|override_a| {
+            let mut clone_computer = computer.clone();
+            clone_computer.A = *override_a as u64;
+            clone_computer.execute_with_desired_output(&computer.mem)
+        })
+        .unwrap()
 }
 
 #[allow(non_snake_case)]
+#[derive(Clone)]
 struct Computer {
     A: u64,
     B: u64,
@@ -25,6 +38,19 @@ struct Computer {
 }
 
 impl Computer {
+    fn execute_with_desired_output(&mut self, desired_output: &[u64]) -> bool {
+        let mut idx = 0;
+        while self.is_instruction_pointer_valid() {
+            if let Some(output) = self.execute_one() {
+                if output != desired_output[idx] {
+                    return false;
+                }
+                idx += 1;
+            }
+        }
+        idx == desired_output.len()
+    }
+
     fn execute_one(&mut self) -> Option<u64> {
         let opcode = self.mem[self.instruction_pointer];
         let operand = self.mem[self.instruction_pointer + 1];
@@ -131,6 +157,6 @@ fn parse(input: &str) -> Computer {
 common::aoctest!(
     "4,6,3,5,6,3,5,2,1,0".to_string(),
     "7,1,2,3,2,6,7,2,5".to_string(),
-    1234,
+    117440,
     1234
 );
