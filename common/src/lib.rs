@@ -15,7 +15,7 @@ macro_rules! aoctest {
             }
 
             #[test]
-            fn part_1() {
+            fn part_1_real() {
                 let output = super::part1(FULL_INPUT);
                 assert_eq!(output, $op_1);
             }
@@ -27,7 +27,7 @@ macro_rules! aoctest {
             }
 
             #[test]
-            fn part_2() {
+            fn part_2_real() {
                 let output = super::part2(FULL_INPUT);
                 assert_eq!(output, $op_2);
             }

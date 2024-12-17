@@ -21,7 +21,9 @@ By default `just` will run these for the latest year, set by the env variable `A
 just fetch 15         # fetches the 15th day's problem and input.
 
 just test 15 1_t      # runs day15::tests::part1_test
-just test 15 2        # runs day15::tests::part2_test _and_ day15::tests:part2
+just test 15 1_r      # runs day15::tests::part1_real
+just test 15 1        # runs both tests for day 15 part 1
+just test 15 2        # runs both tests for day 15 part 2
 just test 15          # runs all 4 tests for day 15
 
 just submit 15 1 1024 # Submit "1024" as the solution for Day 15 Part 1
