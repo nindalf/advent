@@ -1,30 +1,48 @@
-use rayon::prelude::*;
-
 #[inline]
 pub fn part1(input: &str) -> String {
     let mut computer = parse(input);
-    let mut result = Vec::with_capacity(20);
-    while computer.is_instruction_pointer_valid() {
-        if let Some(output) = computer.execute_one() {
-            result.push(output.to_string());
-        }
-    }
-    result.join(",")
+    let output = computer.execute();
+    output
+        .iter()
+        .map(u64::to_string)
+        .collect::<Vec<String>>()
+        .join(",")
 }
 
 #[inline]
-pub fn part2(input: &str) -> u32 {
+pub fn part2(input: &str) -> u64 {
     let computer = parse(input);
+    let desired_output = computer.mem.clone();
+    let d_len = desired_output.len();
 
-    (0..10_000)
-        .into_par_iter()
-        .by_exponential_blocks()
-        .find_first(|override_a| {
-            let mut clone_computer = computer.clone();
-            clone_computer.A = *override_a as u64;
-            clone_computer.execute_with_desired_output(&computer.mem)
-        })
-        .unwrap()
+    let mut override_a = 1;
+    loop {
+        // Check if this is the correct value
+        let mut cloned_computer = computer.clone();
+        cloned_computer.A = override_a;
+        let output = cloned_computer.execute();
+        if output == desired_output {
+            return override_a;
+        }
+
+        // The output length is proportional to size of the override
+        // Multiplying by 10 allows us to quickly converge on the real answer
+        if output.len() < d_len {
+            override_a *= 10;
+            continue;
+        }
+        // If the last digit doesn't match, increment by a lot - `multiple``
+        // If the penultimate digit doesn't match, increment by a bit less - `multiple/10` and so on.
+        let mut multiple = 10u64.pow(override_a.ilog10() - 3);
+        for (i, val) in output.iter().enumerate().rev() {
+            if *val != desired_output[i] {
+                override_a += multiple;
+                break;
+            }
+            multiple /= 10;
+        }
+        override_a += 1;
+    }
 }
 
 #[allow(non_snake_case)]
@@ -38,17 +56,14 @@ struct Computer {
 }
 
 impl Computer {
-    fn execute_with_desired_output(&mut self, desired_output: &[u64]) -> bool {
-        let mut idx = 0;
+    fn execute(&mut self) -> Vec<u64> {
+        let mut result = Vec::with_capacity(20);
         while self.is_instruction_pointer_valid() {
             if let Some(output) = self.execute_one() {
-                if output != desired_output[idx] {
-                    return false;
-                }
-                idx += 1;
+                result.push(output);
             }
         }
-        idx == desired_output.len()
+        result
     }
 
     fn execute_one(&mut self) -> Option<u64> {
@@ -155,8 +170,8 @@ fn parse(input: &str) -> Computer {
 }
 
 common::aoctest!(
-    "4,6,3,5,6,3,5,2,1,0".to_string(),
+    "5,7,3,0".to_string(),
     "7,1,2,3,2,6,7,2,5".to_string(),
     117440,
-    1234
+    202356708354602
 );
