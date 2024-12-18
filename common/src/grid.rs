@@ -37,6 +37,10 @@ where
         }
     }
 
+    pub fn manual_construct(s: Vec<T>, rows: usize, columns: usize) -> Grid<T> {
+        Grid { s, rows, columns }
+    }
+
     pub fn get(&self, position: Point) -> Option<T> {
         self.s.get(position.0 * self.columns + position.1).copied()
     }
