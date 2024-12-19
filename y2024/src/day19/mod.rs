@@ -1,4 +1,4 @@
-use ahash::AHashSet;
+use ahash::{AHashMap, AHashSet};
 use rayon::prelude::*;
 
 /// Note on performance
@@ -8,44 +8,52 @@ use rayon::prelude::*;
 /// That was slow enough that it never actually finished part 1.
 /// I replaced that with towels being a HashSet and checking the prefix of pattern is contained in the HashSet. Much faster
 /// Part 1 completed in 8.2ms single threaded and 1.2ms (-85%) while using rayon.
+/// I had to rewrite it with a recursive approach to make it work for part 2. This further optimised performance to 467µs (-61%).
+/// Final numbers: Part 1 - 451µs, Part 2 - 454µs.
+/// They're both doing exactly the same computation but Part 2 takes slightly longer because it needs to add up the results.
+/// I could optimise Part 1 with a const generic param so it returns after just one match, but I prefer to keep the code looking simple and clean.
 #[inline]
 pub fn part1(input: &str) -> usize {
     let (towels, patterns) = parse(input);
     patterns
         .iter()
         .par_bridge()
-        .filter(|pattern| match_towels_to_pattern(&towels, pattern))
+        .filter(|pattern| {
+            match_towels_to_pattern(&towels, pattern, &mut AHashMap::with_capacity(100)) > 0
+        })
         .count()
 }
 
 #[inline]
-pub fn part2(_input: &str) -> i32 {
-    0
+pub fn part2(input: &str) -> u64 {
+    let (towels, patterns) = parse(input);
+    patterns
+        .iter()
+        .par_bridge()
+        .map(|pattern| match_towels_to_pattern(&towels, pattern, &mut AHashMap::with_capacity(100)))
+        .sum()
 }
 
-fn match_towels_to_pattern(towels: &AHashSet<&str>, pattern: &str) -> bool {
-    let mut current = AHashSet::new();
-    current.insert(0);
-    loop {
-        let mut temp = AHashSet::with_capacity(current.len() * 2);
-        for index in current {
-            for idx in 0..8 {
-                let new_len = index + idx + 1;
-                if new_len <= pattern.len() && towels.contains(&pattern[index..new_len]) {
-                    if new_len == pattern.len() {
-                        // Match found
-                        return true;
-                    }
-                    temp.insert(new_len);
-                }
-            }
-        }
-        if temp.is_empty() {
-            // No matches found
-            return false;
-        }
-        current = temp;
+fn match_towels_to_pattern<'a>(
+    towels: &AHashSet<&str>,
+    pattern: &'a str,
+    memo: &mut AHashMap<&'a str, u64>,
+) -> u64 {
+    if memo.contains_key(pattern) {
+        return memo[pattern];
     }
+    let mut matches = 0;
+    for idx in 1..=8 {
+        if idx <= pattern.len() && towels.contains(&pattern[0..idx]) {
+            if idx == pattern.len() {
+                matches += 1;
+                continue;
+            }
+            matches += match_towels_to_pattern(towels, &pattern[idx..], memo);
+        }
+    }
+    *memo.entry(pattern).or_default() += matches;
+    matches
 }
 
 fn parse(input: &str) -> (AHashSet<&str>, Vec<&str>) {
@@ -55,4 +63,4 @@ fn parse(input: &str) -> (AHashSet<&str>, Vec<&str>) {
     (towels, patterns)
 }
 
-common::aoctest!(6, 236, 1234, 1234);
+common::aoctest!(6, 236, 16, 643685981770598);

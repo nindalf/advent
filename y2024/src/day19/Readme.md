@@ -50,8 +50,6 @@ To get into the onsen as soon as possible, consult your list of towel patterns a
 
 Your puzzle answer was `236`.
 
-The first half of this puzzle is complete! It provides one gold star: \*
-
 \--- Part Two ---
 ----------
 
@@ -89,7 +87,11 @@ Adding up all of the ways the towels in this example could be arranged into the 
 
 They'll let you into the onsen as soon as you have the list. *What do you get if you add up the number of different ways you could make each design?*
 
-Answer:
+Your puzzle answer was `643685981770598`.
 
-Although it hasn't changed, you can still [get your puzzle input](19/input).
+Both parts of this puzzle are complete! They provide two gold stars: \*\*
+
+At this point, you should [return to your Advent calendar](/2024) and try another puzzle.
+
+If you still want to see it, you can [get your puzzle input](19/input).
 
