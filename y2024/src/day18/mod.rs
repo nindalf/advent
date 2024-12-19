@@ -68,8 +68,10 @@ fn simple_bfs(
     points_to_avoid: &[Point],
 ) -> Option<usize> {
     let points_to_avoid: AHashSet<Point> = points_to_avoid.iter().copied().collect();
-    let mut seen = AHashSet::with_capacity(100);
-    let mut q = VecDeque::with_capacity(100);
+
+    let size = grid.rows * grid.columns - points_to_avoid.len();
+    let mut seen = AHashSet::with_capacity(size);
+    let mut q = VecDeque::with_capacity(size);
     q.push_back(Path {
         point: start,
         distance_so_far: 0,
