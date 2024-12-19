@@ -1,10 +1,19 @@
 use ahash::AHashSet;
+use rayon::prelude::*;
 
+/// Note on performance
+/// I started out minimising string allocations, using only indices instead of allocating strings, or storing strings.
+/// In fact, there is no string allocation, not even the input, which is a static string baked into the binary. Everything borrows from that.
+/// I started with the towels in a Vec, checking each time if the string starting at index matched each of the towels.
+/// That was slow enough that it never actually finished part 1.
+/// I replaced that with towels being a HashSet and checking the prefix of pattern is contained in the HashSet. Much faster
+/// Part 1 completed in 8.2ms single threaded and 1.2ms (-85%) while using rayon.
 #[inline]
 pub fn part1(input: &str) -> usize {
     let (towels, patterns) = parse(input);
     patterns
         .iter()
+        .par_bridge()
         .filter(|pattern| match_towels_to_pattern(&towels, pattern))
         .count()
 }
@@ -26,9 +35,6 @@ fn match_towels_to_pattern(towels: &AHashSet<&str>, pattern: &str) -> bool {
                     if new_len == pattern.len() {
                         // Match found
                         return true;
-                    }
-                    if new_len > pattern.len() {
-                        continue;
                     }
                     temp.insert(new_len);
                 }
