@@ -36,5 +36,5 @@ test DAY="" TARGET="":
     if [ "{{DAY}}" = "" ]; then
         cargo test --manifest-path y{{AOC_YEAR}}/Cargo.toml
     else
-        cargo test --manifest-path y{{AOC_YEAR}}/Cargo.toml -- day{{DAY}}::tests::part_{{TARGET}}
+        cargo test --manifest-path y{{AOC_YEAR}}/Cargo.toml -- day{{DAY}}::tests::part_{{TARGET}} --nocapture
     fi
