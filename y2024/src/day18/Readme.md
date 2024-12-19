@@ -76,8 +76,6 @@ Simulate the first kilobyte (`1024` bytes) falling onto your memory space. After
 
 Your puzzle answer was `310`.
 
-The first half of this puzzle is complete! It provides one gold star: \*
-
 \--- Part Two ---
 ----------
 
@@ -115,7 +113,11 @@ So, in this example, the coordinates of the first byte that prevents the exit fr
 
 Simulate more of the bytes that are about to corrupt your memory space. *What are the coordinates of the first byte that will prevent the exit from being reachable from your starting position?* (Provide the answer as two integers separated by a comma with no other characters.)
 
-Answer:
+Your puzzle answer was `16,46`.
 
-Although it hasn't changed, you can still [get your puzzle input](18/input).
+Both parts of this puzzle are complete! They provide two gold stars: \*\*
+
+At this point, you should [return to your Advent calendar](/2024) and try another puzzle.
+
+If you still want to see it, you can [get your puzzle input](18/input).
 
