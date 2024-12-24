@@ -2,6 +2,10 @@ use std::hash::Hash;
 
 use ahash::{AHashMap, AHashSet};
 
+/// Performance.
+/// Part 1 is fine, it completes in 25.8µs.
+/// Part 2 is quite ugly to look at, not very proud. But it still executes in 39.7µs.
+/// Good enough, I won't optimise it.
 #[inline]
 pub fn part1(input: &str) -> u64 {
     let (mut values, instructions) = parse(input);
@@ -192,10 +196,8 @@ fn evaluate<'a>(
     calculated_values: &mut AHashMap<&'a str, u8>,
     instructions: &'a AHashMap<&'a str, Instruction>,
 ) -> u8 {
-    if (output.starts_with("x") || output.starts_with("y"))
-        && calculated_values.contains_key(&output)
-    {
-        return calculated_values[&output];
+    if let Some(value) = calculated_values.get(&output) {
+        return *value;
     }
 
     let output_val = match instructions[&output] {
