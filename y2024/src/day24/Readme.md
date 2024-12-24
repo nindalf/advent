@@ -140,8 +140,6 @@ Simulate the system of gates and wires. *What decimal number does it output on t
 
 Your puzzle answer was `66055249060558`.
 
-The first half of this puzzle is complete! It provides one gold star: \*
-
 \--- Part Two ---
 ----------
 
@@ -223,7 +221,11 @@ Of course, your actual system is much more complex than this, and the gates that
 
 Your system of gates and wires has *four* pairs of gates which need their output wires swapped - *eight* wires in total. Determine which four pairs of gates need their outputs swapped so that your system correctly performs addition; *what do you get if you sort the names of the eight wires involved in a swap and then join those names with commas?*
 
-Answer:
+Your puzzle answer was `fcd,fhp,hmk,rvf,tpc,z16,z20,z33`.
 
-Although it hasn't changed, you can still [get your puzzle input](24/input).
+Both parts of this puzzle are complete! They provide two gold stars: \*\*
+
+At this point, you should [return to your Advent calendar](/2024) and try another puzzle.
+
+If you still want to see it, you can [get your puzzle input](24/input).
 
