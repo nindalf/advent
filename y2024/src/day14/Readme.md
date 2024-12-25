@@ -5,7 +5,7 @@
 
 One of The Historians needs to use the bathroom; fortunately, you know there's a bathroom near an unvisited location on their list, and so you're all quickly teleported directly to the lobby of Easter Bunny Headquarters.
 
-Unfortunately, EBHQ seems to have "improved" bathroom security *again* after your last [visit](/2016/day/2). The area outside the bathroom is swarming with robots!
+Unfortunately, EBHQ seems to have "improved" bathroom security *again* after your last [visit](https://adventofcode.com/2016/day/2). The area outside the bathroom is swarming with robots!
 
 To get The Historian safely to the bathroom, you'll need a way to predict where the robots will be in the future. Fortunately, they all seem to be moving on the tile floor in predictable *straight lines*.
 
@@ -150,7 +150,7 @@ Your puzzle answer was `7051`.
 
 Both parts of this puzzle are complete! They provide two gold stars: \*\*
 
-At this point, you should [return to your Advent calendar](/2024) and try another puzzle.
+At this point, all that is left is for you to [admire your Advent calendar](https://adventofcode.com/2024).
 
 If you still want to see it, you can [get your puzzle input](14/input).
 

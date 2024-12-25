@@ -3,7 +3,7 @@
 \--- Day 4: Ceres Search ---
 ----------
 
-"Looks like the Chief's not here. Next!" One of The Historians pulls out a device and pushes the only button on it. After a brief flash, you recognize the interior of the [Ceres monitoring station](/2019/day/10)!
+"Looks like the Chief's not here. Next!" One of The Historians pulls out a device and pushes the only button on it. After a brief flash, you recognize the interior of the [Ceres monitoring station](https://adventofcode.com/2019/day/10)!
 
 As the search for the Chief continues, a small Elf who lives on the station tugs on your shirt; she'd like to know if you could help her with her *word search* (your puzzle input). She only has to find one word: `XMAS`.
 
@@ -94,7 +94,7 @@ Your puzzle answer was `1910`.
 
 Both parts of this puzzle are complete! They provide two gold stars: \*\*
 
-At this point, you should [return to your Advent calendar](/2024) and try another puzzle.
+At this point, all that is left is for you to [admire your Advent calendar](https://adventofcode.com/2024).
 
 If you still want to see it, you can [get your puzzle input](4/input).
 

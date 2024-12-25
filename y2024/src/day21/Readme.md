@@ -3,7 +3,7 @@
 \--- Day 21: Keypad Conundrum ---
 ----------
 
-As you teleport onto Santa's [Reindeer-class starship](/2019/day/25), The Historians begin to panic: someone from their search party is *missing*. A quick life-form scan by the ship's computer reveals that when the missing Historian teleported, he arrived in another part of the ship.
+As you teleport onto Santa's [Reindeer-class starship](https://adventofcode.com/2019/day/25), The Historians begin to panic: someone from their search party is *missing*. A quick life-form scan by the ship's computer reveals that when the missing Historian teleported, he arrived in another part of the ship.
 
 The door to that area is locked, but the computer can't open it; it can only be opened by *physically typing* the door codes (your puzzle input) on the numeric keypad on the door.
 
@@ -112,7 +112,32 @@ In the above example, complexity of the five codes can be found by calculating `
 
 Find the fewest number of button presses you'll need to perform in order to cause the robot in front of the door to type each code. *What is the sum of the complexities of the five codes on your list?*
 
-To begin, [get your puzzle input](21/input).
+Your puzzle answer was `188398`.
 
-Answer:
+\--- Part Two ---
+----------
+
+Just as the missing Historian is released, The Historians realize that a *second* member of their search party has also been missing this entire time!
+
+A quick life-form scan reveals the Historian is also trapped in a locked area of the ship. Due to a variety of hazards, robots are once again dispatched, forming another chain of remote control keypads managing robotic-arm-wielding robots.
+
+This time, many more robots are involved. In summary, there are the following keypads:
+
+* One directional keypad that *you* are using.
+* *25* directional keypads that *robots* are using.
+* One numeric keypad (on a door) that a *robot* is using.
+
+The keypads form a chain, just like before: your directional keypad controls a robot which is typing on a directional keypad which controls a robot which is typing on a directional keypad... and so on, ending with the robot which is typing on the numeric keypad.
+
+The door codes are the same this time around; only the number of robots and directional keypads has changed.
+
+Find the fewest number of button presses you'll need to perform in order to cause the robot in front of the door to type each code. *What is the sum of the complexities of the five codes on your list?*
+
+Your puzzle answer was `230049027535970`.
+
+Both parts of this puzzle are complete! They provide two gold stars: \*\*
+
+At this point, all that is left is for you to [admire your Advent calendar](https://adventofcode.com/2024).
+
+If you still want to see it, you can [get your puzzle input](21/input).
 

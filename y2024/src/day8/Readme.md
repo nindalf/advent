@@ -3,7 +3,7 @@
 \--- Day 8: Resonant Collinearity ---
 ----------
 
-You find yourselves on the [roof](/2016/day/25) of a top-secret Easter Bunny installation.
+You find yourselves on the [roof](https://adventofcode.com/2016/day/25) of a top-secret Easter Bunny installation.
 
 While The Historians do their thing, you take a look at the familiar *huge antenna*. Much to your surprise, it seems to have been reconfigured to emit a signal that makes people 0.1% more likely to buy Easter Bunny brand Imitation Mediocre Chocolate as a Christmas gift! Unthinkable!
 
@@ -150,7 +150,7 @@ Your puzzle answer was `1157`.
 
 Both parts of this puzzle are complete! They provide two gold stars: \*\*
 
-At this point, you should [return to your Advent calendar](/2024) and try another puzzle.
+At this point, all that is left is for you to [admire your Advent calendar](https://adventofcode.com/2024).
 
 If you still want to see it, you can [get your puzzle input](8/input).
 

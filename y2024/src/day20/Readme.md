@@ -3,7 +3,7 @@
 \--- Day 20: Race Condition ---
 ----------
 
-The Historians are quite pixelated again. This time, a massive, black building looms over you - you're [right outside](/2017/day/24) the CPU!
+The Historians are quite pixelated again. This time, a massive, black building looms over you - you're [right outside](https://adventofcode.com/2017/day/24) the CPU!
 
 While The Historians get to work, a nearby program sees that you're idle and challenges you to a *race*. Apparently, you've arrived just in time for the frequently-held *race condition* festival!
 
@@ -214,7 +214,7 @@ Your puzzle answer was `1027164`.
 
 Both parts of this puzzle are complete! They provide two gold stars: \*\*
 
-At this point, you should [return to your Advent calendar](/2024) and try another puzzle.
+At this point, all that is left is for you to [admire your Advent calendar](https://adventofcode.com/2024).
 
 If you still want to see it, you can [get your puzzle input](20/input).
 

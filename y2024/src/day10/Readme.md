@@ -3,7 +3,7 @@
 \--- Day 10: Hoof It ---
 ----------
 
-You all arrive at a [Lava Production Facility](/2023/day/15) on a floating island in the sky. As the others begin to search the massive industrial complex, you feel a small nose boop your leg and look down to discover a reindeer wearing a hard hat.
+You all arrive at a [Lava Production Facility](https://adventofcode.com/2023/day/15) on a floating island in the sky. As the others begin to search the massive industrial complex, you feel a small nose boop your leg and look down to discover a reindeer wearing a hard hat.
 
 The reindeer is holding a book titled "Lava Island Hiking Guide". However, when you open the book, you discover that most of it seems to have been scorched by lava! As you're about to ask how you can help, the reindeer brings you a blank [topographic map](https://en.wikipedia.org/wiki/Topographic_map) of the surrounding area (your puzzle input) and looks up at you excitedly.
 
@@ -164,7 +164,7 @@ Your puzzle answer was `1017`.
 
 Both parts of this puzzle are complete! They provide two gold stars: \*\*
 
-At this point, you should [return to your Advent calendar](/2024) and try another puzzle.
+At this point, all that is left is for you to [admire your Advent calendar](https://adventofcode.com/2024).
 
 If you still want to see it, you can [get your puzzle input](10/input).
 

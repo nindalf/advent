@@ -3,7 +3,7 @@
 \--- Day 17: Chronospatial Computer ---
 ----------
 
-The Historians push the button on their strange device, but this time, you all just feel like you're [falling](/2018/day/6).
+The Historians push the button on their strange device, but this time, you all just feel like you're [falling](https://adventofcode.com/2018/day/6).
 
 "Situation critical", the device announces in a familiar voice. "Bootstrapping process failed. Initializing debugger...."
 
@@ -92,7 +92,7 @@ Your puzzle answer was `202356708354602`.
 
 Both parts of this puzzle are complete! They provide two gold stars: \*\*
 
-At this point, you should [return to your Advent calendar](/2024) and try another puzzle.
+At this point, all that is left is for you to [admire your Advent calendar](https://adventofcode.com/2024).
 
 If you still want to see it, you can [get your puzzle input](17/input).
 

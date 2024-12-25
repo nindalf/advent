@@ -3,7 +3,7 @@
 \--- Day 16: Reindeer Maze ---
 ----------
 
-It's time again for the [Reindeer Olympics](/2015/day/14)! This year, the big event is the *Reindeer Maze*, where the Reindeer compete for the *lowest score*.
+It's time again for the [Reindeer Olympics](https://adventofcode.com/2015/day/14)! This year, the big event is the *Reindeer Maze*, where the Reindeer compete for the *lowest score*.
 
 You and The Historians arrive to search for the Chief right as the event is about to start. It wouldn't hurt to watch a little, right?
 
@@ -163,7 +163,7 @@ Your puzzle answer was `500`.
 
 Both parts of this puzzle are complete! They provide two gold stars: \*\*
 
-At this point, you should [return to your Advent calendar](/2024) and try another puzzle.
+At this point, all that is left is for you to [admire your Advent calendar](https://adventofcode.com/2024).
 
 If you still want to see it, you can [get your puzzle input](16/input).
 

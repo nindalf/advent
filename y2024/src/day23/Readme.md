@@ -3,7 +3,7 @@
 \--- Day 23: LAN Party ---
 ----------
 
-As The Historians wander around a secure area at Easter Bunny HQ, you come across posters for a [LAN party](https://en.wikipedia.org/wiki/LAN_party) scheduled for today! Maybe you can find it; you connect to a nearby [datalink port](/2016/day/9) and download a map of the local network (your puzzle input).
+As The Historians wander around a secure area at Easter Bunny HQ, you come across posters for a [LAN party](https://en.wikipedia.org/wiki/LAN_party) scheduled for today! Maybe you can find it; you connect to a nearby [datalink port](https://adventofcode.com/2016/day/9) and download a map of the local network (your puzzle input).
 
 The network map provides a list of every *connection between two computers*. For example:
 
@@ -109,7 +109,7 @@ Your puzzle answer was `dd,ig,il,im,kb,kr,pe,ti,tv,vr,we,xu,zi`.
 
 Both parts of this puzzle are complete! They provide two gold stars: \*\*
 
-At this point, you should [return to your Advent calendar](/2024) and try another puzzle.
+At this point, all that is left is for you to [admire your Advent calendar](https://adventofcode.com/2024).
 
 If you still want to see it, you can [get your puzzle input](23/input).
 

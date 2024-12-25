@@ -128,8 +128,6 @@ Analyze your lock and key schematics. *How many unique lock/key pairs fit togeth
 
 Your puzzle answer was `3397`.
 
-The first half of this puzzle is complete! It provides one gold star: \*
-
 \--- Part Two ---
 ----------
 
@@ -145,7 +143,11 @@ The Chief's eyes get wide. "With all this, we might just have enough time to fin
 
 You nod, and The Historians quickly work to collect their notes into the final set of pages for the chronicle.
 
-You don't have enough stars to finish the chronicle, though. You need 3 more.
+If you like, you can .
 
-Although it hasn't changed, you can still [get your puzzle input](25/input).
+Both parts of this puzzle are complete! They provide two gold stars: \*\*
+
+At this point, all that is left is for you to [admire your Advent calendar](https://adventofcode.com/2024).
+
+If you still want to see it, you can [get your puzzle input](25/input).
 

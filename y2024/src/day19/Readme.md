@@ -3,7 +3,7 @@
 \--- Day 19: Linen Layout ---
 ----------
 
-Today, The Historians take you up to the [hot springs](/2023/day/12) on Gear Island! Very [suspiciously](https://www.youtube.com/watch?v=ekL881PJMjI), absolutely nothing goes wrong as they begin their careful search of the vast field of helixes.
+Today, The Historians take you up to the [hot springs](https://adventofcode.com/2023/day/12) on Gear Island! Very [suspiciously](https://www.youtube.com/watch?v=ekL881PJMjI), absolutely nothing goes wrong as they begin their careful search of the vast field of helixes.
 
 Could this *finally* be your chance to visit the [onsen](https://en.wikipedia.org/wiki/Onsen) next door? Only one way to find out.
 
@@ -91,7 +91,7 @@ Your puzzle answer was `643685981770598`.
 
 Both parts of this puzzle are complete! They provide two gold stars: \*\*
 
-At this point, you should [return to your Advent calendar](/2024) and try another puzzle.
+At this point, all that is left is for you to [admire your Advent calendar](https://adventofcode.com/2024).
 
 If you still want to see it, you can [get your puzzle input](19/input).
 

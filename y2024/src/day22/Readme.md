@@ -3,7 +3,7 @@
 \--- Day 22: Monkey Market ---
 ----------
 
-As you're all teleported deep into the jungle, a [monkey](/2022/day/11) steals The Historians' device! You'll need get it back while The Historians are looking for the Chief.
+As you're all teleported deep into the jungle, a [monkey](https://adventofcode.com/2022/day/11) steals The Historians' device! You'll need to get it back while The Historians are looking for the Chief.
 
 The monkey that stole the device seems willing to trade it, but only in exchange for an absurd number of bananas. Your only option is to buy bananas on the Monkey Exchange Market.
 
@@ -93,7 +93,7 @@ So, if a buyer starts with a secret number of `123`, that buyer's first ten *pri
 
 ```
 
-This price is the number of *bananas* that buyer is offering in exchange for your information about a new hiding spot. However, you still don't speak [monkey](/2022/day/21), so you can't negotiate with the buyers directly. The Historian speaks a little, but not enough to negotiate; instead, he can ask another monkey to negotiate on your behalf.
+This price is the number of *bananas* that buyer is offering in exchange for your information about a new hiding spot. However, you still don't speak [monkey](https://adventofcode.com/2022/day/21), so you can't negotiate with the buyers directly. The Historian speaks a little, but not enough to negotiate; instead, he can ask another monkey to negotiate on your behalf.
 
 Unfortunately, the monkey only knows how to decide when to sell by looking at the *changes* in price. Specifically, the monkey will only look for a specific sequence of *four consecutive changes* in price, then immediately sell when it sees that sequence.
 
@@ -148,7 +148,7 @@ Your puzzle answer was `2089`.
 
 Both parts of this puzzle are complete! They provide two gold stars: \*\*
 
-At this point, you should [return to your Advent calendar](/2024) and try another puzzle.
+At this point, all that is left is for you to [admire your Advent calendar](https://adventofcode.com/2024).
 
 If you still want to see it, you can [get your puzzle input](22/input).
 

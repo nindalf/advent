@@ -5,7 +5,7 @@
 
 Satisfied with their search on Ceres, the squadron of scholars suggests subsequently scanning the stationery stacks of sub-basement 17.
 
-The North Pole printing department is busier than ever this close to Christmas, and while The Historians continue their search of this historically significant facility, an Elf operating a [very familiar printer](/2017/day/1) beckons you over.
+The North Pole printing department is busier than ever this close to Christmas, and while The Historians continue their search of this historically significant facility, an Elf operating a [very familiar printer](https://adventofcode.com/2017/day/1) beckons you over.
 
 The Elf must recognize you, because they waste no time explaining that the new *sleigh launch safety manual* updates won't print correctly. Failure to update the safety manuals would be dire indeed, so you offer your services.
 
@@ -107,7 +107,7 @@ Your puzzle answer was `4121`.
 
 Both parts of this puzzle are complete! They provide two gold stars: \*\*
 
-At this point, you should [return to your Advent calendar](/2024) and try another puzzle.
+At this point, all that is left is for you to [admire your Advent calendar](https://adventofcode.com/2024).
 
 If you still want to see it, you can [get your puzzle input](5/input).
 

@@ -3,7 +3,7 @@
 \--- Day 7: Bridge Repair ---
 ----------
 
-The Historians take you to a familiar [rope bridge](/2022/day/9) over a river in the middle of a jungle. The Chief isn't on this side of the bridge, though; maybe he's on the other side?
+The Historians take you to a familiar [rope bridge](https://adventofcode.com/2022/day/9) over a river in the middle of a jungle. The Chief isn't on this side of the bridge, though; maybe he's on the other side?
 
 When you go to cross the bridge, you notice a group of engineers trying to repair it. (Apparently, it breaks pretty frequently.) You won't be able to cross until it's fixed.
 
@@ -61,7 +61,7 @@ Your puzzle answer was `105517128211543`.
 
 Both parts of this puzzle are complete! They provide two gold stars: \*\*
 
-At this point, you should [return to your Advent calendar](/2024) and try another puzzle.
+At this point, all that is left is for you to [admire your Advent calendar](https://adventofcode.com/2024).
 
 If you still want to see it, you can [get your puzzle input](7/input).
 

@@ -3,7 +3,7 @@
 \--- Day 11: Plutonian Pebbles ---
 ----------
 
-The ancient civilization on [Pluto](/2019/day/20) was known for its ability to manipulate spacetime, and while The Historians explore their infinite corridors, you've noticed a strange set of physics-defying stones.
+The ancient civilization on [Pluto](https://adventofcode.com/2019/day/20) was known for its ability to manipulate spacetime, and while The Historians explore their infinite corridors, you've noticed a strange set of physics-defying stones.
 
 At first glance, they seem like normal stones: they're arranged in a perfectly *straight line*, and each stone has a *number* engraved on it.
 
@@ -74,7 +74,7 @@ Your puzzle answer was `221291560078593`.
 
 Both parts of this puzzle are complete! They provide two gold stars: \*\*
 
-At this point, you should [return to your Advent calendar](/2024) and try another puzzle.
+At this point, all that is left is for you to [admire your Advent calendar](https://adventofcode.com/2024).
 
 If you still want to see it, you can [get your puzzle input](11/input).
 
