@@ -113,6 +113,39 @@ where
         ]
     }
 
+    #[allow(clippy::type_complexity)]
+    pub fn adjacent_two(
+        &self,
+        position: Point,
+    ) -> [(Option<Point>, Option<T>, Option<Point>, Option<T>); 4] {
+        let up_one = (position.0 > 0).then(|| (position.0 - 1, position.1));
+        let right_one = (position.1 + 1 < self.columns).then(|| (position.0, position.1 + 1));
+        let down_one = (position.0 + 1 < self.rows).then(|| (position.0 + 1, position.1));
+        let left_one = (position.1 > 0).then(|| (position.0, position.1 - 1));
+
+        let up_one_val = up_one.and_then(|p| self.get(p));
+        let right_one_val = right_one.and_then(|p| self.get(p));
+        let down_one_val = down_one.and_then(|p| self.get(p));
+        let left_one_val = left_one.and_then(|p| self.get(p));
+
+        let up_two = (position.0 > 1).then(|| (position.0 - 2, position.1));
+        let right_two = (position.1 + 2 < self.columns).then(|| (position.0, position.1 + 2));
+        let down_two = (position.0 + 2 < self.rows).then(|| (position.0 + 2, position.1));
+        let left_two = (position.1 > 1).then(|| (position.0, position.1 - 2));
+
+        let up_two_val = up_two.and_then(|p| self.get(p));
+        let right_two_val = right_two.and_then(|p| self.get(p));
+        let down_two_val = down_two.and_then(|p| self.get(p));
+        let left_two_val = left_two.and_then(|p| self.get(p));
+
+        [
+            (up_one, up_one_val, up_two, up_two_val),
+            (right_one, right_one_val, right_two, right_two_val),
+            (down_one, down_one_val, down_two, down_two_val),
+            (left_one, left_one_val, left_two, left_two_val),
+        ]
+    }
+
     pub fn iter(&self) -> impl Iterator<Item = (Point, T)> + use<'_, T> {
         self.s
             .iter()
