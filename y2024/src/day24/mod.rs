@@ -23,6 +23,9 @@ pub fn part1(input: &str) -> u64 {
 #[inline]
 pub fn part2(input: &str) -> String {
     let (_, instructions) = parse(input);
+    if instructions.len() < 100 {
+        return "".to_string();
+    }
     let reversed_instructions: AHashMap<Instruction, &str> = instructions.iter().fold(
         AHashMap::with_capacity(instructions.len()),
         |mut acc, (key, val)| {

@@ -7,6 +7,7 @@ pub fn part1(input: &str) -> usize {
         .count()
 }
 
+// There is no part 2
 #[inline]
 pub fn part2(_input: &str) -> i32 {
     0
@@ -63,4 +64,4 @@ fn parse(input: &str) -> (Vec<[u8; 5]>, Vec<[u8; 5]>) {
     (locks, keys)
 }
 
-common::aoctest!(3, 3397, 1234, 1234);
+common::aoctest!(3, 3397, 0, 0);
