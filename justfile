@@ -5,6 +5,18 @@ default:
     @echo "Advent of Code {{AOC_YEAR}}"
     @just --list
 
+# Run benchmarks for the year or a specific day
+bench DAY="":
+    #!/usr/bin/env sh
+    if [ "{{DAY}}" = "" ]; then
+        cargo bench -- y{{AOC_YEAR}}
+    else
+        # The extra space after day{{DAY}} is needed to avoid `just bench 1` matching with 11, 12...
+        cargo bench -- "y{{AOC_YEAR}} day{{DAY}} "
+    fi
+    # Run benches/src/main.rs to generate README.md based on benchmark results
+    cargo run benches
+
 # Fetch test input and create
 fetch DAY:
     @cd y{{AOC_YEAR}} && aocgen fetch --day {{DAY}} --year {{AOC_YEAR}}
@@ -19,17 +31,6 @@ refetch DAY:
 
 submit DAY PART ANSWER:
     @aocgen submit --year {{AOC_YEAR}} --day {{DAY}} --part {{PART}} --answer {{ANSWER}}
-
-# Run benchmarks for the year or a specific day
-bench DAY="":
-    #!/usr/bin/env sh
-    if [ "{{DAY}}" = "" ]; then
-        cargo bench -- y{{AOC_YEAR}}
-    else
-        # The extra space after day{{DAY}} is needed to avoid `just bench 1` matching with 11, 12...
-        cargo bench -- "y{{AOC_YEAR}} day{{DAY}} "
-    fi
-    cargo run benches
 
 # Run tests for the year or a specific day, optionally targeting a specific part
 test DAY="" TARGET="":
