@@ -29,6 +29,7 @@ bench DAY="":
         # The extra space after day{{DAY}} is needed to avoid `just bench 1` matching with 11, 12...
         cargo bench -- "y{{AOC_YEAR}} day{{DAY}} "
     fi
+    cargo run benches
 
 # Run tests for the year or a specific day, optionally targeting a specific part
 test DAY="" TARGET="":

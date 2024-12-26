@@ -9,8 +9,21 @@ pub struct Record {
 const README_TEMPLATE: &str = include_str!("readme.tmpl");
 
 pub fn write_to_readme(data: &BTreeMap<(u32, u32), Record>) -> anyhow::Result<()> {
-    let mut output = String::from(
-        "### 2024\n\n| Day  | Problem     | Solution    | Part 1 (ms) | Part 2 (ms) | Total (ms) |\n",
+    let mut output = String::new();
+    #[allow(clippy::single_element_loop)]
+    for year in [2024] {
+        output.push_str(&markdown_for_year(data, year));
+    }
+
+    let readme = README_TEMPLATE.replace("{{table}}", &output);
+    std::fs::write("README.md", readme)?;
+
+    Ok(())
+}
+
+fn markdown_for_year(data: &BTreeMap<(u32, u32), Record>, required_year: u32) -> String {
+    let mut output = format!(
+        "### {required_year}\n\n| Day  | Problem     | Solution    | Part 1 (ms) | Part 2 (ms) | Total (ms) |\n",
     );
     output.push_str(
         "|------|-------------|-------------|-------------|-------------|------------|\n",
@@ -19,7 +32,7 @@ pub fn write_to_readme(data: &BTreeMap<(u32, u32), Record>) -> anyhow::Result<()
     let mut part_two_total = 0.0;
     let mut total_total = 0.0;
     for ((year, day), record) in data {
-        if *year != 2024 {
+        if *year != required_year {
             continue;
         }
 
@@ -38,14 +51,11 @@ pub fn write_to_readme(data: &BTreeMap<(u32, u32), Record>) -> anyhow::Result<()
     }
 
     output.push_str(&format!(
-        "|  |  | Total | {:.2}ms | {:.2}ms | {:.2}ms |\n",
+        "|  |  | Total | {:.2}ms | {:.2}ms | {:.2}ms |\n\n",
         part_one_total, part_two_total, total_total
     ));
 
-    let readme = README_TEMPLATE.replace("{{table}}", &output);
-    std::fs::write("README.md", readme)?;
-
-    Ok(())
+    output
 }
 
 fn get_problem_name(year: u32, day: u32) -> Option<String> {
