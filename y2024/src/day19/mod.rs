@@ -44,8 +44,8 @@ fn match_towels_to_pattern<'a>(
     pattern: &'a str,
     cache: &mut AHashMap<&'a str, u64>,
 ) -> u64 {
-    if cache.contains_key(pattern) {
-        return cache[pattern];
+    if let Some(pre_computed) = cache.get(pattern) {
+        return *pre_computed;
     }
 
     let mut matches = 0;
