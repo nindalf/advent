@@ -12,30 +12,30 @@ Successfully completed problems with the time taken to execute them on my M1 Pro
 
 | Day  | Problem     | Solution    | Part 1 (ms) | Part 2 (ms) | Total (ms) |
 |------|-------------|-------------|-------------|-------------|------------|
-| 1 | [Historian Hysteria](https://adventofcode.com/2024/day/1) | [Solution](https://github.com/nindalf/advent/blob/master/y2024/src/day1/mod.rs) | 0.04ms | 0.04ms | 0.08ms |
-| 2 | [Red-Nosed Reports](https://adventofcode.com/2024/day/2) | [Solution](https://github.com/nindalf/advent/blob/master/y2024/src/day2/mod.rs) | 0.10ms | 0.10ms | 0.19ms |
-| 3 | [Mull It Over](https://adventofcode.com/2024/day/3) | [Solution](https://github.com/nindalf/advent/blob/master/y2024/src/day3/mod.rs) | 0.21ms | 0.22ms | 0.43ms |
-| 4 | [Ceres Search](https://adventofcode.com/2024/day/4) | [Solution](https://github.com/nindalf/advent/blob/master/y2024/src/day4/mod.rs) | 0.14ms | 0.08ms | 0.22ms |
-| 5 | [Print Queue](https://adventofcode.com/2024/day/5) | [Solution](https://github.com/nindalf/advent/blob/master/y2024/src/day5/mod.rs) | 0.13ms | 0.14ms | 0.27ms |
-| 6 | [Guard Gallivant](https://adventofcode.com/2024/day/6) | [Solution](https://github.com/nindalf/advent/blob/master/y2024/src/day6/mod.rs) | 0.15ms | 26.91ms | 27.06ms |
-| 7 | [Bridge Repair](https://adventofcode.com/2024/day/7) | [Solution](https://github.com/nindalf/advent/blob/master/y2024/src/day7/mod.rs) | 0.17ms | 4.29ms | 4.45ms |
-| 8 | [Resonant Collinearity](https://adventofcode.com/2024/day/8) | [Solution](https://github.com/nindalf/advent/blob/master/y2024/src/day8/mod.rs) | 0.02ms | 0.05ms | 0.06ms |
-| 9 | [Disk Fragmenter](https://adventofcode.com/2024/day/9) | [Solution](https://github.com/nindalf/advent/blob/master/y2024/src/day9/mod.rs) | 0.25ms | 27.70ms | 27.96ms |
-| 10 | [Hoof It](https://adventofcode.com/2024/day/10) | [Solution](https://github.com/nindalf/advent/blob/master/y2024/src/day10/mod.rs) | 0.08ms | 0.05ms | 0.13ms |
-| 11 | [Plutonian Pebbles](https://adventofcode.com/2024/day/11) | [Solution](https://github.com/nindalf/advent/blob/master/y2024/src/day11/mod.rs) | 0.04ms | 2.41ms | 2.45ms |
-| 12 | [Garden Groups](https://adventofcode.com/2024/day/12) | [Solution](https://github.com/nindalf/advent/blob/master/y2024/src/day12/mod.rs) | 1.07ms | 1.85ms | 2.92ms |
-| 13 | [Claw Contraption](https://adventofcode.com/2024/day/13) | [Solution](https://github.com/nindalf/advent/blob/master/y2024/src/day13/mod.rs) | 0.03ms | 0.03ms | 0.07ms |
-| 14 | [Restroom Redoubt](https://adventofcode.com/2024/day/14) | [Solution](https://github.com/nindalf/advent/blob/master/y2024/src/day14/mod.rs) | 0.28ms | 30.37ms | 30.65ms |
-| 15 | [Warehouse Woes](https://adventofcode.com/2024/day/15) | [Solution](https://github.com/nindalf/advent/blob/master/y2024/src/day15/mod.rs) | 0.42ms | 0.57ms | 0.98ms |
-| 16 | [Reindeer Maze](https://adventofcode.com/2024/day/16) | [Solution](https://github.com/nindalf/advent/blob/master/y2024/src/day16/mod.rs) | 2.90ms | 5.83ms | 8.72ms |
-| 17 | [Chronospatial Computer](https://adventofcode.com/2024/day/17) | [Solution](https://github.com/nindalf/advent/blob/master/y2024/src/day17/mod.rs) | 0.00ms | 21.80ms | 21.80ms |
-| 18 | [RAM Run](https://adventofcode.com/2024/day/18) | [Solution](https://github.com/nindalf/advent/blob/master/y2024/src/day18/mod.rs) | 0.46ms | 2.39ms | 2.84ms |
-| 19 | [Linen Layout](https://adventofcode.com/2024/day/19) | [Solution](https://github.com/nindalf/advent/blob/master/y2024/src/day19/mod.rs) | 0.44ms | 0.45ms | 0.89ms |
-| 20 | [Race Condition](https://adventofcode.com/2024/day/20) | [Solution](https://github.com/nindalf/advent/blob/master/y2024/src/day20/mod.rs) | 0.65ms | 37.94ms | 38.60ms |
-| 22 | [Monkey Market](https://adventofcode.com/2024/day/22) | [Solution](https://github.com/nindalf/advent/blob/master/y2024/src/day22/mod.rs) | 1.12ms | 31.87ms | 32.99ms |
-| 23 | [LAN Party](https://adventofcode.com/2024/day/23) | [Solution](https://github.com/nindalf/advent/blob/master/y2024/src/day23/mod.rs) | 0.37ms | 44.13ms | 44.50ms |
-| 24 | [Crossed Wires](https://adventofcode.com/2024/day/24) | [Solution](https://github.com/nindalf/advent/blob/master/y2024/src/day24/mod.rs) | 0.03ms | 0.04ms | 0.07ms |
-| 25 | [Code Chronicle](https://adventofcode.com/2024/day/25) | [Solution](https://github.com/nindalf/advent/blob/master/y2024/src/day25/mod.rs) | 0.18ms | 0.00ms | 0.18ms |
+| 1 | [Historian Hysteria](https://adventofcode.com/2024/day/1) | [Solution](/y2024/src/day1/mod.rs) | 0.04ms | 0.04ms | 0.08ms |
+| 2 | [Red-Nosed Reports](https://adventofcode.com/2024/day/2) | [Solution](/y2024/src/day2/mod.rs) | 0.10ms | 0.10ms | 0.19ms |
+| 3 | [Mull It Over](https://adventofcode.com/2024/day/3) | [Solution](/y2024/src/day3/mod.rs) | 0.21ms | 0.22ms | 0.43ms |
+| 4 | [Ceres Search](https://adventofcode.com/2024/day/4) | [Solution](/y2024/src/day4/mod.rs) | 0.14ms | 0.08ms | 0.22ms |
+| 5 | [Print Queue](https://adventofcode.com/2024/day/5) | [Solution](/y2024/src/day5/mod.rs) | 0.13ms | 0.14ms | 0.27ms |
+| 6 | [Guard Gallivant](https://adventofcode.com/2024/day/6) | [Solution](/y2024/src/day6/mod.rs) | 0.15ms | 26.91ms | 27.06ms |
+| 7 | [Bridge Repair](https://adventofcode.com/2024/day/7) | [Solution](/y2024/src/day7/mod.rs) | 0.17ms | 4.29ms | 4.45ms |
+| 8 | [Resonant Collinearity](https://adventofcode.com/2024/day/8) | [Solution](/y2024/src/day8/mod.rs) | 0.02ms | 0.05ms | 0.06ms |
+| 9 | [Disk Fragmenter](https://adventofcode.com/2024/day/9) | [Solution](/y2024/src/day9/mod.rs) | 0.25ms | 27.70ms | 27.96ms |
+| 10 | [Hoof It](https://adventofcode.com/2024/day/10) | [Solution](/y2024/src/day10/mod.rs) | 0.08ms | 0.05ms | 0.13ms |
+| 11 | [Plutonian Pebbles](https://adventofcode.com/2024/day/11) | [Solution](/y2024/src/day11/mod.rs) | 0.04ms | 2.41ms | 2.45ms |
+| 12 | [Garden Groups](https://adventofcode.com/2024/day/12) | [Solution](/y2024/src/day12/mod.rs) | 1.07ms | 1.85ms | 2.92ms |
+| 13 | [Claw Contraption](https://adventofcode.com/2024/day/13) | [Solution](/y2024/src/day13/mod.rs) | 0.03ms | 0.03ms | 0.07ms |
+| 14 | [Restroom Redoubt](https://adventofcode.com/2024/day/14) | [Solution](/y2024/src/day14/mod.rs) | 0.28ms | 30.37ms | 30.65ms |
+| 15 | [Warehouse Woes](https://adventofcode.com/2024/day/15) | [Solution](/y2024/src/day15/mod.rs) | 0.42ms | 0.57ms | 0.98ms |
+| 16 | [Reindeer Maze](https://adventofcode.com/2024/day/16) | [Solution](/y2024/src/day16/mod.rs) | 2.90ms | 5.83ms | 8.72ms |
+| 17 | [Chronospatial Computer](https://adventofcode.com/2024/day/17) | [Solution](/y2024/src/day17/mod.rs) | 0.00ms | 21.80ms | 21.80ms |
+| 18 | [RAM Run](https://adventofcode.com/2024/day/18) | [Solution](/y2024/src/day18/mod.rs) | 0.46ms | 2.39ms | 2.84ms |
+| 19 | [Linen Layout](https://adventofcode.com/2024/day/19) | [Solution](/y2024/src/day19/mod.rs) | 0.44ms | 0.45ms | 0.89ms |
+| 20 | [Race Condition](https://adventofcode.com/2024/day/20) | [Solution](/y2024/src/day20/mod.rs) | 0.65ms | 37.94ms | 38.60ms |
+| 22 | [Monkey Market](https://adventofcode.com/2024/day/22) | [Solution](/y2024/src/day22/mod.rs) | 1.12ms | 31.87ms | 32.99ms |
+| 23 | [LAN Party](https://adventofcode.com/2024/day/23) | [Solution](/y2024/src/day23/mod.rs) | 0.37ms | 44.13ms | 44.50ms |
+| 24 | [Crossed Wires](https://adventofcode.com/2024/day/24) | [Solution](/y2024/src/day24/mod.rs) | 0.03ms | 0.04ms | 0.07ms |
+| 25 | [Code Chronicle](https://adventofcode.com/2024/day/25) | [Solution](/y2024/src/day25/mod.rs) | 0.18ms | 0.00ms | 0.18ms |
 |  |  | Total | 9.29ms | 239.24ms | 248.53ms |
 
 

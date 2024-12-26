@@ -39,8 +39,7 @@ fn markdown_for_year(data: &BTreeMap<(u32, u32), Record>, required_year: u32) ->
         let url = format!("https://adventofcode.com/{}/day/{}", year, day);
         let problem_name =
             get_problem_name(*year, *day).unwrap_or_else(|| "Unknown problem name".to_string());
-        let solution_url =
-            format!("https://github.com/nindalf/advent/blob/master/y{year}/src/day{day}/mod.rs");
+        let solution_url = format!("/y{year}/src/day{day}/mod.rs");
         output.push_str(&format!(
             "| {day} | [{problem_name}]({url}) | [Solution]({solution_url}) | {:.2}ms | {:.2}ms | {:.2}ms |\n",
             record.part_one_millis, record.part_two_millis, record.total
