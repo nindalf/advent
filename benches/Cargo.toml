@@ -8,6 +8,12 @@ criterion = "0.5.1"
 paste = "1.0"
 y2024 = { path = "../y2024" }
 y2023 = { path = "../y2023" }
+serde = "1.0.216"
+glob = "0.3.1"
+anyhow.workspace = true
+serde_json = "1.0.134"
+scan_fmt.workspace = true
+regex.workspace = true
 
 [[bench]]
 name = "bench"
