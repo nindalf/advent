@@ -21,8 +21,7 @@ use rayon::prelude::*;
 pub fn part1(input: &str) -> usize {
     let (towels, patterns) = parse(input);
     patterns
-        .iter()
-        .par_bridge()
+        .par_lines()
         .filter(|pattern| {
             match_towels_to_pattern(&towels, pattern, &mut AHashMap::with_capacity(100)) > 0
         })
@@ -33,8 +32,7 @@ pub fn part1(input: &str) -> usize {
 pub fn part2(input: &str) -> u64 {
     let (towels, patterns) = parse(input);
     patterns
-        .iter()
-        .par_bridge()
+        .par_lines()
         .map(|pattern| match_towels_to_pattern(&towels, pattern, &mut AHashMap::with_capacity(100)))
         .sum()
 }
@@ -64,9 +62,8 @@ fn match_towels_to_pattern<'a>(
     matches
 }
 
-fn parse(input: &str) -> (AHashSet<&str>, Vec<&str>) {
+fn parse(input: &str) -> (AHashSet<&str>, &str) {
     let (towels, patterns) = input.split_once("\n\n").expect("input is well formed");
-    let patterns = patterns.lines().collect();
     let towels = towels.split(", ").collect();
     (towels, patterns)
 }
