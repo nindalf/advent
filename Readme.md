@@ -32,11 +32,12 @@ Successfully completed problems with the time taken to execute them on my M1 Pro
 | 18 | [RAM Run](https://adventofcode.com/2024/day/18) | [Solution](/y2024/src/day18/mod.rs) | 0.46ms | 2.39ms | 2.84ms |
 | 19 | [Linen Layout](https://adventofcode.com/2024/day/19) | [Solution](/y2024/src/day19/mod.rs) | 0.44ms | 0.45ms | 0.89ms |
 | 20 | [Race Condition](https://adventofcode.com/2024/day/20) | [Solution](/y2024/src/day20/mod.rs) | 0.65ms | 37.94ms | 38.60ms |
+| 21 | [Keypad Conundrum](https://adventofcode.com/2024/day/21) | [Solution](/y2024/src/day21/mod.rs) | 0.00ms | 0.00ms | 0.01ms |
 | 22 | [Monkey Market](https://adventofcode.com/2024/day/22) | [Solution](/y2024/src/day22/mod.rs) | 1.12ms | 31.87ms | 32.99ms |
 | 23 | [LAN Party](https://adventofcode.com/2024/day/23) | [Solution](/y2024/src/day23/mod.rs) | 0.37ms | 44.13ms | 44.50ms |
 | 24 | [Crossed Wires](https://adventofcode.com/2024/day/24) | [Solution](/y2024/src/day24/mod.rs) | 0.03ms | 0.04ms | 0.07ms |
 | 25 | [Code Chronicle](https://adventofcode.com/2024/day/25) | [Solution](/y2024/src/day25/mod.rs) | 0.18ms | 0.00ms | 0.18ms |
-|  |  | Total | 9.29ms | 239.24ms | 248.53ms |
+|  |  | Total | 9.29ms | 239.25ms | 248.54ms |
 
 
 ## Setup

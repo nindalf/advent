@@ -68,6 +68,9 @@ Were you to choose this sequence of button presses, here are all of the buttons 
 v<<A>>^A<A>AvA<^AA>A<vAAA>^A
 <A^A>^^AvvvA
 029A
+A<A^A>^^AvvvA
+v<<A>>^A<A>AvA<^AA>A<vAAA>^A
+<AA>>^AvAA<^A>Av<<A>>^AvA^A<vA>^Av<<A>^A>AAvA^Av<<A>A>^AAAvA<^A>A
 
 ```
 
@@ -98,6 +101,9 @@ For each of these, here is a shortest sequence of button presses you could type 
 179A: <v<A>>^A<vA<A>>^AAvAA<^A>A<v<A>>^AAvA^A<vA>^AA<A>A<v<A>A>^AAAvA<^A>A
 456A: <v<A>>^AA<vA<A>>^AAvAA<^A>A<vA>^A<A>A<vA>^A<A>A<v<A>A>^AAvA<^A>A
 379A: <v<A>>^AvA^A<vA<AA>>^AAvA<^A>AAvA^A<vA>^AA<A>A<v<A>A>^AAAvA<^A>A
+      v<<A>>^AvA^Av<<A>>^AA<vA<A>>^AAvAA<^A>A<vA>^AA<A>Av<<A>A>^AAAvA<^A>A
+         <   A > A   <   AA  v <   AA >>  ^ A  v  AA ^ A   < v  AAA >  ^ A
+      A      ^   A       ^^        <<       A     >>   A        vvv      A
 
 ```
 
