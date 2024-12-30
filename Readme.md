@@ -18,7 +18,7 @@ Successfully completed problems with the time taken to execute them on my M1 Pro
 | 4 | [Ceres Search](https://adventofcode.com/2024/day/4) | [Solution](/y2024/src/day4/mod.rs) | 0.14ms | 0.08ms | 0.22ms |
 | 5 | [Print Queue](https://adventofcode.com/2024/day/5) | [Solution](/y2024/src/day5/mod.rs) | 0.13ms | 0.14ms | 0.27ms |
 | 6 | [Guard Gallivant](https://adventofcode.com/2024/day/6) | [Solution](/y2024/src/day6/mod.rs) | 0.15ms | 26.91ms | 27.06ms |
-| 7 | [Bridge Repair](https://adventofcode.com/2024/day/7) | [Solution](/y2024/src/day7/mod.rs) | 0.27ms | 44.15ms | 44.41ms |
+| 7 | [Bridge Repair](https://adventofcode.com/2024/day/7) | [Solution](/y2024/src/day7/mod.rs) | 0.19ms | 4.87ms | 5.05ms |
 | 8 | [Resonant Collinearity](https://adventofcode.com/2024/day/8) | [Solution](/y2024/src/day8/mod.rs) | 0.02ms | 0.05ms | 0.06ms |
 | 9 | [Disk Fragmenter](https://adventofcode.com/2024/day/9) | [Solution](/y2024/src/day9/mod.rs) | 0.25ms | 27.70ms | 27.96ms |
 | 10 | [Hoof It](https://adventofcode.com/2024/day/10) | [Solution](/y2024/src/day10/mod.rs) | 0.08ms | 0.05ms | 0.13ms |
@@ -37,7 +37,7 @@ Successfully completed problems with the time taken to execute them on my M1 Pro
 | 23 | [LAN Party](https://adventofcode.com/2024/day/23) | [Solution](/y2024/src/day23/mod.rs) | 0.37ms | 44.13ms | 44.50ms |
 | 24 | [Crossed Wires](https://adventofcode.com/2024/day/24) | [Solution](/y2024/src/day24/mod.rs) | 0.03ms | 0.04ms | 0.07ms |
 | 25 | [Code Chronicle](https://adventofcode.com/2024/day/25) | [Solution](/y2024/src/day25/mod.rs) | 0.18ms | 0.00ms | 0.18ms |
-|  |  | Total | 9.04ms | 248.19ms | 257.23ms |
+|  |  | Total | 8.96ms | 208.90ms | 217.86ms |
 
 
 ## Setup
