@@ -1,5 +1,6 @@
 use ahash::AHashMap;
 use common::grid::{Grid, Point};
+use rayon::prelude::*;
 
 /// Performance
 /// Part 1 - 473µs, not much to do here.
@@ -9,6 +10,10 @@ use common::grid::{Grid, Point};
 /// The code is much cleaner though, so I kept it.
 /// Part 1 with Vec takes 59.2ms (+12399% regression).
 /// Part 2 with Vec is 59.4ms (+57 regression).
+/// Coming back much later, I forgot the obvious one - rayon for part 2.
+/// Improves performance by 84% from 39ms -> 6.2ms.
+/// And another suggestion by maneatingape - you don't need to check all points, just a subset.
+/// Improves performance by 27.4% from 6.2ms to 4.5ms.
 #[inline]
 pub fn part1(input: &str) -> usize {
     let (grid, start) = parse(input);
@@ -61,45 +66,32 @@ fn num_cheats_2(grid: &Grid<char>, path: AHashMap<Point, i32>) -> usize {
 
 fn num_cheats_20(path: AHashMap<Point, i32>) -> usize {
     let min_distance = if path.len() > 1000 { 100 } else { 50 };
-    #[allow(unused_variables)]
-    let mut results = 0;
-    for (point, path_distance) in path.iter() {
-        for i in 0..21 {
-            for j in 0..21 - i {
-                let euclid_distance = (i + j) as i32;
-                if let Some(other_distance) = path.get(&(point.0 + i, point.1 + j))
-                    && path_distance - other_distance - euclid_distance >= min_distance
-                {
-                    results += 1;
-                }
-                if point.0 >= i
-                    && i != 0
-                    && j != 0
-                    && let Some(other_distance) = path.get(&(point.0 - i, point.1 + j))
-                    && path_distance - other_distance - euclid_distance >= min_distance
-                {
-                    results += 1;
-                }
-                if point.1 >= j
-                    && i != 0
-                    && j != 0
-                    && let Some(other_distance) = path.get(&(point.0 + i, point.1 - j))
-                    && path_distance - other_distance - euclid_distance >= min_distance
-                {
-                    results += 1;
-                }
-                if point.0 >= i
-                    && point.1 >= j
-                    && let Some(other_distance) = path.get(&(point.0 - i, point.1 - j))
-                    && path_distance - other_distance - euclid_distance >= min_distance
-                {
-                    results += 1;
+    path.par_iter()
+        .map(|(point, path_distance)| {
+            let mut results = 0;
+            for i in 0..21 {
+                for j in 0..21 - i {
+                    let euclid_distance = (i + j) as i32;
+                    if let Some(other_distance) = path.get(&(point.0 + i, point.1 + j))
+                        && ((path_distance - other_distance - euclid_distance >= min_distance)
+                         || (other_distance - path_distance - euclid_distance >= min_distance))
+                    {
+                        results += 1;
+                    }
+                    if point.0 >= i
+                        && i != 0
+                        && j != 0
+                        && let Some(other_distance) = path.get(&(point.0 - i, point.1 + j))
+                        && ((path_distance - other_distance - euclid_distance >= min_distance)
+                        || (other_distance - path_distance - euclid_distance >= min_distance))
+                    {
+                        results += 1;
+                    }
                 }
             }
-        }
-    }
-
-    results
+            results
+        })
+        .sum()
 }
 
 fn parse(input: &str) -> (Grid<char>, Point) {
