@@ -20,7 +20,7 @@ Successfully completed problems with the time taken to execute them on my M1 Pro
 | 6 | [Guard Gallivant](https://adventofcode.com/2024/day/6) | [Solution](/y2024/src/day6/mod.rs) | 0.15ms | 26.91ms | 27.06ms |
 | 7 | [Bridge Repair](https://adventofcode.com/2024/day/7) | [Solution](/y2024/src/day7/mod.rs) | 0.19ms | 4.87ms | 5.05ms |
 | 8 | [Resonant Collinearity](https://adventofcode.com/2024/day/8) | [Solution](/y2024/src/day8/mod.rs) | 0.02ms | 0.05ms | 0.06ms |
-| 9 | [Disk Fragmenter](https://adventofcode.com/2024/day/9) | [Solution](/y2024/src/day9/mod.rs) | 0.25ms | 27.70ms | 27.96ms |
+| 9 | [Disk Fragmenter](https://adventofcode.com/2024/day/9) | [Solution](/y2024/src/day9/mod.rs) | 0.11ms | 0.35ms | 0.46ms |
 | 10 | [Hoof It](https://adventofcode.com/2024/day/10) | [Solution](/y2024/src/day10/mod.rs) | 0.08ms | 0.05ms | 0.13ms |
 | 11 | [Plutonian Pebbles](https://adventofcode.com/2024/day/11) | [Solution](/y2024/src/day11/mod.rs) | 0.04ms | 2.41ms | 2.45ms |
 | 12 | [Garden Groups](https://adventofcode.com/2024/day/12) | [Solution](/y2024/src/day12/mod.rs) | 1.07ms | 1.85ms | 2.92ms |
@@ -31,13 +31,13 @@ Successfully completed problems with the time taken to execute them on my M1 Pro
 | 17 | [Chronospatial Computer](https://adventofcode.com/2024/day/17) | [Solution](/y2024/src/day17/mod.rs) | 0.00ms | 21.11ms | 21.11ms |
 | 18 | [RAM Run](https://adventofcode.com/2024/day/18) | [Solution](/y2024/src/day18/mod.rs) | 0.46ms | 2.39ms | 2.84ms |
 | 19 | [Linen Layout](https://adventofcode.com/2024/day/19) | [Solution](/y2024/src/day19/mod.rs) | 0.33ms | 0.34ms | 0.66ms |
-| 20 | [Race Condition](https://adventofcode.com/2024/day/20) | [Solution](/y2024/src/day20/mod.rs) | 0.65ms | 37.94ms | 38.60ms |
+| 20 | [Race Condition](https://adventofcode.com/2024/day/20) | [Solution](/y2024/src/day20/mod.rs) | 0.47ms | 39.01ms | 39.48ms |
 | 21 | [Keypad Conundrum](https://adventofcode.com/2024/day/21) | [Solution](/y2024/src/day21/mod.rs) | 0.00ms | 0.06ms | 0.07ms |
 | 22 | [Monkey Market](https://adventofcode.com/2024/day/22) | [Solution](/y2024/src/day22/mod.rs) | 1.12ms | 31.87ms | 32.99ms |
 | 23 | [LAN Party](https://adventofcode.com/2024/day/23) | [Solution](/y2024/src/day23/mod.rs) | 0.37ms | 44.13ms | 44.50ms |
 | 24 | [Crossed Wires](https://adventofcode.com/2024/day/24) | [Solution](/y2024/src/day24/mod.rs) | 0.03ms | 0.04ms | 0.07ms |
 | 25 | [Code Chronicle](https://adventofcode.com/2024/day/25) | [Solution](/y2024/src/day25/mod.rs) | 0.18ms | 0.00ms | 0.18ms |
-|  |  | Total | 8.96ms | 208.90ms | 217.86ms |
+|  |  | Total | 8.63ms | 182.62ms | 191.25ms |
 
 
 ## Setup
