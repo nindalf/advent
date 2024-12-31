@@ -41,7 +41,7 @@ fn markdown_for_year(data: &BTreeMap<(u32, u32), Record>, required_year: u32) ->
             get_problem_name(*year, *day).unwrap_or_else(|| "Unknown problem name".to_string());
         let solution_url = format!("/y{year}/src/day{day}/mod.rs");
         output.push_str(&format!(
-            "| {day} | [{problem_name}]({url}) | [Solution]({solution_url}) | {:.2}ms | {:.2}ms | {:.2}ms |\n",
+            "| {day} | [{problem_name}]({url}) | [Solution]({solution_url}) | {:.2} | {:.2} | {:.2} |\n",
             record.part_one_millis, record.part_two_millis, record.total
         ));
         part_one_total += record.part_one_millis;
