@@ -1,12 +1,17 @@
-use std::collections::BTreeMap;
+use std::{collections::BTreeMap, path::Path};
 
-pub struct Record {
-    pub part_one_millis: f64,
-    pub part_two_millis: f64,
-    pub total: f64,
-}
+use crate::read::Record;
 
 const README_TEMPLATE: &str = include_str!("readme.tmpl");
+
+pub fn write_to_csv(csv_file: &Path, data: BTreeMap<(u32, u32), Record>) -> anyhow::Result<()> {
+    let mut writer = csv::Writer::from_path(csv_file)?;
+    for (_, record) in data {
+        writer.serialize(record)?;
+    }
+    writer.flush()?;
+    Ok(())
+}
 
 pub fn write_to_readme(data: &BTreeMap<(u32, u32), Record>) -> anyhow::Result<()> {
     let mut output = String::new();
