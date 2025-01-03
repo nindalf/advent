@@ -39,7 +39,7 @@ pub fn part2(input: &str) -> u64 {
                 override_a += multiple;
                 break;
             }
-            multiple /= 10;
+            multiple /= 8;
         }
         override_a += 1;
     }
@@ -69,10 +69,10 @@ impl Computer {
     fn execute_one(&mut self) -> Option<u64> {
         let opcode = self.mem[self.instruction_pointer];
         let operand = self.mem[self.instruction_pointer + 1];
-        let combo_operand = self.operand_val(operand);
         match opcode {
             // adv
             0 => {
+                let combo_operand = self.operand_val(operand);
                 self.A /= 2u64.pow(combo_operand as u32);
                 self.instruction_pointer += 2;
             }
@@ -83,6 +83,7 @@ impl Computer {
             }
             // bst
             2 => {
+                let combo_operand = self.operand_val(operand);
                 self.B = combo_operand % 8;
                 self.instruction_pointer += 2;
             }
@@ -101,16 +102,19 @@ impl Computer {
             }
             // out
             5 => {
+                let combo_operand = self.operand_val(operand);
                 self.instruction_pointer += 2;
                 return Some(combo_operand % 8);
             }
             // bdv
             6 => {
+                let combo_operand = self.operand_val(operand);
                 self.B = self.A / 2u64.pow(combo_operand as u32);
                 self.instruction_pointer += 2;
             }
             // cdv
             7 => {
+                let combo_operand = self.operand_val(operand);
                 self.C = self.A / 2u64.pow(combo_operand as u32);
                 self.instruction_pointer += 2;
             }

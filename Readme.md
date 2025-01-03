@@ -28,7 +28,7 @@ Successfully completed problems with the time taken to execute them on my M1 Pro
 | 14 | [Restroom Redoubt](https://adventofcode.com/2024/day/14) | [Solution](/y2024/src/day14/mod.rs) | 0.04 | 0.19 | 0.23 |
 | 15 | [Warehouse Woes](https://adventofcode.com/2024/day/15) | [Solution](/y2024/src/day15/mod.rs) | 0.43 | 0.58 | 1.00 |
 | 16 | [Reindeer Maze](https://adventofcode.com/2024/day/16) | [Solution](/y2024/src/day16/mod.rs) | 3.01 | 6.38 | 9.39 |
-| 17 | [Chronospatial Computer](https://adventofcode.com/2024/day/17) | [Solution](/y2024/src/day17/mod.rs) | 0.00 | 23.27 | 23.27 |
+| 17 | [Chronospatial Computer](https://adventofcode.com/2024/day/17) | [Solution](/y2024/src/day17/mod.rs) | 0.00 | 5.35 | 5.35 |
 | 18 | [RAM Run](https://adventofcode.com/2024/day/18) | [Solution](/y2024/src/day18/mod.rs) | 0.27 | 1.15 | 1.42 |
 | 19 | [Linen Layout](https://adventofcode.com/2024/day/19) | [Solution](/y2024/src/day19/mod.rs) | 0.33 | 0.34 | 0.67 |
 | 20 | [Race Condition](https://adventofcode.com/2024/day/20) | [Solution](/y2024/src/day20/mod.rs) | 0.52 | 4.64 | 5.16 |
@@ -37,7 +37,7 @@ Successfully completed problems with the time taken to execute them on my M1 Pro
 | 23 | [LAN Party](https://adventofcode.com/2024/day/23) | [Solution](/y2024/src/day23/mod.rs) | 0.37 | 7.92 | 8.28 |
 | 24 | [Crossed Wires](https://adventofcode.com/2024/day/24) | [Solution](/y2024/src/day24/mod.rs) | 0.03 | 0.05 | 0.07 |
 | 25 | [Code Chronicle](https://adventofcode.com/2024/day/25) | [Solution](/y2024/src/day25/mod.rs) | 0.16 | 0.00 | 0.16 |
-|  |  | Total | 8.75ms | 92.91ms | 101.66ms |
+|  |  | Total | 8.75ms | 74.98ms | 83.74ms |
 
 
 ## Setup
