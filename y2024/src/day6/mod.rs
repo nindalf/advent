@@ -5,24 +5,24 @@ use rayon::prelude::*;
 #[inline]
 pub fn part1(input: &str) -> usize {
     let (grid, initial_position) = parse(input);
-    let steps = steps_to_leave_the_grid(&grid, initial_position, None).unwrap();
+    let steps = steps_to_leave_the_grid::<false>(&grid, initial_position, None).unwrap();
     steps.len() + 1
 }
 
 #[inline]
 pub fn part2(input: &str) -> usize {
     let (grid, initial_position) = parse(input);
-    let steps = steps_to_leave_the_grid(&grid, initial_position, None).unwrap();
+    let steps = steps_to_leave_the_grid::<false>(&grid, initial_position, None).unwrap();
 
     steps
         .par_iter()
-        .map(|obstruction| steps_to_leave_the_grid(&grid, initial_position, Some(*obstruction)))
+        .map(|obstruction| steps_to_leave_the_grid::<true>(&grid, initial_position, Some(*obstruction)))
         .filter(|optional_steps| optional_steps.is_none())
         .count()
         + 1
 }
 
-fn steps_to_leave_the_grid(
+fn steps_to_leave_the_grid<const WITH_DIRECTION:bool>(
     grid: &Grid<char>,
     initial_position: Point,
     obstruction: Option<Point>,
@@ -34,17 +34,24 @@ fn steps_to_leave_the_grid(
     while let Some((next_position, next_direction)) =
         next_valid_position(grid, obstruction, guard_position, guard_direction)
     {
-        visited.insert(guard_position);
-        let position_with_direction = (guard_position.0, guard_position.1, guard_direction);
-        if visited_with_direction.contains(&position_with_direction) {
-            // We're in a loop, quit.
-            return None;
+        if !WITH_DIRECTION {
+            visited.insert(guard_position);
+        } else {
+            let position_with_direction = (guard_position.0, guard_position.1, guard_direction);
+            if visited_with_direction.contains(&position_with_direction) {
+                // We're in a loop, quit.
+                return None;
+            }
+            visited_with_direction.insert(position_with_direction);
         }
-        visited_with_direction.insert(position_with_direction);
         guard_position = next_position;
         guard_direction = next_direction;
     }
-    Some(visited)
+    if !WITH_DIRECTION {
+        Some(visited)
+    } else {
+        Some(AHashSet::new())
+    }
 }
 
 fn next_valid_position(
@@ -54,7 +61,7 @@ fn next_valid_position(
     mut direction: Direction,
 ) -> Option<(Point, Direction)> {
     while let Some(next_position) = grid.next_position(position, direction) {
-        if obstruction.is_some() && obstruction.unwrap() == next_position {
+        if Some(next_position) == obstruction {
             direction = direction.turn_right();
             continue;
         }
