@@ -5,53 +5,61 @@ use rayon::prelude::*;
 #[inline]
 pub fn part1(input: &str) -> usize {
     let (grid, initial_position) = parse(input);
-    let steps = steps_to_leave_the_grid::<false>(&grid, initial_position, None).unwrap();
+    let steps = steps_to_leave_the_grid(&grid, initial_position);
     steps.len() + 1
 }
 
 #[inline]
 pub fn part2(input: &str) -> usize {
     let (grid, initial_position) = parse(input);
-    let steps = steps_to_leave_the_grid::<false>(&grid, initial_position, None).unwrap();
+    let steps = steps_to_leave_the_grid(&grid, initial_position);
 
     steps
         .par_iter()
-        .map(|obstruction| steps_to_leave_the_grid::<true>(&grid, initial_position, Some(*obstruction)))
-        .filter(|optional_steps| optional_steps.is_none())
+        .filter(|obstruction| grid_contains_loop(&grid, initial_position, Some(**obstruction)))
         .count()
         + 1
 }
 
-fn steps_to_leave_the_grid<const WITH_DIRECTION:bool>(
+fn steps_to_leave_the_grid(
     grid: &Grid<char>,
     initial_position: Point,
-    obstruction: Option<Point>,
-) -> Option<AHashSet<Point>> {
+) -> AHashSet<Point> {
     let mut guard_direction = Direction::Up;
     let mut guard_position = initial_position;
     let mut visited = AHashSet::with_capacity(grid.rows * grid.columns);
+    while let Some((next_position, next_direction)) =
+        next_valid_position(grid, None, guard_position, guard_direction)
+    {
+        visited.insert(guard_position);
+
+        guard_position = next_position;
+        guard_direction = next_direction;
+    }
+    visited
+}
+
+fn grid_contains_loop(
+    grid: &Grid<char>,
+    initial_position: Point,
+    obstruction: Option<Point>,
+) -> bool {
+    let mut guard_direction = Direction::Up;
+    let mut guard_position = initial_position;
     let mut visited_with_direction = AHashSet::with_capacity(grid.rows * grid.columns);
     while let Some((next_position, next_direction)) =
         next_valid_position(grid, obstruction, guard_position, guard_direction)
     {
-        if !WITH_DIRECTION {
-            visited.insert(guard_position);
-        } else {
-            let position_with_direction = (guard_position.0, guard_position.1, guard_direction);
-            if visited_with_direction.contains(&position_with_direction) {
-                // We're in a loop, quit.
-                return None;
-            }
-            visited_with_direction.insert(position_with_direction);
+        let position_with_direction = (guard_position.0, guard_position.1, guard_direction);
+        if visited_with_direction.contains(&position_with_direction) {
+            // We're in a loop, quit.
+            return true;
         }
+        visited_with_direction.insert(position_with_direction);
         guard_position = next_position;
         guard_direction = next_direction;
     }
-    if !WITH_DIRECTION {
-        Some(visited)
-    } else {
-        Some(AHashSet::new())
-    }
+    false
 }
 
 fn next_valid_position(
