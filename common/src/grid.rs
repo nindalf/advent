@@ -75,6 +75,52 @@ where
         })
     }
 
+    pub fn search_until(
+        &self,
+        start: Point,
+        direction: Direction,
+        predicate: impl Fn(T, Point) -> bool,
+    ) -> Option<Point> {
+        let mut current = start;
+        loop {
+            let next = match direction {
+                Direction::Up => {
+                    if current.0 > 0 {
+                        (current.0 - 1, current.1)
+                    } else {
+                        return None;
+                    }
+                }
+                Direction::Right => {
+                    if current.1 + 1 < self.columns {
+                        (current.0, current.1 + 1)
+                    } else {
+                        return None;
+                    }
+                }
+                Direction::Down => {
+                    if current.0 + 1 < self.rows {
+                        (current.0 + 1, current.1)
+                    } else {
+                        return None;
+                    }
+                }
+                Direction::Left => {
+                    if current.1 > 0 {
+                        (current.0, current.1 - 1)
+                    } else {
+                        return None;
+                    }
+                }
+            };
+            let next_val = self.get(next).unwrap();
+            if predicate(next_val, next) {
+                return Some(current);
+            }
+            current = next;
+        }
+    }
+
     pub fn next_position(&self, position: Point, direction: Direction) -> Option<Point> {
         match direction {
             Direction::Up => (position.0 > 0).then(|| (position.0 - 1, position.1)),
