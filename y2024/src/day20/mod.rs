@@ -74,7 +74,7 @@ fn num_cheats_20(path: AHashMap<Point, i32>) -> usize {
                     let euclid_distance = (i + j) as i32;
                     if let Some(other_distance) = path.get(&(point.0 + i, point.1 + j))
                         && ((path_distance - other_distance - euclid_distance >= min_distance)
-                         || (other_distance - path_distance - euclid_distance >= min_distance))
+                            || (other_distance - path_distance - euclid_distance >= min_distance))
                     {
                         results += 1;
                     }
@@ -83,7 +83,7 @@ fn num_cheats_20(path: AHashMap<Point, i32>) -> usize {
                         && j != 0
                         && let Some(other_distance) = path.get(&(point.0 - i, point.1 + j))
                         && ((path_distance - other_distance - euclid_distance >= min_distance)
-                        || (other_distance - path_distance - euclid_distance >= min_distance))
+                            || (other_distance - path_distance - euclid_distance >= min_distance))
                     {
                         results += 1;
                     }

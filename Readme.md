@@ -34,10 +34,10 @@ Successfully completed problems with the time taken to execute them on my M1 Pro
 | 20 | [Race Condition](https://adventofcode.com/2024/day/20) | [Solution](/y2024/src/day20/mod.rs) | 0.52 | 4.64 | 5.16 |
 | 21 | [Keypad Conundrum](https://adventofcode.com/2024/day/21) | [Solution](/y2024/src/day21/mod.rs) | 0.01 | 0.06 | 0.07 |
 | 22 | [Monkey Market](https://adventofcode.com/2024/day/22) | [Solution](/y2024/src/day22/mod.rs) | 1.23 | 33.77 | 35.00 |
-| 23 | [LAN Party](https://adventofcode.com/2024/day/23) | [Solution](/y2024/src/day23/mod.rs) | 0.38 | 68.61 | 68.99 |
+| 23 | [LAN Party](https://adventofcode.com/2024/day/23) | [Solution](/y2024/src/day23/mod.rs) | 0.37 | 7.92 | 8.28 |
 | 24 | [Crossed Wires](https://adventofcode.com/2024/day/24) | [Solution](/y2024/src/day24/mod.rs) | 0.03 | 0.05 | 0.07 |
 | 25 | [Code Chronicle](https://adventofcode.com/2024/day/25) | [Solution](/y2024/src/day25/mod.rs) | 0.16 | 0.00 | 0.16 |
-|  |  | Total | 8.90ms | 179.98ms | 188.87ms |
+|  |  | Total | 8.88ms | 119.28ms | 128.16ms |
 
 
 ## Setup

@@ -28,20 +28,50 @@ pub fn part1(input: &str) -> usize {
     }
     results.len()
 }
-
 #[inline]
 pub fn part2(input: &str) -> String {
     let lan = parse(input);
-    let r = AHashSet::new();
-    let p = lan.keys().copied().collect();
-    let maximal_clique = bron_kerbosch_clique_calculator(&lan, r, p);
-
+    let maximal_clique = bron_kerbosch_pivoted(&lan);
     let mut clique_vec: Vec<_> = maximal_clique.iter().copied().collect();
     clique_vec.sort_unstable();
     clique_vec.join(",")
 }
 
-fn bron_kerbosch_clique_calculator<'a>(
+fn bron_kerbosch_pivoted<'a>(lan: &'a AHashMap<&str, AHashSet<&'a str>>) -> AHashSet<&'a str> {
+    let r = AHashSet::new();
+    let p: AHashSet<_> = lan.keys().copied().collect();
+
+    if p.is_empty() {
+        return r;
+    }
+
+    // Choose pivot vertex with most neighbors in P
+    let pivot = p
+        .iter()
+        .max_by_key(|&v| lan[v].intersection(&p).count())
+        .unwrap();
+
+    let mut p_minus_n = p.difference(&lan[pivot]).copied().collect::<AHashSet<_>>();
+    let mut results = Vec::with_capacity(p_minus_n.len());
+
+    while !p_minus_n.is_empty() {
+        let vertex = p_minus_n.iter().next().unwrap().to_owned();
+        p_minus_n.remove(&vertex);
+
+        let mut r_new = r.clone();
+        r_new.insert(vertex);
+
+        let neighbors = &lan[vertex];
+        let p_new = p.intersection(neighbors).copied().collect();
+
+        let clique = bron_kerbosch_pivoted_recursive(lan, r_new, p_new);
+        results.push(clique);
+    }
+
+    results.into_iter().max_by_key(|c| c.len()).unwrap_or(r)
+}
+
+fn bron_kerbosch_pivoted_recursive<'a>(
     lan: &AHashMap<&str, AHashSet<&'a str>>,
     r: AHashSet<&'a str>,
     p: AHashSet<&'a str>,
@@ -49,27 +79,22 @@ fn bron_kerbosch_clique_calculator<'a>(
     if p.is_empty() {
         return r;
     }
-    let mut p_c = p.clone();
 
-    let mut results = Vec::with_capacity(p.len());
-    for vertex in p.iter() {
-        let mut r_c = r.clone();
+    let pivot = p
+        .iter()
+        .max_by_key(|&v| lan[v].intersection(&p).count())
+        .unwrap();
 
-        r_c.insert(vertex);
-        let neighbours = &lan[vertex];
-        let pruned_p = p_c.intersection(neighbours).copied().collect();
+    let mut results = Vec::new();
+    for vertex in p.difference(&lan[pivot]) {
+        let mut r_new = r.clone();
+        r_new.insert(vertex);
 
-        let maximal_clique = bron_kerbosch_clique_calculator(lan, r_c, pruned_p);
-        results.push(maximal_clique);
-
-        p_c.remove(vertex);
+        let p_new = p.intersection(&lan[vertex]).copied().collect();
+        results.push(bron_kerbosch_pivoted_recursive(lan, r_new, p_new));
     }
 
-    if results.is_empty() {
-        return r;
-    }
-    results.sort_unstable_by_key(|a| a.len());
-    results[results.len() - 1].clone()
+    results.into_iter().max_by_key(|c| c.len()).unwrap_or(r)
 }
 
 fn parse(input: &str) -> AHashMap<&str, AHashSet<&str>> {
