@@ -40,3 +40,7 @@ test DAY="" TARGET="":
     else
         cargo test --manifest-path y{{AOC_YEAR}}/Cargo.toml -- day{{DAY}}::tests::part_{{TARGET}} --nocapture
     fi
+
+# Install flamegraph first with ` cargo install flamegraph`
+flamegraph DAY TARGET="":
+    CARGO_PROFILE_RELEASE_DEBUG=true cargo flamegraph --root --unit-test y{{AOC_YEAR}} -- day{{DAY}}::tests::part_{{TARGET}}
