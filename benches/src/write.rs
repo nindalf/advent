@@ -4,9 +4,9 @@ use crate::read::Record;
 
 const README_TEMPLATE: &str = include_str!("readme.tmpl");
 
-pub fn write_to_csv(csv_file: &Path, data: BTreeMap<(u32, u32), Record>) -> anyhow::Result<()> {
+pub fn write_to_csv(csv_file: &Path, data: &BTreeMap<(u32, u32), Record>) -> anyhow::Result<()> {
     let mut writer = csv::Writer::from_path(csv_file)?;
-    for (_, record) in data {
+    for record in data.values() {
         writer.serialize(record)?;
     }
     writer.flush()?;

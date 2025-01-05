@@ -6,7 +6,7 @@ use anyhow::Result;
 use scan_fmt::scan_fmt;
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Record {
     pub year: u32,
     pub day: u32,
