@@ -1,0 +1,14 @@
+[package]
+name = "y2025"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = { workspace = true } 
+ahash = { workspace = true }
+rayon = { workspace = true }
+regex = { workspace = true }
+scan_fmt = { workspace = true }
+winnow = { workspace = true }
+
+common = { path = "../common" }

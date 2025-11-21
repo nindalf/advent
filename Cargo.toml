@@ -2,9 +2,11 @@
 resolver = "2"
 members = [
     "benches", 
-    "common", "y2022", 
+    "common", 
+    "y2022", 
     "y2023",
-    "y2024",
+    "y2024", 
+    "y2025",
 ]
 
 [workspace.dependencies]
