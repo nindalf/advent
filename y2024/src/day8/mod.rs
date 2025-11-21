@@ -21,8 +21,8 @@ fn solve(
     let (antenna_locations, grid_size) = parse(input);
 
     antenna_locations
-        .iter()
-        .map(|(_, locations)| node_finder_fn(locations, grid_size))
+        .values()
+        .map(|locations| node_finder_fn(locations, grid_size))
         .fold(
             ahash::AHashSet::with_capacity(2000),
             |mut acc, anti_nodes| {

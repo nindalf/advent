@@ -104,12 +104,11 @@ struct Path {
 }
 
 fn parse(input: &str) -> Vec<(usize, usize)> {
-    let corrupted = input
+    input
         .lines()
         .filter_map(|line| line.split_once(","))
         .map(|(x, y)| (x.parse().unwrap(), y.parse().unwrap()))
-        .collect();
-    corrupted
+        .collect()
 }
 
 common::aoctest!(22, 310, (6, 1), (16, 46));

@@ -62,7 +62,7 @@ fn calculate_bfs<const N: usize>(result: u64, operands: &[u64]) -> bool {
         intermediates = temp
     }
 
-    intermediates.iter().any(|n| *n == result)
+    intermediates.contains(&result)
 }
 
 #[allow(dead_code)]
