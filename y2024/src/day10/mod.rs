@@ -74,7 +74,7 @@ fn num_paths_bfs<const OVERLAPPING_ENABLED: bool>(grid: &Grid<u8>, start: Point,
 }
 
 pub fn parse(input: &str) -> Grid<u8> {
-    Grid::construct(input, |x| (x as u8 - b'0'))
+    Grid::construct(input, |x| x as u8 - b'0')
 }
 
 common::aoctest!(36, 501, 81, 1017);

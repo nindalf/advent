@@ -222,7 +222,7 @@ fn evaluate<'a>(
     output_val
 }
 
-fn parse(input: &str) -> (AHashMap<&str, u8>, AHashMap<&str, Instruction>) {
+fn parse(input: &str) -> (AHashMap<&str, u8>, AHashMap<&str, Instruction<'_>>) {
     let (wires, gates) = input.split_once("\n\n").expect("input is well formed");
 
     let initial_values = wires

@@ -1,4 +1,3 @@
-#![feature(let_chains)]
 #![feature(iter_map_windows)]
 
 pub mod computer;

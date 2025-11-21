@@ -158,7 +158,7 @@ pub fn parse(input: &str) -> Vec<usize> {
     input
         .chars()
         .filter(|c| *c != '\n')
-        .map(|c| (c as usize - '0' as usize))
+        .map(|c| c as usize - '0' as usize)
         .collect()
 }
 
