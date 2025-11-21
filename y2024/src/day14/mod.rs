@@ -193,9 +193,9 @@ pub fn parse(input: &str) -> Vec<Robot> {
 use winnow::ascii::dec_int;
 use winnow::combinator::seq;
 use winnow::token::literal;
-use winnow::{PResult, Parser};
+use winnow::{ModalResult, Parser};
 
-fn parse_robot(input: &mut &str) -> PResult<Robot> {
+fn parse_robot(input: &mut &str) -> ModalResult<Robot> {
     // "p=9,5 v=-3,-3"
     seq! {
         Robot {

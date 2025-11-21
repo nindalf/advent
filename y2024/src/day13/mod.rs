@@ -116,9 +116,9 @@ fn parse_with_scan_fmt(input: &str) -> anyhow::Result<(Equation, Equation)> {
 use winnow::ascii::digit1;
 use winnow::combinator::{alt, delimited, preceded, separated_pair};
 use winnow::token::literal;
-use winnow::{PResult, Parser};
+use winnow::{ModalResult, Parser};
 
-fn parse_machine(input: &mut &str) -> PResult<(Equation, Equation)> {
+fn parse_machine(input: &mut &str) -> ModalResult<(Equation, Equation)> {
     let (x_op1, y_op1) = parse_line(input)?;
     let (x_op2, y_op2) = parse_line(input)?;
     let (x_result, y_result) = parse_prize(input)?;
@@ -136,7 +136,7 @@ fn parse_machine(input: &mut &str) -> PResult<(Equation, Equation)> {
     ))
 }
 
-fn parse_line(input: &mut &str) -> PResult<(i64, i64)> {
+fn parse_line(input: &mut &str) -> ModalResult<(i64, i64)> {
     delimited(
         alt((literal("Button A: X+"), literal("Button B: X+"))),
         separated_pair(
@@ -149,7 +149,7 @@ fn parse_line(input: &mut &str) -> PResult<(i64, i64)> {
     .parse_next(input)
 }
 
-fn parse_prize(input: &mut &str) -> PResult<(i64, i64)> {
+fn parse_prize(input: &mut &str) -> ModalResult<(i64, i64)> {
     preceded(
         literal("Prize: X="),
         separated_pair(

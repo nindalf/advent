@@ -172,9 +172,9 @@ fn parse(input: &str) -> Vec<Valve> {
 use winnow::ascii::{alpha1, digit1};
 use winnow::combinator::{alt, opt, repeat, seq, terminated};
 use winnow::token::literal;
-use winnow::{PResult, Parser};
+use winnow::{ModalResult, Parser};
 
-fn parse_valve(input: &mut &str) -> PResult<Valve> {
+fn parse_valve(input: &mut &str) -> ModalResult<Valve> {
     // "Valve AA has flow rate=0; tunnels lead to valves DD, II, BB"
     seq!{
         Valve {

@@ -8,13 +8,13 @@ members = [
 ]
 
 [workspace.dependencies]
-ahash = "0.8.11"
+ahash = "0.8.12"
 anyhow = "1.0"
-phf = { version = "0.11", features = ["macros"] }
-rayon = "1.10.0"
-regex = "1.11.1"
+phf = { version = "0.13.1", features = ["macros"] }
+rayon = "1.11.0"
+regex = "1.12.2"
 scan_fmt = "0.2.6"
-winnow = "0.6.20"
+winnow = "0.7.13"
 
 [profile.bench]
 lto = true

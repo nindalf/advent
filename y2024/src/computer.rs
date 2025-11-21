@@ -41,57 +41,57 @@ impl<'a> Computer<'a> {
 use winnow::ascii::digit1;
 use winnow::combinator::{alt, delimited, separated_pair};
 use winnow::token::{literal, take_while};
-use winnow::{PResult, Parser};
+use winnow::{ModalResult, Parser};
 
-fn parse_do(input: &mut &str) -> PResult<Instruction> {
+fn parse_do(input: &mut &str) -> ModalResult<Instruction> {
     literal("do()").map(|_| Instruction::Do).parse_next(input)
 }
 
-fn parse_dont(input: &mut &str) -> PResult<Instruction> {
+fn parse_dont(input: &mut &str) -> ModalResult<Instruction> {
     literal("don't()")
         .map(|_| Instruction::Dont)
         .parse_next(input)
 }
 
-fn parse_from(input: &mut &str) -> PResult<Instruction> {
+fn parse_from(input: &mut &str) -> ModalResult<Instruction> {
     literal("from()")
         .map(|_| Instruction::From)
         .parse_next(input)
 }
 
-fn parse_how(input: &mut &str) -> PResult<Instruction> {
+fn parse_how(input: &mut &str) -> ModalResult<Instruction> {
     literal("how()").map(|_| Instruction::How).parse_next(input)
 }
 
-fn parse_select(input: &mut &str) -> PResult<Instruction> {
+fn parse_select(input: &mut &str) -> ModalResult<Instruction> {
     literal("select()")
         .map(|_| Instruction::Select)
         .parse_next(input)
 }
 
-fn parse_what(input: &mut &str) -> PResult<Instruction> {
+fn parse_what(input: &mut &str) -> ModalResult<Instruction> {
     literal("what()")
         .map(|_| Instruction::What)
         .parse_next(input)
 }
 
-fn parse_when(input: &mut &str) -> PResult<Instruction> {
+fn parse_when(input: &mut &str) -> ModalResult<Instruction> {
     literal("when()")
         .map(|_| Instruction::When)
         .parse_next(input)
 }
 
-fn parse_where(input: &mut &str) -> PResult<Instruction> {
+fn parse_where(input: &mut &str) -> ModalResult<Instruction> {
     literal("where()")
         .map(|_| Instruction::Where)
         .parse_next(input)
 }
 
-fn parse_why(input: &mut &str) -> PResult<Instruction> {
+fn parse_why(input: &mut &str) -> ModalResult<Instruction> {
     literal("why()").map(|_| Instruction::Why).parse_next(input)
 }
 
-fn parse_mul(input: &mut &str) -> PResult<Instruction> {
+fn parse_mul(input: &mut &str) -> ModalResult<Instruction> {
     delimited(
         literal("mul("),
         separated_pair(
@@ -105,19 +105,19 @@ fn parse_mul(input: &mut &str) -> PResult<Instruction> {
     .parse_next(input)
 }
 
-fn parse_gibberish(input: &mut &str) -> PResult<Instruction> {
+fn parse_gibberish(input: &mut &str) -> ModalResult<Instruction> {
     winnow::token::any
         .map(Instruction::UnknownChar)
         .parse_next(input)
 }
 
-fn parse_special_character(input: &mut &str) -> PResult<Instruction> {
+fn parse_special_character(input: &mut &str) -> ModalResult<Instruction> {
     take_while(1.., is_special_character)
         .map(|s: &str| Instruction::SpecialCharacters(s.to_string()))
         .parse_next(input)
 }
 
-fn parse_whitespace(input: &mut &str) -> PResult<Instruction> {
+fn parse_whitespace(input: &mut &str) -> ModalResult<Instruction> {
     take_while(1.., is_whitespace)
         .map(|_| Instruction::Whitespace)
         .parse_next(input)
@@ -134,7 +134,7 @@ fn is_whitespace(c: char) -> bool {
     c == ' ' || c == '\t' || c == '\n'
 }
 
-fn parse_instruction<'s>(input: &mut &'s str) -> PResult<(&'s str, Instruction)> {
+fn parse_instruction<'s>(input: &mut &'s str) -> ModalResult<(&'s str, Instruction)> {
     alt((
         parse_do,
         parse_dont,
