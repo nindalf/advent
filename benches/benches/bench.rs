@@ -36,7 +36,7 @@ fn gen_benches() {
     // Store the benchmark function names in a vector and pass them to the criterion_group macro
     let mut fn_names = Vec::new();
     for (year, day) in years_and_days {
-        let input_file_path = &format!("../../{}/src/{}/input.txt", year, day);
+        let input_file_path = &format!("{}/{}/src/{}/input.txt", crabtime::WORKSPACE_PATH, year, day);
         let input_file = format!("{}_{}_INPUT", year, day);
 
         let fn_name = format!("{}_{}", year, day);

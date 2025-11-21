@@ -13,8 +13,7 @@ fn main() -> anyhow::Result<()> {
     write::write_to_readme(&records)?;
     write::write_to_csv(&csv_path, &records)?;
 
-    // Bar Chart disabled until it can create images
-    // bar_chart::create_bar_chart(&records, 2024)?;
+    bar_chart::create_bar_chart(&records, 2024)?;
 
     Ok(())
 }

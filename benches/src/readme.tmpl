@@ -4,7 +4,9 @@ This repo has my solutions to Advent of Code, written in Rust.
 
 I've tried to write idiomatic, readable code. I attempt to make my code fast, but if it's a choice between fast and readable, I choose readable. No `unsafe` code or SIMD here.
 
-That said, the code is pretty fast. My solutions for 2024 run in 84ms total. I've written in detail about the optimisations I've used to make my solutions faster - [Optimising my Rust solutions for Advent of Code](https://nindalf.com/posts/optimising-rust/). These tips are general and could be applied to most Rust programs.
+That said, the code is pretty fast. My solutions for 2024 run in 82ms total. I've written in detail about the optimisations I've used to make my solutions faster - [Optimising my Rust solutions for Advent of Code](https://nindalf.com/posts/optimising-rust/). These tips are general and could be applied to most Rust programs.
+
+![2024 Results](./benches/benches/advent_2024_bar_chart.png)
 
 ## Benchmarks
 
