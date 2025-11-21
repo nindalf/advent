@@ -1,16 +1,14 @@
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{criterion_group, criterion_main, Criterion};
+use std::hint::black_box;
 
 #[crabtime::function]
 fn gen_benches() {
     // Find all solution modules
     // Search the project root for crates that match the pattern y20*/src/day*/mod.rs
     // Return a list of tuples containing the year and day of each solution module
-    let project_root = env!("CARGO_MANIFEST_DIR");
-    // This relative path is brittle and will break if implementation details in crabtime change
-    // Ideally crabtime would set an environment variable pointing to the project root
     let pattern = format!(
         "{}/{}",
-        project_root, "../../../../../../../../y20*/src/day*/mod.rs"
+        crabtime::WORKSPACE_PATH, "y20*/src/day*/mod.rs"
     );
     let mut years_and_days = glob::glob(&pattern)
         .unwrap()
@@ -80,5 +78,4 @@ fn gen_benches() {
 
 // I don't know why rust-analyzer says "Compilation of the generated code failed."
 // rustc compiles it.
-
 gen_benches!();
