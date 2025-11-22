@@ -91,13 +91,15 @@ pub fn part2(input: &str) -> i32 {
 }
 
 // This function doesn't bother with the division by n and sqrt because we're only using it for sorting
+// Uses Var(X) = E[X^2] - E[X]^2 to compute in single pass
 fn get_variance(positions: &[i32]) -> f64 {
     let n = positions.len() as f64;
-    let mean = positions.iter().sum::<i32>() as f64 / n;
-    positions
+    let (sum, sum_sq) = positions
         .iter()
-        .map(|&x| (x as f64 - mean).powi(2))
-        .sum::<f64>()
+        .fold((0i64, 0i64), |(s, sq), &x| (s + x as i64, sq + (x as i64 * x as i64)));
+    let mean = sum as f64 / n;
+    let mean_sq = sum_sq as f64 / n;
+    (mean_sq - mean * mean) * n
 }
 
 fn extended_gcd(a: i32, b: i32) -> (i32, i32, i32) {
