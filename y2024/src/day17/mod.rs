@@ -73,7 +73,7 @@ impl Computer {
             // adv
             0 => {
                 let combo_operand = self.operand_val(operand);
-                self.A /= 2u64.pow(combo_operand as u32);
+                self.A >>= combo_operand;
                 self.instruction_pointer += 2;
             }
             // bxl
@@ -84,7 +84,7 @@ impl Computer {
             // bst
             2 => {
                 let combo_operand = self.operand_val(operand);
-                self.B = combo_operand % 8;
+                self.B = combo_operand & 7;
                 self.instruction_pointer += 2;
             }
             // jnz
@@ -104,18 +104,18 @@ impl Computer {
             5 => {
                 let combo_operand = self.operand_val(operand);
                 self.instruction_pointer += 2;
-                return Some(combo_operand % 8);
+                return Some(combo_operand & 7);
             }
             // bdv
             6 => {
                 let combo_operand = self.operand_val(operand);
-                self.B = self.A / 2u64.pow(combo_operand as u32);
+                self.B = self.A >> combo_operand;
                 self.instruction_pointer += 2;
             }
             // cdv
             7 => {
                 let combo_operand = self.operand_val(operand);
-                self.C = self.A / 2u64.pow(combo_operand as u32);
+                self.C = self.A >> combo_operand;
                 self.instruction_pointer += 2;
             }
             _ => unreachable!("Invalid opcode"),
