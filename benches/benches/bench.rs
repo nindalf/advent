@@ -13,16 +13,15 @@ fn gen_benches() {
     let mut years_and_days = glob::glob(&pattern)
         .unwrap()
         .filter_map(|entry| entry.ok())
-        .filter_map(|path| {
+        .map(|path| {
             let components = path
                 .components()
-                .map(|c| c.as_os_str())
-                .filter_map(|c| c.to_str())
+                .filter_map(|c| c.as_os_str().to_str())
                 .map(|c| c.to_string())
                 .collect::<Vec<String>>();
             let year = components[components.len() - 4].clone();
             let day = components[components.len() - 2].clone();
-            Some((year, day))
+            (year, day)
         })
         .collect::<Vec<(String, String)>>();
 
@@ -76,6 +75,7 @@ fn gen_benches() {
     }
 }
 
-// I don't know why rust-analyzer says "Compilation of the generated code failed."
-// rustc compiles it.
+// I don't know why rust-analyzer says "Compilation of the generated code failed." when rustc compiles it. 
+// That's why I've added this to the settings.json -> "rust-analyzer.diagnostics.disabled": ["macro-error"]
+// Check back in a year if RA has fixed this.
 gen_benches!();
