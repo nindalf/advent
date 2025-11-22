@@ -11,7 +11,7 @@ pub enum Instruction {
     How,
     Mul(i32, i32),
     Select,
-    SpecialCharacters(String),
+    SpecialCharacters,
     UnknownChar(char),
     What,
     When,
@@ -113,7 +113,7 @@ fn parse_gibberish(input: &mut &str) -> ModalResult<Instruction> {
 
 fn parse_special_character(input: &mut &str) -> ModalResult<Instruction> {
     take_while(1.., is_special_character)
-        .map(|s: &str| Instruction::SpecialCharacters(s.to_string()))
+        .map(|_: &str| Instruction::SpecialCharacters)
         .parse_next(input)
 }
 
